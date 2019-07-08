@@ -82,6 +82,36 @@ const Sidebar = ({ router }) => {
           text-decoration: none;
           font-family: monospace;
         }
+
+        @media (max-width: 768px) {
+          .sidebar {
+            width: 100%;
+            height: 40px;
+            bottom: 0;
+            left: 0;
+            top: auto;
+            flex-direction: row;
+          }
+          .sidebar__pages {
+            flex-direction: row;
+          }
+          .sidebar__page {
+            width: 60px;
+            height: 10px;
+            margin-bottom: 0;
+            margin-right: 10px;
+          }
+          .sidebar__title {
+            transform: none;
+            padding: 5px;
+          }
+          .sidebar__whodis {
+            padding: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
       `}</style>
     </div>
   );

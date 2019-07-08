@@ -159,6 +159,26 @@ const Log = props => {
           font-weight: lighter;
           display: block;
         }
+
+        @media (max-width: 768px) {
+          h1 {
+            font-size: 3em;
+          }
+          .log__nothing {
+            font-size: 1.4em;
+          }
+          .log__entry {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto;
+            text-align: center;
+          }
+          .log__remove {
+            padding: 5px;
+          }
+          .log__total {
+            text-align: center;
+          }
+        }
       `}</style>
     </Page>
   );

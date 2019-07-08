@@ -49,6 +49,15 @@ const About = () => {
           color: white;
           text-decoration: none;
         }
+
+        @media (max-width: 768px) {
+          h1 {
+            font-size: 3em;
+          }
+          p {
+            font-size: 1.2em;
+          }
+        }
       `}</style>
     </Page>
   );

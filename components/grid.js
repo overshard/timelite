@@ -64,6 +64,16 @@ const Grid = props => {
         .grid-column-6 {
           grid-column 6;
         }
+
+        @media (max-width: 768px) {
+          .grid {
+            grid-template-columns: 40px 10px auto auto 10px 40px;
+          }
+
+          .grid-lines {
+            display: none;
+          }
+        }
       `}</style>
     </>
   );

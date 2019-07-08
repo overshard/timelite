@@ -137,6 +137,24 @@ const Timer = props => {
         .timer__note:focus {
           transform: scale(1.1);
         }
+
+        @media (max-width: 768px) {
+          .timer__time {
+            font-size: 4em;
+          }
+
+          .timer__button {
+            font-size: 0.9em;
+            padding: 5px 10px;
+            width: 100px;
+            margin: 0 5px;
+          }
+
+          .timer__note {
+            padding: 5px 15px;
+            font-size: 1.2em;
+          }
+        }
       `}</style>
     </div>
   );
