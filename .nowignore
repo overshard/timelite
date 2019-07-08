@@ -12,3 +12,9 @@ node_modules
 
 # editorconfig
 .editorconfig
+
+# license
+LICENSE.md
+
+# readme
+README.md
