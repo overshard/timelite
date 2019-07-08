@@ -103,10 +103,10 @@ const Sidebar = ({ router }) => {
           }
           .sidebar__title {
             transform: none;
-            padding: 5px;
+            padding: 4px 10px;
           }
           .sidebar__whodis {
-            padding: 0 5px;
+            padding: 0 15px;
             display: flex;
             justify-content: center;
             align-items: center;
