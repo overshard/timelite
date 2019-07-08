@@ -5,43 +5,66 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Page from "../components/page";
 
 const Log = props => {
+  const getTotalTime = () => {
+    let timerMiliseconds = props.timeLogs.reduce((total, entry) => {
+      return total + entry.diff;
+    }, 0);
+    const timerTotal = [
+      (timerMiliseconds / 1000 / 60 / 60) % 60, // Hours
+      (timerMiliseconds / 1000 / 60) % 60, // Minutes
+      (timerMiliseconds / 1000) % 60 // Seconds
+    ];
+    return timerTotal
+      .map(timer => {
+        let stringTime = Math.floor(timer).toString();
+        if (stringTime.length < 2) stringTime = `0${stringTime}`;
+        return stringTime;
+      })
+      .join(":");
+  };
+
   return (
     <Page title="Log">
       <main>
         <h1>Log</h1>
         {props.timeLogs.length > 0 ? (
-          <TransitionGroup>
-            {props.timeLogs.map((log, index) => {
-              const timeout = (index + 1) * 250;
-              const transitionDelay = index * 125;
-              return (
-                <CSSTransition
-                  key={index}
-                  appear
-                  unmountOnExit
-                  mountOnEnter
-                  timeout={timeout}
-                  classNames="fade"
-                >
-                  <div
-                    className="log__entry"
-                    style={{ transitionDelay: `${transitionDelay}ms` }}
+          <>
+            <TransitionGroup component={null}>
+              {props.timeLogs.map((log, index) => {
+                const timeout = (index + 1) * 250;
+                const transitionDelay = index * 125;
+                return (
+                  <CSSTransition
+                    key={index}
+                    appear
+                    unmountOnExit
+                    mountOnEnter
+                    timeout={timeout}
+                    classNames="fade"
                   >
-                    <div className="log__time">{log.time}</div>
-                    <div className="log__note">{log.note}</div>
-                    <button
-                      className="log__remove"
-                      onClick={() => {
-                        props.removeTimeLog(index);
-                      }}
+                    <div
+                      className="log__entry"
+                      style={{ transitionDelay: `${transitionDelay}ms` }}
                     >
-                      x
-                    </button>
-                  </div>
-                </CSSTransition>
-              );
-            })}
-          </TransitionGroup>
+                      <div className="log__time">{log.time}</div>
+                      <div className="log__note">{log.note}</div>
+                      <button
+                        className="log__remove"
+                        onClick={() => {
+                          props.removeTimeLog(index);
+                        }}
+                      >
+                        x
+                      </button>
+                    </div>
+                  </CSSTransition>
+                );
+              })}
+            </TransitionGroup>
+            <div className="log__total">
+              <span>Total</span> {getTotalTime()}
+            </div>
+          </>
         ) : (
           <div className="log__nothing">No times added to your log yet!</div>
         )}
@@ -124,6 +147,17 @@ const Log = props => {
         .log__nothing {
           text-align: center;
           font-size: 2em;
+        }
+        .log__total {
+          font-weight: bolder;
+          font-size: 2em;
+          padding: 5px;
+        }
+        .log__total span {
+          font-size: 0.4em;
+          text-transform: uppercase;
+          font-weight: lighter;
+          display: block;
         }
       `}</style>
     </Page>

@@ -28,9 +28,12 @@ class MyApp extends App {
         position: toast.POSITION.TOP_LEFT
       });
     } else {
-      toast.info("Welcome to Timelite! All your data is stored locally.", {
-        position: toast.POSITION.TOP_LEFT
-      });
+      toast.info(
+        "Welcome to Timelite! You can use Timelite offline, all your data is stored locally.",
+        {
+          position: toast.POSITION.TOP_LEFT
+        }
+      );
     }
   }
 

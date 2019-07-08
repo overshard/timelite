@@ -45,7 +45,13 @@ const Timer = props => {
   };
 
   const addTimeLog = () => {
+    const start = props.time;
+    const end = new Date();
+    const diff = end - start;
     props.addTimeLog({
+      start: start,
+      end: end,
+      diff: diff,
       time: getTimeCurrent(),
       note: note
     });
