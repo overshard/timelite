@@ -104,7 +104,7 @@ const Heading = styled.h1`
 const Entry = styled.div`
   background-color: #ffffff;
   color: black;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   border-radius: 3px;
   display: grid;
   grid-template-columns: 150px 1fr 50px;
@@ -180,6 +180,7 @@ const Nothing = styled.div`
 const Total = styled.div`
   font-weight: bolder;
   font-size: 2em;
+  margin-top: 50px;
   padding: 5px;
   & span {
     font-size: 0.4em;

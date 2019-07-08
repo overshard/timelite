@@ -108,9 +108,7 @@ const theme = {
   colors: {
     primary: "#1b1a23"
   },
-  breakpoints: {
-    medium: "max-width: 1023.99px"
-  }
+  breakpoint: "max-width: 1023.99px"
 };
 
 const GlobalStyle = createGlobalStyle`
