@@ -87,6 +87,7 @@ const Timer = props => {
         .timer__time {
           font-size: 10em;
           text-align: center;
+          font-weight: lighter;
         }
         .timer__buttons {
           text-align: center;

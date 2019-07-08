@@ -1,5 +1,7 @@
 import React from "react";
 import App, { Container } from "next/app";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Grid from "../components/grid";
 import Sidebar from "../components/sidebar";
@@ -18,10 +20,18 @@ class MyApp extends App {
 
   componentDidMount() {
     const timeLogs = JSON.parse(localStorage.getItem("timeLogs"));
-    if (timeLogs)
+    if (timeLogs) {
       this.setState({
         timeLogs: timeLogs
       });
+      toast.success("Loaded entries from local storage.", {
+        position: toast.POSITION.TOP_LEFT
+      });
+    } else {
+      toast.info("Welcome to Timelite! All your data is stored locally.", {
+        position: toast.POSITION.TOP_LEFT
+      });
+    }
   }
 
   static async getInitialProps({ Component, ctx }) {
@@ -43,6 +53,9 @@ class MyApp extends App {
       timeLogs: timeLogs
     });
     localStorage.setItem("timeLogs", JSON.stringify(timeLogs));
+    toast.success("You've added an entry.", {
+      position: toast.POSITION.TOP_LEFT
+    });
   }
 
   removeTimeLog(timeLogIndex) {
@@ -51,6 +64,9 @@ class MyApp extends App {
       timeLogs: timeLogs
     });
     localStorage.setItem("timeLogs", JSON.stringify(timeLogs));
+    toast.warn("You've deleted an entry.", {
+      position: toast.POSITION.TOP_LEFT
+    });
   }
 
   render() {
@@ -69,6 +85,7 @@ class MyApp extends App {
           />
           <Sidebar />
         </Grid>
+        <ToastContainer />
       </Container>
     );
   }

@@ -8,10 +8,12 @@
     "next": "^8.1.1-canary.69",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-toastify": "^5.3.1",
     "react-tooltip": "^3.10.0",
     "react-transition-group": "^4.2.1"
   },
   "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
