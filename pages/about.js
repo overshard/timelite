@@ -44,6 +44,7 @@ const About = () => {
         }
         .about__creator {
           text-align: right;
+          opacity: 0.7;
         }
         .about__creator a {
           color: white;
