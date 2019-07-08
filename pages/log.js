@@ -72,6 +72,8 @@ const Log = props => {
       <style jsx>{`
         main {
           grid-area: main;
+          min-height: 100vh;
+          margin-top: 50px;
         }
         h1 {
           font-size: 5em;
@@ -114,11 +116,6 @@ const Log = props => {
           align-items: center;
           border-top-left-radius: 3px;
           border-bottom-left-radius: 3px;
-          transform: scale(1);
-          transition: transform 250ms;
-        }
-        .log__entry:hover {
-          transform: scale(1.05);
         }
         .log__time {
           font-weight: bold;
