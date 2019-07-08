@@ -1,0 +1,8 @@
+{
+  "name": "Timelite",
+  "start_url": "/",
+  "background_color": "#1b1a23",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#1b1a23"
+}
