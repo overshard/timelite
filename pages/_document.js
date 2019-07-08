@@ -26,21 +26,6 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <style jsx global>{`
-          * {
-            box-sizing: border-box;
-            font-family: "Open Sans", sans-serif;
-          }
-
-          body {
-            color: #ffffff;
-            background-color: #1b1a23;
-            min-height: 100vh;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-          }
-        `}</style>
       </Html>
     );
   }

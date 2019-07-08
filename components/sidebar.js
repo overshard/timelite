@@ -61,10 +61,10 @@ const Sidebar = ({ router }) => {
           position: relative;
           content: "";
           width: 10px;
-          height: 45px;
+          height: 60px;
           background-color: rgba(0, 0, 0, 0.5);
           display: block;
-          margin-bottom: 15px;
+          margin-bottom: 25px;
           transition: background-color 200ms;
         }
         .sidebar__page:hover {
