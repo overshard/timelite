@@ -24,6 +24,7 @@ const Timer = props => {
   }, [props.time]);
 
   const getTimeCurrent = () => {
+    if (props.time === null) return "00:00:00";
     const timerCurrent = new Date();
     const timerMiliseconds = timerCurrent - props.time;
     const timerTotal = [
