@@ -2,12 +2,12 @@
   "short_name": "Timelite",
   "name": "Timelite",
   "start_url": "/",
-  "background_color": "#ffffff",
+  "background_color": "#1b1a23",
   "icons": [
     {
       "src": "/static/logo.png",
       "type": "image/png",
-      "sizes": "1200x1200"
+      "sizes": "512x512"
     }
   ],
   "display": "standalone",
