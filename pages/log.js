@@ -73,7 +73,8 @@ const Log = props => {
         main {
           grid-area: main;
           min-height: 100vh;
-          margin-top: 50px;
+          padding-top: 50px;
+          padding-bottom: 50px;
         }
         h1 {
           font-size: 5em;
