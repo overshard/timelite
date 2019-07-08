@@ -140,7 +140,7 @@ const Timer = props => {
           transform: scale(1.1);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1023.99px) {
           .timer__time {
             font-size: 4em;
           }

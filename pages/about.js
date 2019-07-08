@@ -51,7 +51,7 @@ const About = () => {
           text-decoration: none;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1023.99px) {
           h1 {
             font-size: 3em;
           }

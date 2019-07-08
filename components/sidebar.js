@@ -83,7 +83,7 @@ const Sidebar = ({ router }) => {
           font-family: monospace;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1023.99px) {
           .sidebar {
             width: 100%;
             height: 40px;
