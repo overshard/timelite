@@ -1,80 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const Grid = props => {
   return (
     <>
-      <div className="grid grid-lines">
-        <div className="grid-column grid-column-1" />
-        <div className="grid-column grid-column-2" />
-        <div className="grid-column grid-column-3" />
-        <div className="grid-column grid-column-4" />
-        <div className="grid-column grid-column-5" />
-        <div className="grid-column grid-column-6" />
-      </div>
-      <div className="grid">{props.children}</div>
-      <style jsx>{`
-        .grid {
-          min-height: 100vh;
-          display: grid;
-          grid-template-columns: 60px 15% auto auto 15% 60px;
-          grid-template-rows: auto auto auto;
-          grid-template-areas:
-            ". . .    .    . sidebar"
-            ". . main main . sidebar"
-            ". . .    .    . sidebar";
-          grid-column-start: 3;
-          grid-column-end: 5;
-          grid-row-start: 2;
-          grid-row-end: 2;
-        }
-
-        .grid-lines {
-          position: fixed;
-          width: 100%;
-          height: 100vh;
-          pointer-events: none;
-        }
-
-        .grid-column {
-          border-right: 1px solid rgba(255, 255, 255, 0.1);
-          grid-row: 1 / -1;
-        }
-
-        .grid-column-1 {
-          grid-column 1;
-        }
-
-        .grid-column-2 {
-          grid-column 2;
-        }
-
-        .grid-column-3 {
-          grid-column 3;
-        }
-
-        .grid-column-4 {
-          grid-column 4;
-        }
-
-        .grid-column-5 {
-          grid-column 5;
-        }
-
-        .grid-column-6 {
-          grid-column 6;
-        }
-
-        @media (max-width: 1023.99px) {
-          .grid {
-            grid-template-columns: 40px 10px auto auto 10px 40px;
-          }
-
-          .grid-lines {
-            display: none;
-          }
-        }
-      `}</style>
+      <GridLines>
+        <GridColumn column={1} />
+        <GridColumn column={2} />
+        <GridColumn column={3} />
+        <GridColumn column={4} />
+        <GridColumn column={5} />
+        <GridColumn column={6} />
+      </GridLines>
+      <GridTemplate>{props.children}</GridTemplate>
     </>
   );
 };
@@ -87,3 +26,39 @@ Grid.propTypes = {
 };
 
 export default Grid;
+
+const GridTemplate = styled.div`
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 60px 15% auto auto 15% 60px;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    ". . .    .    . sidebar"
+    ". . main main . sidebar"
+    ". . .    .    . sidebar";
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 2;
+
+  @media (max-width: 1023.99px) {
+    grid-template-columns: 40px 10px auto auto 10px 40px;
+  }
+`;
+
+const GridLines = styled(GridTemplate)`
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+
+  @media (max-width: 1023.99px) {
+    display: none;
+  }
+`;
+
+const GridColumn = styled.div`
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  grid-row: 1 / -1;
+  grid-column: ${props => props.column};
+`;

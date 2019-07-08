@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import Page from "../components/page";
 import Timer from "../components/timer";
@@ -6,19 +7,19 @@ import Timer from "../components/timer";
 const Index = props => {
   return (
     <Page title="Timer">
-      <main>
+      <Main>
         <Timer {...props} />
-      </main>
-      <style jsx>{`
-        main {
-          grid-area: main;
-          justify-content: center;
-          align-items: center;
-          display: flex;
-        }
-      `}</style>
+      </Main>
     </Page>
   );
 };
 
 export default Index;
+
+const Main = styled.main`
+  grid-area: main;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;

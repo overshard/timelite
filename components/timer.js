@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const Timer = props => {
   const [time, setTime] = useState("00:00:00");
@@ -70,95 +71,27 @@ const Timer = props => {
   };
 
   return (
-    <div className="timer">
-      <div className="timer__time">{time}</div>
+    <>
+      <Time>{time}</Time>
       <form onSubmit={submitForm}>
-        <div className="timer__inputs">
-          <input
-            className="timer__note"
+        <Inputs>
+          <Note
             type="text"
             placeholder="Note"
             value={note}
             onChange={onChangeNote}
           />
-        </div>
-        <div className="timer__buttons">
-          <button className="timer__button" type="reset" onClick={resetTime}>
+        </Inputs>
+        <Buttons>
+          <Button className="timer__button" type="reset" onClick={resetTime}>
             - Reset
-          </button>
-          <button className="timer__button" type="submit">
+          </Button>
+          <Button className="timer__button" type="submit">
             Add +
-          </button>
-        </div>
+          </Button>
+        </Buttons>
       </form>
-      <style jsx>{`
-        .timer__time {
-          font-size: 10em;
-          text-align: center;
-          font-weight: lighter;
-        }
-        .timer__buttons {
-          text-align: center;
-        }
-        .timer__button {
-          margin: 0 20px;
-          border: 0;
-          color: white;
-          background: #73724c;
-          padding: 10px 15px;
-          font-size: 1em;
-          letter-spacing: 4px;
-          width: 150px;
-          cursor: pointer;
-          text-transform: uppercase;
-          font-weight: lighter;
-          transform: scale(1);
-          transition: transform 250ms;
-        }
-        .timer__button:hover,
-        .timer__buton:focus {
-          transform: scale(1.1);
-        }
-        .timer__inputs {
-          text-align: center;
-        }
-        .timer__note {
-          width: 100%;
-          text-align: center;
-          margin-bottom: 25px;
-          border: 0;
-          background: white;
-          color: black;
-          padding: 15px 30px;
-          font-size: 1.6em;
-          box-shadow: 1px 1px 0px white;
-          transform: scale(1);
-          transition: transform 250ms;
-        }
-        .timer__note:hover,
-        .timer__note:focus {
-          transform: scale(1.1);
-        }
-
-        @media (max-width: 1023.99px) {
-          .timer__time {
-            font-size: 4em;
-          }
-
-          .timer__button {
-            font-size: 0.9em;
-            padding: 5px 10px;
-            width: 100px;
-            margin: 0 5px;
-          }
-
-          .timer__note {
-            padding: 5px 15px;
-            font-size: 1.2em;
-          }
-        }
-      `}</style>
-    </div>
+    </>
   );
 };
 
@@ -169,3 +102,70 @@ Timer.propTypes = {
 };
 
 export default Timer;
+
+const Time = styled.div`
+  font-size: 10em;
+  text-align: center;
+  font-weight: lighter;
+  @media (max-width: 1023.99px) {
+    font-size: 4em;
+  }
+`;
+
+const Inputs = styled.div`
+  text-align: center;
+`;
+
+const Note = styled.input`
+  width: 600px;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border: 0;
+  background: white;
+  color: black;
+  padding: 15px 30px;
+  font-size: 1.6em;
+  box-shadow: 1px 1px 0px white;
+  transform: scale(1);
+  transition: transform 250ms;
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+  @media (max-width: 1023.99px) {
+    padding: 5px 15px;
+    font-size: 1.2em;
+  }
+`;
+
+const Buttons = styled.div`
+  text-align: center;
+`;
+
+const Button = styled.button`
+  margin: 0 20px;
+  border: 0;
+  color: white;
+  background: #73724c;
+  padding: 15px 30px;
+  font-size: 1em;
+  letter-spacing: 4px;
+  width: 280px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: lighter;
+  transform: scale(1);
+  transition: transform 250ms;
+  border-radius: 3px;
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+  @media (max-width: 1023.99px) {
+    font-size: 0.9em;
+    padding: 5px 10px;
+    width: 100px;
+    margin: 0 5px;
+  }
+`;

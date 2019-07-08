@@ -7,12 +7,6 @@ node_modules
 # git
 .gitignore
 
-# eslint
-.eslintrc.js
-
-# editorconfig
-.editorconfig
-
 # license
 LICENSE.md
 

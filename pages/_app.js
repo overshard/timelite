@@ -1,10 +1,37 @@
 import React from "react";
 import App, { Container } from "next/app";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import ReactTooltip from "react-tooltip";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Grid from "../components/grid";
 import Sidebar from "../components/sidebar";
+
+const theme = {
+  colors: {
+    primary: "#1b1a23"
+  },
+  breakpoints: {
+    medium: "max-width: 1023.99px"
+  }
+};
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  body {
+    color: #ffffff;
+    background-color: #1b1a23;
+    min-height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+`;
 
 class MyApp extends App {
   constructor(props) {
@@ -67,7 +94,7 @@ class MyApp extends App {
       timeLogs: timeLogs
     });
     localStorage.setItem("timeLogs", JSON.stringify(timeLogs));
-    toast.warn("You've deleted an entry.", {
+    toast.error("You've deleted an entry.", {
       position: toast.POSITION.TOP_LEFT
     });
   }
@@ -77,33 +104,22 @@ class MyApp extends App {
 
     return (
       <Container>
-        <Grid>
-          <Component
-            {...pageProps}
-            timeLogs={this.state.timeLogs}
-            addTimeLog={this.addTimeLog}
-            removeTimeLog={this.removeTimeLog}
-            time={this.state.time}
-            resetTime={this.resetTime}
-          />
-          <Sidebar />
-        </Grid>
+        <GlobalStyle />
+        <ReactTooltip place="left" effect="solid" />
         <ToastContainer />
-        <style jsx global>{`
-          * {
-            box-sizing: border-box;
-            font-family: "Open Sans", sans-serif;
-          }
-
-          body {
-            color: #ffffff;
-            background-color: #1b1a23;
-            min-height: 100vh;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-          }
-        `}</style>
+        <ThemeProvider theme={theme}>
+          <Grid>
+            <Component
+              {...pageProps}
+              timeLogs={this.state.timeLogs}
+              addTimeLog={this.addTimeLog}
+              removeTimeLog={this.removeTimeLog}
+              time={this.state.time}
+              resetTime={this.resetTime}
+            />
+            <Sidebar />
+          </Grid>
+        </ThemeProvider>
       </Container>
     );
   }
