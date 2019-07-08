@@ -11,6 +11,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta
+            name="description"
+            content="Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?"
+          />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&display=swap"
