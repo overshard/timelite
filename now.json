@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "name": "timelite",
+  "builds": [{ "src": "package.json", "use": "@now/next" }]
+}

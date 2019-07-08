@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "now dev -p 8000",
+    "deploy": "now"
+  },
+  "dependencies": {
+    "next": "^8.1.1-canary.69",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-tooltip": "^3.10.0",
+    "react-transition-group": "^4.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "prettier": "^1.18.2"
+  }
+}

@@ -1,0 +1,14 @@
+# next
+.next
+
+# node
+node_modules
+
+# git
+.gitignore
+
+# eslint
+.eslintrc.js
+
+# editorconfig
+.editorconfig
