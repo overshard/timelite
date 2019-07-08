@@ -11,11 +11,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="manifest" href="/manifest.json" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&display=swap"
           />
+          <link rel="manifest" href="/manifest.json" />
+          <meta name="theme-color" content="#1b1a23" />
         </Head>
         <body>
           <Main />
