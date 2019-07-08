@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "next": "^8.1.1-canary.69",
+    "next-offline": "^4.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-toastify": "^5.3.1",
