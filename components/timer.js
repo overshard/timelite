@@ -10,7 +10,9 @@ const Timer = props => {
     setTime(getTimeCurrent());
 
     const timerInterval = setInterval(() => {
-      setTime(getTimeCurrent());
+      const timeCurrent = getTimeCurrent();
+      setTime(timeCurrent);
+      document.title = `${timeCurrent} — Timelite`;
     }, 1000);
 
     const cleanup = () => {
