@@ -81,6 +81,7 @@ const Timer = props => {
         <Inputs>
           <Note
             type="text"
+            aria-label="Note"
             placeholder="Note"
             value={note}
             onChange={onChangeNote}

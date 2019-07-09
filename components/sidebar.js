@@ -10,14 +10,22 @@ const Sidebar = ({ router }) => {
       <Title>Timelite</Title>
       <Pages>
         <Link href="/" passHref>
-          <Page active={router.pathname === "/"} data-tip="Timer" />
+          <Page
+            active={router.pathname === "/"}
+            data-tip="Timer"
+            aria-label="Timer"
+          />
         </Link>
         <Link href="/log" passHref>
-          <Page active={router.pathname === "/log"} data-tip="Log" />
+          <Page
+            active={router.pathname === "/log"}
+            data-tip="Log"
+            aria-label="Log"
+          />
         </Link>
       </Pages>
       <Link href="/about" passHref>
-        <About>?</About>
+        <About aria-label="About">?</About>
       </Link>
     </Side>
   );
