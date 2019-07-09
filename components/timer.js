@@ -140,6 +140,7 @@ const Note = styled.input`
   @media (max-width: 1023.99px) {
     padding: 5px 15px;
     font-size: 1.2em;
+    width: 100%;
   }
 `;
 
