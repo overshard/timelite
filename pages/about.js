@@ -8,7 +8,7 @@ const About = () => {
     <Page title="About">
       <Main>
         <Heading>Timelite?</Heading>
-        <Paragraph>{`Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?`}</Paragraph>
+        <Blockquote>{`Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?`}</Blockquote>
         <Creator
           href="https://www.isaacbythewood.com/"
           target="_blank"
@@ -46,9 +46,20 @@ const Heading = styled.h1`
   }
 `;
 
-const Paragraph = styled.p`
+const Blockquote = styled.blockquote`
   font-size: 2.5em;
-  text-align: justify;
+  margin: 0 auto;
+  position: relative;
+  max-width: 650px;
+  &::before {
+    content: "”";
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 5em;
+    opacity: 0.1;
+    line-height: 0.5em;
+  }
   @media (max-width: 1023.99px) {
     font-size: 1.2em;
   }
