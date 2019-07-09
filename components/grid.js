@@ -3,18 +3,19 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Grid = props => {
+  return <GridTemplate>{props.children}</GridTemplate>;
+};
+
+const GridLines = () => {
   return (
-    <>
-      <GridLines>
-        <GridColumn column={1} />
-        <GridColumn column={2} />
-        <GridColumn column={3} />
-        <GridColumn column={4} />
-        <GridColumn column={5} />
-        <GridColumn column={6} />
-      </GridLines>
-      <GridTemplate>{props.children}</GridTemplate>
-    </>
+    <GridBorders>
+      <GridColumn column={1} />
+      <GridColumn column={2} />
+      <GridColumn column={3} />
+      <GridColumn column={4} />
+      <GridColumn column={5} />
+      <GridColumn column={6} />
+    </GridBorders>
   );
 };
 
@@ -25,7 +26,7 @@ Grid.propTypes = {
   ])
 };
 
-export default Grid;
+export { Grid, GridLines };
 
 const GridTemplate = styled.div`
   min-height: 100vh;
@@ -46,7 +47,7 @@ const GridTemplate = styled.div`
   }
 `;
 
-const GridLines = styled(GridTemplate)`
+const GridBorders = styled(GridTemplate)`
   position: fixed;
   width: 100%;
   height: 100vh;

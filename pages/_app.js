@@ -1,11 +1,12 @@
 import React from "react";
 import App, { Container } from "next/app";
-import { ThemeProvider, createGlobalStyle } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import ReactTooltip from "react-tooltip";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Grid from "../components/grid";
+import { Grid, GridLines } from "../components/grid";
 import Sidebar from "../components/sidebar";
 
 class MyApp extends App {
@@ -84,18 +85,36 @@ class MyApp extends App {
         <GlobalStyle />
         <ReactTooltip place="left" effect="solid" />
         <ToastContainer position={toast.POSITION.TOP_LEFT} />
+        <GridLines />
         <ThemeProvider theme={theme}>
-          <Grid>
-            <Component
-              {...pageProps}
-              timeLogs={this.state.timeLogs}
-              addTimeLog={this.addTimeLog}
-              removeTimeLog={this.removeTimeLog}
-              time={this.state.time}
-              resetTime={this.resetTime}
-            />
+          <>
+            <TransitionGroup component={null}>
+              <CSSTransition
+                key={this.props.router.route}
+                appear
+                timeout={{
+                  appear: 500,
+                  enter: 500,
+                  exit: 250
+                }}
+                classNames="page-transition"
+              >
+                <Transition>
+                  <Grid>
+                    <Component
+                      {...pageProps}
+                      timeLogs={this.state.timeLogs}
+                      addTimeLog={this.addTimeLog}
+                      removeTimeLog={this.removeTimeLog}
+                      time={this.state.time}
+                      resetTime={this.resetTime}
+                    />
+                  </Grid>
+                </Transition>
+              </CSSTransition>
+            </TransitionGroup>
             <Sidebar />
-          </Grid>
+          </>
         </ThemeProvider>
       </Container>
     );
@@ -124,5 +143,37 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     padding: 0;
     margin: 0;
+  }
+`;
+
+const Transition = styled.div`
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  &.page-transition-appear,
+  &.page-transition-enter {
+    opacity: 0;
+  }
+  &.page-transition-appear-active,
+  &.page-transition-enter-active {
+    opacity: 1;
+    transition-delay: 250ms;
+    transition-duration: 250ms;
+    transition-property: opacity;
+  }
+  &.page-transition-appear-done,
+  &.page-transition-enter-done {
+    opacity: 1;
+  }
+  &.page-transition-exit {
+    opacity: 1;
+  }
+  &.page-transition-exit-active {
+    opacity: 0;
+    transition-duration: 250ms;
+    transition-property: opacity;
   }
 `;
