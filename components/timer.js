@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import uuid from "uuid";
 
 const Timer = props => {
   const [time, setTime] = useState("00:00:00");
@@ -49,12 +50,14 @@ const Timer = props => {
   };
 
   const addTimeLog = () => {
+    const id = uuid();
     const start = props.time;
     const end = new Date();
     const diff = end - start;
     props.addTimeLog({
-      start: start,
-      end: end,
+      id: id,
+      start: start.toString(),
+      end: end.toString(),
       diff: diff,
       time: getTimeCurrent(),
       note: note

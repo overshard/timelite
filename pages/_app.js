@@ -68,8 +68,10 @@ class MyApp extends App {
     toast.success("You've added an entry.");
   }
 
-  removeTimeLog(timeLogIndex) {
-    const timeLogs = this.state.timeLogs.filter((_, i) => i !== timeLogIndex);
+  removeTimeLog(timeLogId) {
+    const timeLogs = this.state.timeLogs.filter(
+      timeLog => timeLog.id !== timeLogId
+    );
     this.setState({
       timeLogs: timeLogs
     });

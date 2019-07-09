@@ -36,11 +36,9 @@ const Log = props => {
                 const transitionDelay = index * 125;
                 return (
                   <CSSTransition
-                    key={index}
+                    key={log.id}
                     appear
-                    unmountOnExit
-                    mountOnEnter
-                    timeout={timeout}
+                    timeout={{ appear: timeout, enter: 250, exit: 250 }}
                     classNames="fade"
                   >
                     <Entry style={{ transitionDelay: `${transitionDelay}ms` }}>
@@ -48,7 +46,7 @@ const Log = props => {
                       <EntryNote>{log.note}</EntryNote>
                       <EntryRemove
                         onClick={() => {
-                          props.removeTimeLog(index);
+                          props.removeTimeLog(log.id);
                         }}
                       >
                         x
@@ -130,6 +128,7 @@ const Entry = styled.div`
   }
   &.fade-exit-active {
     opacity: 0;
+    transition-delay: 0ms !important;
     transition-duration: 250ms;
     transition-property: opacity, transform;
     transform: translateX(100px);
