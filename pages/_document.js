@@ -37,11 +37,9 @@ class MyDocument extends Document {
             content="Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?"
           />
 
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <meta name="theme-color" content="#1b1a23" />
 
           <link rel="manifest" href="/manifest.json" />
-          <meta name="theme-color" content="#1b1a23" />
         </Head>
         <body>
           <Main />

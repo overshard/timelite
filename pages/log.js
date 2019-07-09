@@ -107,8 +107,6 @@ const Entry = styled.div`
   display: grid;
   grid-template-columns: 150px 1fr 50px;
   align-items: center;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
 
   &.fade-appear,
   &.fade-enter {
@@ -148,6 +146,9 @@ const EntryTime = styled.div`
   height: 100%;
   background-color: #e2e2e2;
   text-align: center;
+  box-sizing: border-box;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 `;
 
 const EntryNote = styled.div`

@@ -134,14 +134,8 @@ const theme = {
 
 // NOTE: Prevent renderblocking of Google WebFonts CSS by importing it here
 const GlobalStyle = createGlobalStyle`
-  @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&display=swap");
-
-  * {
-    font-family: "Open Sans", sans-serif;
-    box-sizing: border-box;
-  }
-
   body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: #ffffff;
     background-color: #1b1a23;
     min-height: 100vh;
