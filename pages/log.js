@@ -81,6 +81,7 @@ const Main = styled.main`
   min-height: 100vh;
   padding-top: 50px;
   padding-bottom: 50px;
+  box-sizing: border-box;
 `;
 
 const Heading = styled.h1`
