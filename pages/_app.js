@@ -84,7 +84,7 @@ class MyApp extends App {
     this.setState({
       timeLogs: []
     });
-    localStorage.setItem("timeLogs", []);
+    localStorage.setItem("timeLogs", "[]");
     toast.error("You've reset your log.");
   }
 

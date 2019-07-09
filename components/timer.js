@@ -109,7 +109,7 @@ Timer.propTypes = {
 export default Timer;
 
 const Time = styled.div`
-  font-size: 10em;
+  font-size: 12em;
   text-align: center;
   font-weight: lighter;
   @media (max-width: 1023.99px) {
