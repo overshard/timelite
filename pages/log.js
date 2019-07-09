@@ -126,10 +126,13 @@ const Entry = styled.div`
   }
   &.fade-exit {
     opacity: 1;
+    transform: translateX(0);
   }
   &.fade-exit-active {
     opacity: 0;
-    transition: opacity 250ms;
+    transition-duration: 250ms;
+    transition-property: opacity, transform;
+    transform: translateX(100px);
   }
 
   @media (max-width: 1023.99px) {
