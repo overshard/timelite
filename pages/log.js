@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
@@ -6,6 +6,16 @@ import styled from "styled-components";
 import Page from "../components/page";
 
 const Log = props => {
+  const [firstEntryDate, setFirstEntryDate] = useState(null);
+
+  useEffect(() => {
+    if (props.timeLogs.length > 0)
+      setFirstEntryDate(
+        new Date(props.timeLogs[props.timeLogs.length - 1].start)
+      );
+    else setFirstEntryDate(null);
+  }, [props.timeLogs]);
+
   const getTotalTime = () => {
     let timerMiliseconds = props.timeLogs.reduce((total, entry) => {
       return total + entry.diff;
@@ -27,7 +37,19 @@ const Log = props => {
   return (
     <Page title="Log">
       <Main>
-        <Heading>Log</Heading>
+        <TopBar>
+          <Heading>Log</Heading>
+          {firstEntryDate && (
+            <Start>
+              <span>Start Time</span>
+              {firstEntryDate.toLocaleTimeString()}
+            </Start>
+          )}
+          <Total>
+            <span>Total</span>
+            {getTotalTime()}
+          </Total>
+        </TopBar>
         {props.timeLogs.length > 0 ? (
           <>
             <TransitionGroup component={null}>
@@ -56,10 +78,6 @@ const Log = props => {
                 );
               })}
             </TransitionGroup>
-            <Total>
-              <span>Total</span>
-              {getTotalTime()}
-            </Total>
           </>
         ) : (
           <Nothing>No times added to your log yet!</Nothing>
@@ -84,10 +102,18 @@ const Main = styled.main`
   box-sizing: border-box;
 `;
 
+const TopBar = styled.div`
+  display: flex;
+  margin-bottom: 30px;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
 const Heading = styled.h1`
   font-size: 5em;
   font-weight: lighter;
   margin-top: 0;
+  margin-bottom: 0;
   &::before {
     content: "";
     width: 50px;
@@ -184,7 +210,6 @@ const Nothing = styled.div`
 const Total = styled.div`
   font-weight: bolder;
   font-size: 2em;
-  margin-top: 50px;
   padding: 5px;
   & span {
     font-size: 0.4em;
@@ -192,7 +217,10 @@ const Total = styled.div`
     font-weight: lighter;
     display: block;
   }
+`;
+
+const Start = styled(Total)`
   @media (max-width: 1023.99px) {
-    text-align: center;
+    display: none;
   }
 `;
