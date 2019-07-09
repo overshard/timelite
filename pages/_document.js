@@ -30,12 +30,16 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <meta
             name="description"
             content="Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?"
           />
+
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#1b1a23" />
         </Head>
