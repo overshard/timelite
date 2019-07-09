@@ -141,29 +141,34 @@ const Note = styled.input`
   @media (max-width: 1023.99px) {
     padding: 5px 15px;
     font-size: 1.2em;
-    width: 100%;
+    width: 225px;
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
 `;
 
 const Buttons = styled.div`
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -10px;
 `;
 
 const Button = styled.button`
-  margin: 0 20px;
   border: 0;
   color: white;
   background: #73724c;
   padding: 15px 30px;
   font-size: 1em;
   letter-spacing: 4px;
-  width: 280px;
+  width: 50%;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: lighter;
   transform: scale(1);
   transition: transform 250ms;
   border-radius: 3px;
+  margin: 0 10px;
   &:hover,
   &:focus {
     transform: scale(1.1);
@@ -171,7 +176,7 @@ const Button = styled.button`
   @media (max-width: 1023.99px) {
     font-size: 0.9em;
     padding: 5px 10px;
-    width: 100px;
+    width: 50%;
     margin: 0 5px;
   }
 `;
