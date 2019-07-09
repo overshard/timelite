@@ -47,7 +47,7 @@ const Heading = styled.h1`
 `;
 
 const Paragraph = styled.p`
-  font-size: 2em;
+  font-size: 2.5em;
   text-align: justify;
   @media (max-width: 1023.99px) {
     font-size: 1.2em;
@@ -61,6 +61,10 @@ const Creator = styled.a`
   opacity: 0.7;
   color: white;
   text-decoration: none;
+  transition: opacity 250ms;
+  &:hover {
+    opacity: 1;
+  }
   @media (max-width: 1023.99px) {
     font-size: 1.2em;
   }

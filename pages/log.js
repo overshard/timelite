@@ -115,12 +115,12 @@ const Entry = styled.div`
   &.fade-appear,
   &.fade-enter {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateX(-100px);
   }
   &.fade-appear-active,
   &.fade-enter-active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
     transition-duration: 250ms;
     transition-property: opacity, transform;
   }
