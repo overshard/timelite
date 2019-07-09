@@ -78,6 +78,9 @@ const Log = props => {
                 );
               })}
             </TransitionGroup>
+            <BottomBar>
+              <Reset onClick={props.resetTimeLog}>Clear</Reset>
+            </BottomBar>
           </>
         ) : (
           <Nothing>No times added to your log yet!</Nothing>
@@ -89,7 +92,8 @@ const Log = props => {
 
 Log.propTypes = {
   timeLogs: PropTypes.array,
-  removeTimeLog: PropTypes.func
+  removeTimeLog: PropTypes.func,
+  resetTimeLog: PropTypes.func
 };
 
 export default Log;
@@ -104,7 +108,7 @@ const Main = styled.main`
 
 const TopBar = styled.div`
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   justify-content: space-between;
   align-items: flex-end;
 `;
@@ -223,4 +227,22 @@ const Start = styled(Total)`
   @media (max-width: 1023.99px) {
     display: none;
   }
+`;
+
+const BottomBar = styled.div`
+  text-align: right;
+`;
+
+const Reset = styled.button`
+  font-size: 1.2em;
+  border: 0;
+  border-radius: 3px;
+  background-color: #ff0000;
+  padding: 15px 25px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 30px;
+  color: white;
+  font-weight: bolder;
+  cursor: pointer;
 `;

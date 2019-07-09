@@ -18,6 +18,7 @@ class MyApp extends App {
     };
     this.addTimeLog = this.addTimeLog.bind(this);
     this.removeTimeLog = this.removeTimeLog.bind(this);
+    this.resetTimeLog = this.resetTimeLog.bind(this);
     this.resetTime = this.resetTime.bind(this);
   }
 
@@ -79,6 +80,14 @@ class MyApp extends App {
     toast.error("You've deleted an entry.");
   }
 
+  resetTimeLog() {
+    this.setState({
+      timeLogs: []
+    });
+    localStorage.setItem("timeLogs", []);
+    toast.error("You've reset your log.");
+  }
+
   render() {
     const { Component, pageProps } = this.props;
 
@@ -108,6 +117,7 @@ class MyApp extends App {
                       timeLogs={this.state.timeLogs}
                       addTimeLog={this.addTimeLog}
                       removeTimeLog={this.removeTimeLog}
+                      resetTimeLog={this.resetTimeLog}
                       time={this.state.time}
                       resetTime={this.resetTime}
                     />
