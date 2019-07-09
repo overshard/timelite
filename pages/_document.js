@@ -36,10 +36,6 @@ class MyDocument extends Document {
             name="description"
             content="Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?"
           />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&display=swap"
-          />
           <link rel="manifest" href="/manifest.json" />
           <meta name="theme-color" content="#1b1a23" />
         </Head>

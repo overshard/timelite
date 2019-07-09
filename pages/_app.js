@@ -132,10 +132,13 @@ const theme = {
   breakpoint: "max-width: 1023.99px"
 };
 
+// NOTE: Prevent renderblocking of Google WebFonts CSS by importing it here
 const GlobalStyle = createGlobalStyle`
+  @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,700&display=swap");
+
   * {
-    box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
+    box-sizing: border-box;
   }
 
   body {
