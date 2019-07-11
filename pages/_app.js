@@ -7,35 +7,45 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Grid, GridLines } from "../components/grid";
+import L10n from "../components/l10n";
 import Sidebar from "../components/sidebar";
+import strings from "../l10n/_app";
 
 class MyApp extends App {
   constructor(props) {
     super(props);
     this.state = {
       time: null,
-      timeLogs: []
+      timeLogs: [],
+      language: "en"
     };
     this.addTimeLog = this.addTimeLog.bind(this);
     this.removeTimeLog = this.removeTimeLog.bind(this);
     this.resetTimeLog = this.resetTimeLog.bind(this);
     this.resetTime = this.resetTime.bind(this);
+    this.setLanguage = this.setLanguage.bind(this);
+    strings.setLanguage(this.state.language);
   }
 
   componentDidMount() {
+    const language = localStorage.getItem("language");
+    if (language) {
+      this.setLanguage(language);
+      toast.info(strings.loadedLanguage);
+    }
     const timeLogs = JSON.parse(localStorage.getItem("timeLogs"));
     if (timeLogs) {
       this.setState({
         timeLogs: timeLogs
       });
-      toast.info("Loaded entries from local storage.");
+      toast.info(strings.loadedEntries);
     }
     const time = localStorage.getItem("time");
     if (time) {
       this.setState({
         time: new Date(time)
       });
-      toast.info("Loaded time from local storage.");
+      toast.info(strings.loadedTime);
     } else {
       const time = new Date();
       this.setState({
@@ -66,7 +76,7 @@ class MyApp extends App {
       timeLogs: timeLogs
     });
     localStorage.setItem("timeLogs", JSON.stringify(timeLogs));
-    toast.success("You've added an entry.");
+    toast.success(strings.addedEntry);
   }
 
   removeTimeLog(timeLogId) {
@@ -77,7 +87,7 @@ class MyApp extends App {
       timeLogs: timeLogs
     });
     localStorage.setItem("timeLogs", JSON.stringify(timeLogs));
-    toast.error("You've deleted an entry.");
+    toast.error(strings.deletedEntry);
   }
 
   resetTimeLog() {
@@ -85,7 +95,15 @@ class MyApp extends App {
       timeLogs: []
     });
     localStorage.setItem("timeLogs", "[]");
-    toast.error("You've reset your log.");
+    toast.error(strings.resetLog);
+  }
+
+  setLanguage(language) {
+    this.setState({
+      language: language
+    });
+    strings.setLanguage(language);
+    localStorage.setItem("language", language);
   }
 
   render() {
@@ -97,6 +115,7 @@ class MyApp extends App {
         <ReactTooltip place="left" effect="solid" />
         <ToastContainer position={toast.POSITION.TOP_LEFT} />
         <GridLines />
+        <L10n language={this.state.language} setLanguage={this.setLanguage} />
         <ThemeProvider theme={theme}>
           <>
             <TransitionGroup component={null}>
@@ -120,12 +139,17 @@ class MyApp extends App {
                       resetTimeLog={this.resetTimeLog}
                       time={this.state.time}
                       resetTime={this.resetTime}
+                      language={this.state.language}
+                      setLanguage={this.setLanguage}
                     />
                   </Grid>
                 </Transition>
               </CSSTransition>
             </TransitionGroup>
-            <Sidebar />
+            <Sidebar
+              language={this.state.language}
+              setLanguage={this.setLanguage}
+            />
           </>
         </ThemeProvider>
       </Container>

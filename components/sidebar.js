@@ -4,35 +4,40 @@ import Link from "next/link";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Sidebar = ({ router }) => {
+import strings from "../l10n/sidebar";
+
+const Sidebar = ({ language, router }) => {
+  strings.setLanguage(language);
+
   return (
     <Side>
-      <Title>Timelite</Title>
+      <Title>{strings.name}</Title>
       <Pages>
         <Link href="/" passHref>
           <Page
             active={router.pathname === "/"}
-            data-tip="Timer"
-            aria-label="Timer"
+            data-tip={strings.timer}
+            aria-label={strings.timer}
           />
         </Link>
         <Link href="/log" passHref>
           <Page
             active={router.pathname === "/log"}
-            data-tip="Log"
-            aria-label="Log"
+            data-tip={strings.log}
+            aria-label={strings.log}
           />
         </Link>
       </Pages>
       <Link href="/about" passHref>
-        <About aria-label="About">?</About>
+        <About aria-label={strings.about}>?</About>
       </Link>
     </Side>
   );
 };
 
 Sidebar.propTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
+  language: PropTypes.string
 };
 
 export default withRouter(Sidebar);
@@ -63,6 +68,7 @@ const Title = styled.div`
   font-size: 1.5em;
   font-weight: bolder;
   transform: rotate(-90deg) translateX(-70px);
+  white-space: nowrap;
   @media (max-width: 1023.99px) {
     transform: none;
     padding: 4px 10px;

@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import uuid from "uuid";
 
+import strings from "../l10n/timer";
+
 const Timer = props => {
+  strings.setLanguage(props.language);
+
   const [time, setTime] = useState("00:00:00");
   const [note, setNote] = useState("");
 
@@ -81,18 +85,18 @@ const Timer = props => {
         <Inputs>
           <Note
             type="text"
-            aria-label="Note"
-            placeholder="Note"
+            aria-label={strings.note}
+            placeholder={strings.note}
             value={note}
             onChange={onChangeNote}
           />
         </Inputs>
         <Buttons>
           <Button className="timer__button" type="reset" onClick={resetTime}>
-            - Reset
+            - {strings.reset}
           </Button>
           <Button className="timer__button" type="submit">
-            Add +
+            {strings.add} +
           </Button>
         </Buttons>
       </form>
@@ -103,7 +107,8 @@ const Timer = props => {
 Timer.propTypes = {
   time: PropTypes.object,
   resetTime: PropTypes.func,
-  addTimeLog: PropTypes.func
+  addTimeLog: PropTypes.func,
+  language: PropTypes.string
 };
 
 export default Timer;

@@ -4,8 +4,11 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
 import Page from "../components/page";
+import strings from "../l10n/log";
 
 const Log = props => {
+  strings.setLanguage(props.language);
+
   const [firstEntryDate, setFirstEntryDate] = useState(null);
 
   useEffect(() => {
@@ -38,15 +41,15 @@ const Log = props => {
     <Page title="Log">
       <Main>
         <TopBar>
-          <Heading>Log</Heading>
+          <Heading>{strings.log}</Heading>
           {firstEntryDate && (
             <Start>
-              <span>Start Time</span>
+              <span>{strings.start}</span>
               {firstEntryDate.toLocaleTimeString()}
             </Start>
           )}
           <Total>
-            <span>Total</span>
+            <span>{strings.total}</span>
             {getTotalTime()}
           </Total>
         </TopBar>
@@ -79,11 +82,11 @@ const Log = props => {
               })}
             </TransitionGroup>
             <BottomBar>
-              <Reset onClick={props.resetTimeLog}>Clear</Reset>
+              <Reset onClick={props.resetTimeLog}>{strings.clear}</Reset>
             </BottomBar>
           </>
         ) : (
-          <Nothing>No times added to your log yet!</Nothing>
+          <Nothing>{strings.nothing}</Nothing>
         )}
       </Main>
     </Page>
@@ -93,7 +96,8 @@ const Log = props => {
 Log.propTypes = {
   timeLogs: PropTypes.array,
   removeTimeLog: PropTypes.func,
-  resetTimeLog: PropTypes.func
+  resetTimeLog: PropTypes.func,
+  language: PropTypes.string
 };
 
 export default Log;
@@ -238,11 +242,15 @@ const Reset = styled.button`
   border: 0;
   border-radius: 3px;
   background-color: #ff0000;
-  padding: 15px 25px;
+  padding: 10px 25px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-top: 30px;
   color: white;
   font-weight: bolder;
   cursor: pointer;
+  @media (max-width: 1023.99px) {
+    font-size: 1em;
+    padding: 8px 15px;
+  }
 `;

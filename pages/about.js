@@ -1,24 +1,32 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import Page from "../components/page";
+import strings from "../l10n/about";
 
-const About = () => {
+const About = props => {
+  strings.setLanguage(props.language);
+
   return (
     <Page title="About">
       <Main>
-        <Heading>Timelite?</Heading>
-        <Blockquote>{`Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?`}</Blockquote>
+        <Heading>{strings.title}</Heading>
+        <Blockquote>{strings.quote}</Blockquote>
         <Creator
           href="https://www.isaacbythewood.com/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          — Isaac Bythewood
+          {strings.name}
         </Creator>
       </Main>
     </Page>
   );
+};
+
+About.propTypes = {
+  language: PropTypes.string
 };
 
 export default About;
