@@ -92,12 +92,16 @@ const Timer = props => {
           />
         </Inputs>
         <Buttons>
-          <Button className="timer__button" type="reset" onClick={resetTime}>
+          <ResetButton
+            className="timer__button"
+            type="reset"
+            onClick={resetTime}
+          >
             - {strings.reset}
-          </Button>
-          <Button className="timer__button" type="submit">
+          </ResetButton>
+          <AddButton className="timer__button" type="submit">
             {strings.add} +
-          </Button>
+          </AddButton>
         </Buttons>
       </form>
     </>
@@ -143,6 +147,11 @@ const Note = styled.input`
   &:focus {
     transform: scale(1.1);
   }
+  &::placeholder {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8em;
+  }
   @media (max-width: 1023.99px) {
     padding: 5px 15px;
     font-size: 1.2em;
@@ -155,18 +164,16 @@ const Note = styled.input`
 const Buttons = styled.div`
   text-align: center;
   display: flex;
-  justify-content: space-between;
-  margin: 0 -10px;
+  justify-content: space-around;
 `;
 
 const Button = styled.button`
   border: 0;
   color: white;
-  background: #73724c;
   padding: 15px 30px;
   font-size: 1em;
   letter-spacing: 4px;
-  width: 50%;
+  width: 40%;
   cursor: pointer;
   text-transform: uppercase;
   font-weight: lighter;
@@ -184,4 +191,12 @@ const Button = styled.button`
     width: 50%;
     margin: 0 5px;
   }
+`;
+
+const ResetButton = styled(Button)`
+  background: #543115;
+`;
+
+const AddButton = styled(Button)`
+  background: #3e4011;
 `;
