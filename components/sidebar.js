@@ -53,7 +53,7 @@ const Side = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     width: 100%;
     height: 40px;
     bottom: 0;
@@ -69,7 +69,7 @@ const Title = styled.div`
   font-weight: bolder;
   transform: rotate(-90deg) translateX(-70px);
   white-space: nowrap;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     transform: none;
     padding: 4px 10px;
   }
@@ -80,7 +80,7 @@ const Pages = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     flex-direction: row;
   }
 `;
@@ -100,7 +100,7 @@ const Page = styled.a`
   &:hover {
     background-color: rgba(0, 0, 0, 1);
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     width: 60px;
     height: 10px;
     margin-bottom: 0;
@@ -116,7 +116,7 @@ const About = styled.a`
   color: white;
   text-decoration: none;
   font-family: monospace;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     padding: 0 15px;
     display: flex;
     justify-content: center;

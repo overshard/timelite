@@ -23,7 +23,7 @@ const Buttons = styled.div`
   bottom: 5px;
   left: 5px;
   z-index: 2;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     top: 5px;
     right: 5px;
     text-align: center;
@@ -44,7 +44,7 @@ const Button = styled.button`
   &:hover {
     opacity: 1;
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 0.8em;
   }
 `;

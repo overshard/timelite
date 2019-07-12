@@ -129,7 +129,7 @@ const Heading = styled.h1`
     background-color: blue;
     display: block;
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 3em;
   }
 `;
@@ -167,7 +167,7 @@ const Entry = styled.div`
     transform: translateX(100px);
   }
 
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     text-align: center;
@@ -202,7 +202,7 @@ const EntryRemove = styled.button`
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   height: 100%;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     padding: 5px;
   }
 `;
@@ -210,7 +210,7 @@ const EntryRemove = styled.button`
 const Nothing = styled.div`
   text-align: center;
   font-size: 2em;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 1.4em;
   }
 `;
@@ -228,7 +228,7 @@ const Total = styled.div`
 `;
 
 const Start = styled(Total)`
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     display: none;
   }
 `;
@@ -249,7 +249,7 @@ const Reset = styled.button`
   color: white;
   font-weight: bolder;
   cursor: pointer;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 1em;
     padding: 8px 15px;
   }

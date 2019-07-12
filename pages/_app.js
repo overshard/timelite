@@ -111,13 +111,16 @@ class MyApp extends App {
 
     return (
       <Container>
-        <GlobalStyle />
-        <ReactTooltip place="left" effect="solid" />
-        <ToastContainer position={toast.POSITION.TOP_LEFT} />
-        <GridLines />
-        <L10n language={this.state.language} setLanguage={this.setLanguage} />
         <ThemeProvider theme={theme}>
           <>
+            <GlobalStyle />
+            <ReactTooltip place="left" effect="solid" />
+            <ToastContainer position={toast.POSITION.TOP_LEFT} />
+            <GridLines />
+            <L10n
+              language={this.state.language}
+              setLanguage={this.setLanguage}
+            />
             <TransitionGroup component={null}>
               <CSSTransition
                 key={this.props.router.route}

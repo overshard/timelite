@@ -121,7 +121,7 @@ const Time = styled.div`
   font-size: 12em;
   text-align: center;
   font-weight: lighter;
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 4em;
   }
 `;
@@ -152,7 +152,7 @@ const Note = styled.input`
     letter-spacing: 2px;
     font-size: 0.8em;
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     padding: 5px 15px;
     font-size: 1.2em;
     width: 225px;
@@ -185,7 +185,7 @@ const Button = styled.button`
   &:focus {
     transform: scale(1.1);
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 0.9em;
     padding: 5px 10px;
     width: 50%;

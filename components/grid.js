@@ -42,7 +42,7 @@ const GridTemplate = styled.div`
   grid-row-start: 2;
   grid-row-end: 2;
 
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     grid-template-columns: 40px 10px auto auto 10px 40px;
   }
 `;
@@ -53,7 +53,7 @@ const GridBorders = styled(GridTemplate)`
   height: 100vh;
   pointer-events: none;
 
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     display: none;
   }
 `;

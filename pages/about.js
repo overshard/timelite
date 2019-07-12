@@ -49,7 +49,7 @@ const Heading = styled.h1`
     background-color: blue;
     display: block;
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 3em;
   }
 `;
@@ -68,7 +68,7 @@ const Blockquote = styled.blockquote`
     opacity: 0.1;
     line-height: 0.5em;
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 1.2em;
   }
 `;
@@ -84,7 +84,7 @@ const Creator = styled.a`
   &:hover {
     opacity: 1;
   }
-  @media (max-width: 1023.99px) {
+  @media (${props => props.theme.breakpoint}) {
     font-size: 1.2em;
   }
 `;
