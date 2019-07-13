@@ -5,7 +5,7 @@
     "deploy": "now"
   },
   "dependencies": {
-    "next": "^8.1.1-canary.69",
+    "next": "^9.0.1",
     "next-offline": "^4.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
