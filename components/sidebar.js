@@ -14,18 +14,14 @@ const Sidebar = ({ language, router }) => {
       <Title>{strings.name}</Title>
       <Pages>
         <Link href="/" passHref>
-          <Page
-            active={router.pathname === "/"}
-            data-tip={strings.timer}
-            aria-label={strings.timer}
-          />
+          <Page active={router.pathname === "/"} aria-label={strings.timer}>
+            <Tooltip>{strings.timer}</Tooltip>
+          </Page>
         </Link>
         <Link href="/log" passHref>
-          <Page
-            active={router.pathname === "/log"}
-            data-tip={strings.log}
-            aria-label={strings.log}
-          />
+          <Page active={router.pathname === "/log"} aria-label={strings.log}>
+            <Tooltip>{strings.log}</Tooltip>
+          </Page>
         </Link>
       </Pages>
       <Link href="/about" passHref>
@@ -87,10 +83,10 @@ const Pages = styled.div`
 
 const Page = styled.a`
   position: relative;
-  content: "";
+  display: flex;
+  align-items: center;
   width: 10px;
   height: 60px;
-  display: block;
   margin-bottom: 25px;
   transition: background-color 200ms;
   ${props =>
@@ -99,6 +95,9 @@ const Page = styled.a`
       : "background-color: rgba(0, 0, 0, 0.5);"}
   &:hover {
     background-color: rgba(0, 0, 0, 1);
+    & > div {
+      visibility: visible;
+    }
   }
   @media (${props => props.theme.breakpoint}) {
     width: 60px;
@@ -106,6 +105,20 @@ const Page = styled.a`
     margin-bottom: 0;
     margin-right: 10px;
   }
+`;
+
+const Tooltip = styled.div`
+  position: absolute;
+  right: 150%;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 2px;
+  visibility: hidden;
 `;
 
 const About = styled.a`

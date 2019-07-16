@@ -2,7 +2,6 @@ import React from "react";
 import App, { Container } from "next/app";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import ReactTooltip from "react-tooltip";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
