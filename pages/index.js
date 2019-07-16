@@ -25,8 +25,8 @@ const Background = styled.div`
   bottom: 0;
   left: 0;
   background-image: linear-gradient(#1b1a23, transparent),
-    linear-gradient(to top left, #2a2f52, transparent),
-    linear-gradient(to top right, #0c0000, transparent);
+    linear-gradient(to top left, #1a3f52, transparent),
+    linear-gradient(to top right, #1f0000, transparent);
   background-blend-mode: screen;
   background-size: cover;
 `;
