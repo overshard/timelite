@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "timelite",
+  "alias": ["timelite.app", "www.timelite.app"],
   "routes": [
     {
       "src": "^/service-worker.js$",
