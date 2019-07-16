@@ -5,9 +5,9 @@ import { ServerStyleSheet } from "styled-components";
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     // Redirect to www if no www used
-    if (ctx.req.headers.host === "timelite.app") {
-      ctx.res.writeHead(302, {
-        Location: "https://www.timelite.app"
+    if (ctx.req.headers.host === "www.timelite.app") {
+      ctx.res.writeHead(301, {
+        Location: `https://timelite.app${ctx.req.url}`
       });
       ctx.res.end();
       return {};
