@@ -63,9 +63,15 @@ const Title = styled.div`
   color: #000000;
   font-size: 1.5em;
   font-weight: bolder;
-  transform: rotate(-90deg) translateX(-70px);
+  writing-mode: vertical-rl;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  transform: rotate(-180deg);
   white-space: nowrap;
   @media (${props => props.theme.breakpoint}) {
+    writing-mode: horizontal-tb;
     transform: none;
     padding: 4px 10px;
   }
