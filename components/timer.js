@@ -194,9 +194,9 @@ const Button = styled.button`
 `;
 
 const ResetButton = styled(Button)`
-  background: #543115;
+  background: #790000;
 `;
 
 const AddButton = styled(Button)`
-  background: #3e4011;
+  background: #007900;
 `;
