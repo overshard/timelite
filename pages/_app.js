@@ -113,7 +113,6 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           <>
             <GlobalStyle />
-            <ReactTooltip place="left" effect="solid" />
             <ToastContainer position={toast.POSITION.TOP_LEFT} />
             <GridLines />
             <L10n
