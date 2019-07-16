@@ -97,6 +97,9 @@ const Page = styled.a`
     background-color: rgba(0, 0, 0, 1);
     & > div {
       visibility: visible;
+      @media (${props => props.theme.breakpoint}) {
+        visibility: hidden;
+      }
     }
   }
   @media (${props => props.theme.breakpoint}) {
