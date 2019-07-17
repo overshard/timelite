@@ -170,13 +170,18 @@ const theme = {
 // NOTE: Prevent renderblocking of Google WebFonts CSS by importing it here
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    color: #ffffff;
+    font-family:
+      -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: white;
     background-color: #1b1a23;
     min-height: 100vh;
     width: 100%;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
+    text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+    text-rendering: optimizeLegibility;
   }
 `;
 
