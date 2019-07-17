@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import Page from "../components/page";
 import Timer from "../components/timer";
@@ -16,6 +16,17 @@ const Index = props => {
 };
 
 export default Index;
+
+const FadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Background = styled.div`
   position: absolute;
@@ -37,4 +48,7 @@ const Main = styled.main`
   align-items: center;
   display: flex;
   flex-direction: column;
+  animation-name: ${FadeUp};
+  animation-direction: forwards;
+  animation-duration: 500ms;
 `;

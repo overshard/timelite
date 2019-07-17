@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import PropTypes from "prop-types";
 
 import Page from "../components/page";
@@ -31,6 +31,37 @@ About.propTypes = {
 
 export default About;
 
+const FadeRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const ScaleRight = keyframes`
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+`;
+
+const ScaleLeft = keyframes`
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+`;
+
 const Main = styled.main`
   grid-area: main;
   display: flex;
@@ -42,6 +73,11 @@ const Heading = styled.h1`
   font-size: 5em;
   font-weight: lighter;
   margin-top: 0;
+  opacity: 0;
+  animation-name: ${FadeRight};
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-timing-function: ease-out;
   &::before {
     content: "";
     width: 50px;
@@ -59,6 +95,12 @@ const Blockquote = styled.blockquote`
   margin: 0 auto;
   position: relative;
   max-width: 650px;
+  opacity: 0;
+  animation-name: ${FadeRight};
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-delay: 500ms;
+  animation-timing-function: ease-out;
   &::before {
     content: "”";
     position: absolute;
@@ -76,13 +118,42 @@ const Blockquote = styled.blockquote`
 const Creator = styled.a`
   font-size: 2em;
   display: block;
-  text-align: right;
+  margin-left: auto;
   opacity: 0.7;
   color: white;
   text-decoration: none;
   transition: opacity 250ms;
+  position: relative;
+  opacity: 0;
+  animation-name: ${FadeRight};
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-delay: 1000ms;
+  animation-timing-function: ease-out;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 1);
+    transform-origin: left;
+    animation: ${ScaleLeft} 300ms normal forwards;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+  }
   &:hover {
-    opacity: 1;
+    &::before {
+      animation: ${ScaleRight} 300ms normal forwards;
+    }
   }
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.2em;
