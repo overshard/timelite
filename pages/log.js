@@ -48,10 +48,12 @@ const Log = props => {
               {firstEntryDate.toLocaleTimeString()}
             </Start>
           )}
-          <Total>
-            <span>{strings.total}</span>
-            {getTotalTime()}
-          </Total>
+          {props.timeLogs.length > 0 && (
+            <Total>
+              <span>{strings.total}</span>
+              {getTotalTime()}
+            </Total>
+          )}
         </TopBar>
         {props.timeLogs.length > 0 ? (
           <>
@@ -209,6 +211,8 @@ const EntryRemove = styled.button`
 
 const Nothing = styled.div`
   text-align: center;
+  margin-top: 100px;
+  opacity: 0.5;
   font-size: 2em;
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.4em;
