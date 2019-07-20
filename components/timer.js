@@ -1,81 +1,34 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import uuid from "uuid";
 
+import { Context } from "./context";
 import strings from "../l10n/timer";
+import { timeString, timeDiff } from "../utils/time";
 
-const Timer = props => {
-  strings.setLanguage(props.language);
-
-  const [time, setTime] = useState("00:00:00");
+const Timer = () => {
+  const { state, dispatch } = useContext(Context);
+  const [time, setTime] = useState(timeString(timeDiff(state.timer)));
   const [note, setNote] = useState("");
 
+  strings.setLanguage(state.language);
+
   useEffect(() => {
-    // NOTE: Run this immediately to improve moving between pages
-    setTime(getTimeCurrent());
+    setTime(timeString(timeDiff(state.timer)));
 
     const timerInterval = setInterval(() => {
-      const timeCurrent = getTimeCurrent();
+      const timeCurrent = timeString(timeDiff(state.timer));
       setTime(timeCurrent);
       document.title = `${timeCurrent} — Timelite`;
     }, 1000);
-
-    const cleanup = () => {
+    return () => {
       clearInterval(timerInterval);
     };
-
-    return cleanup;
-  }, [props.time]);
-
-  const getTimeCurrent = () => {
-    if (props.time === null) return "00:00:00";
-    const timerCurrent = new Date();
-    const timerMiliseconds = timerCurrent - props.time;
-    const timerTotal = [
-      (timerMiliseconds / 1000 / 60 / 60) % 60, // Hours
-      (timerMiliseconds / 1000 / 60) % 60, // Minutes
-      (timerMiliseconds / 1000) % 60 // Seconds
-    ];
-    return timerTotal
-      .map(timer => {
-        let stringTime = Math.floor(timer).toString();
-        if (stringTime.length < 2) stringTime = `0${stringTime}`;
-        return stringTime;
-      })
-      .join(":");
-  };
-
-  const resetTime = () => {
-    // NOTE: This also resets the display to make the app feel more responsive
-    props.resetTime();
-    setTime("00:00:00");
-    setNote("");
-  };
-
-  const addTimeLog = () => {
-    const id = uuid();
-    const start = props.time;
-    const end = new Date();
-    const diff = end - start;
-    props.addTimeLog({
-      id: id,
-      start: start.toString(),
-      end: end.toString(),
-      diff: diff,
-      time: getTimeCurrent(),
-      note: note
-    });
-    resetTime();
-  };
-
-  const onChangeNote = e => {
-    setNote(e.target.value);
-  };
+  }, [state.timer]);
 
   const submitForm = e => {
     e.preventDefault();
-    addTimeLog();
+    dispatch({ type: "ADD_LOG", note: note });
+    setNote("");
   };
 
   return (
@@ -88,14 +41,14 @@ const Timer = props => {
             aria-label={strings.note}
             placeholder={strings.note}
             value={note}
-            onChange={onChangeNote}
+            onChange={e => setNote(e.target.value)}
           />
         </Inputs>
         <Buttons>
           <ResetButton
             className="timer__button"
             type="reset"
-            onClick={resetTime}
+            onClick={() => dispatch({ type: "NEW_TIMER" })}
           >
             - {strings.reset}
           </ResetButton>
@@ -106,13 +59,6 @@ const Timer = props => {
       </form>
     </>
   );
-};
-
-Timer.propTypes = {
-  time: PropTypes.object,
-  resetTime: PropTypes.func,
-  addTimeLog: PropTypes.func,
-  language: PropTypes.string
 };
 
 export default Timer;

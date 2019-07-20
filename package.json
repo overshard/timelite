@@ -5,10 +5,11 @@
     "deploy": "now"
   },
   "dependencies": {
+    "localforage": "^1.7.3",
     "next": "^9.0.1",
     "next-offline": "^4.0.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-localization": "^1.0.14",
     "react-toastify": "^5.3.2",
     "react-transition-group": "^4.2.1",

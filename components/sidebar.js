@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { withRouter } from "next/router";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { Context } from "./context";
 import strings from "../l10n/sidebar";
 
-const Sidebar = ({ language, router }) => {
-  strings.setLanguage(language);
+const Sidebar = ({ router }) => {
+  const { state } = useContext(Context);
+  strings.setLanguage(state.language);
 
   return (
     <Side>

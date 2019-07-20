@@ -4,12 +4,12 @@ import styled, { keyframes } from "styled-components";
 import Page from "../components/page";
 import Timer from "../components/timer";
 
-const Index = props => {
+const Index = () => {
   return (
     <Page title="Timer">
       <Background />
       <Main>
-        <Timer {...props} />
+        <Timer />
       </Main>
     </Page>
   );

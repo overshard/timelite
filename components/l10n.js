@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const L10n = props => {
+import { Context } from "./context";
+
+const L10n = () => {
+  const { dispatch } = useContext(Context);
+
   // TODO: This should probably not be buttons and be a select box of some kind...
   return (
     <Buttons>
-      <Button onClick={() => props.setLanguage("en")}>English</Button>
-      <Button onClick={() => props.setLanguage("jp")}>日本語</Button>
+      <Button
+        onClick={() => dispatch({ type: "SET_LANGUAGE", language: "en" })}
+      >
+        English
+      </Button>
+      <Button
+        onClick={() => dispatch({ type: "SET_LANGUAGE", language: "jp" })}
+      >
+        日本語
+      </Button>
     </Buttons>
   );
 };
