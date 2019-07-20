@@ -1,40 +1,27 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, useContext } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
 import Page from "../components/page";
+import { Context } from "../components/context";
 import strings from "../l10n/log";
+import { timeString } from "../utils/time";
 
-const Log = props => {
-  strings.setLanguage(props.language);
-
+const Log = () => {
+  const { state, dispatch } = useContext(Context);
   const [firstEntryDate, setFirstEntryDate] = useState(null);
 
-  useEffect(() => {
-    if (props.timeLogs.length > 0)
-      setFirstEntryDate(
-        new Date(props.timeLogs[props.timeLogs.length - 1].start)
-      );
-    else setFirstEntryDate(null);
-  }, [props.timeLogs]);
+  strings.setLanguage(state.language);
 
-  const getTotalTime = () => {
-    let timerMiliseconds = props.timeLogs.reduce((total, entry) => {
-      return total + entry.diff;
+  useEffect(() => {
+    if (state.log.length > 0) setFirstEntryDate(state.log.start);
+    else setFirstEntryDate(null);
+  }, [state.log]);
+
+  const getTotalMilliseconds = () => {
+    return state.log.reduce((total, entry) => {
+      return total + (entry.end - entry.start);
     }, 0);
-    const timerTotal = [
-      (timerMiliseconds / 1000 / 60 / 60) % 60, // Hours
-      (timerMiliseconds / 1000 / 60) % 60, // Minutes
-      (timerMiliseconds / 1000) % 60 // Seconds
-    ];
-    return timerTotal
-      .map(timer => {
-        let stringTime = Math.floor(timer).toString();
-        if (stringTime.length < 2) stringTime = `0${stringTime}`;
-        return stringTime;
-      })
-      .join(":");
   };
 
   return (
@@ -48,32 +35,34 @@ const Log = props => {
               {firstEntryDate.toLocaleTimeString()}
             </Start>
           )}
-          {props.timeLogs.length > 0 && (
+          {state.log.length > 0 && (
             <Total>
               <span>{strings.total}</span>
-              {getTotalTime()}
+              {timeString(getTotalMilliseconds())}
             </Total>
           )}
         </TopBar>
-        {props.timeLogs.length > 0 ? (
+        {state.log.length > 0 ? (
           <>
             <TransitionGroup component={null}>
-              {props.timeLogs.map((log, index) => {
+              {state.log.map((entry, index) => {
                 const timeout = (index + 1) * 250;
                 const transitionDelay = index * 125;
                 return (
                   <CSSTransition
-                    key={log.id}
+                    key={entry.id}
                     appear
                     timeout={{ appear: timeout, enter: 250, exit: 250 }}
                     classNames="fade"
                   >
                     <Entry style={{ transitionDelay: `${transitionDelay}ms` }}>
-                      <EntryTime>{log.time}</EntryTime>
-                      <EntryNote>{log.note}</EntryNote>
+                      <EntryTime>
+                        {timeString(entry.end - entry.start)}
+                      </EntryTime>
+                      <EntryNote>{entry.note}</EntryNote>
                       <EntryRemove
                         onClick={() => {
-                          props.removeTimeLog(log.id);
+                          () => dispatch({ type: "REMOVE_LOG", id: entry.id });
                         }}
                       >
                         x
@@ -84,7 +73,9 @@ const Log = props => {
               })}
             </TransitionGroup>
             <BottomBar>
-              <Reset onClick={props.resetTimeLog}>{strings.clear}</Reset>
+              <Reset onClick={() => dispatch({ type: "RESET_LOG" })}>
+                {strings.clear}
+              </Reset>
             </BottomBar>
           </>
         ) : (
@@ -93,13 +84,6 @@ const Log = props => {
       </Main>
     </Page>
   );
-};
-
-Log.propTypes = {
-  timeLogs: PropTypes.array,
-  removeTimeLog: PropTypes.func,
-  resetTimeLog: PropTypes.func,
-  language: PropTypes.string
 };
 
 export default Log;

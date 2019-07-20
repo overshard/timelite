@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { keyframes } from "styled-components";
-import PropTypes from "prop-types";
 
 import Page from "../components/page";
+import { Context } from "../components/context";
 import strings from "../l10n/about";
 
-const About = props => {
-  strings.setLanguage(props.language);
+const About = () => {
+  const { state } = useContext(Context);
+  strings.setLanguage(state.language);
 
   return (
     <Page title="About">
@@ -23,10 +24,6 @@ const About = props => {
       </Main>
     </Page>
   );
-};
-
-About.propTypes = {
-  language: PropTypes.string
 };
 
 export default About;

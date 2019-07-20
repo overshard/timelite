@@ -1,0 +1,106 @@
+import React, { useEffect } from "react";
+import { useReducer, createContext } from "react";
+import PropTypes from "prop-types";
+import uuid from "uuid";
+import { toast } from "react-toastify";
+import localForage from "localforage";
+
+import strings from "../l10n/context";
+
+const initialState = {
+  language: "en",
+  timer: new Date(),
+  log: []
+};
+
+const Context = createContext();
+
+const reducer = (state, action) => {
+  let newState = {};
+  strings.setLanguage(state.language);
+
+  switch (action.type) {
+    case "LOCALDATA_READY":
+      toast.info(strings.loaded);
+      return {
+        ...action.localdata
+      };
+    case "SET_LANGUAGE":
+      newState = {
+        ...state,
+        language: action.language
+      };
+      localForage.setItem("context", newState);
+      return newState;
+    case "NEW_TIMER":
+      newState = {
+        ...state,
+        timer: new Date()
+      };
+      localForage.setItem("context", newState);
+      return newState;
+    case "ADD_LOG":
+      toast.success(strings.addedEntry);
+      newState = {
+        ...state,
+        timer: new Date(),
+        log: [
+          {
+            id: uuid(), // HACK: react-transition-group requires an id?
+            start: state.timer,
+            end: new Date(),
+            note: action.note
+          },
+          ...state.log
+        ]
+      };
+      localForage.setItem("context", newState);
+      return newState;
+    case "REMOVE_LOG":
+      toast.error(strings.deletedEntry);
+      newState = {
+        ...state,
+        log: [...state.log.filter(entry => entry.id !== action.id)]
+      };
+      localForage.setItem("context", newState);
+      return newState;
+    case "RESET_LOG":
+      toast.error(strings.resetLog);
+      newState = {
+        ...state,
+        log: []
+      };
+      localForage.setItem("context", newState);
+      return newState;
+    default:
+      return state;
+  }
+};
+
+const ContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const value = { state, dispatch };
+
+  useEffect(() => {
+    localForage
+      .getItem("context")
+      .then(value => {
+        dispatch({ type: "LOCALDATA_READY", localdata: value });
+      })
+      // FIXME: localForage will error with SSR rendering, what do if anything?
+      .catch(() => {});
+  }, []);
+
+  return <Context.Provider value={value}>{children}</Context.Provider>;
+};
+
+ContextProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ])
+};
+
+const ContextConsumer = Context.Consumer;
+
+export { Context, ContextProvider, ContextConsumer };

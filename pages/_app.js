@@ -5,104 +5,18 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { ContextProvider } from "../components/context";
+
 import { Grid, GridLines } from "../components/grid";
 import L10n from "../components/l10n";
 import Sidebar from "../components/sidebar";
-import strings from "../l10n/_app";
 
 class MyApp extends App {
-  constructor(props) {
-    super(props);
-    this.state = {
-      time: null,
-      timeLogs: [],
-      language: "en"
-    };
-    this.addTimeLog = this.addTimeLog.bind(this);
-    this.removeTimeLog = this.removeTimeLog.bind(this);
-    this.resetTimeLog = this.resetTimeLog.bind(this);
-    this.resetTime = this.resetTime.bind(this);
-    this.setLanguage = this.setLanguage.bind(this);
-    strings.setLanguage(this.state.language);
-  }
-
-  componentDidMount() {
-    const language = localStorage.getItem("language");
-    if (language) {
-      this.setLanguage(language);
-      toast.info(strings.loadedLanguage);
-    }
-    const timeLogs = JSON.parse(localStorage.getItem("timeLogs"));
-    if (timeLogs) {
-      this.setState({
-        timeLogs: timeLogs
-      });
-      toast.info(strings.loadedEntries);
-    }
-    const time = localStorage.getItem("time");
-    if (time) {
-      this.setState({
-        time: new Date(time)
-      });
-      toast.info(strings.loadedTime);
-    } else {
-      const time = new Date();
-      this.setState({
-        time: time
-      });
-      localStorage.setItem("time", time.toString());
-    }
-  }
-
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps)
       pageProps = await Component.getInitialProps(ctx);
     return { pageProps };
-  }
-
-  resetTime() {
-    const time = new Date();
-    this.setState({
-      time: time
-    });
-    localStorage.setItem("time", time.toString());
-  }
-
-  addTimeLog(timeLog) {
-    const timeLogs = [timeLog, ...this.state.timeLogs];
-    this.setState({
-      timeLogs: timeLogs
-    });
-    localStorage.setItem("timeLogs", JSON.stringify(timeLogs));
-    toast.success(strings.addedEntry);
-  }
-
-  removeTimeLog(timeLogId) {
-    const timeLogs = this.state.timeLogs.filter(
-      timeLog => timeLog.id !== timeLogId
-    );
-    this.setState({
-      timeLogs: timeLogs
-    });
-    localStorage.setItem("timeLogs", JSON.stringify(timeLogs));
-    toast.error(strings.deletedEntry);
-  }
-
-  resetTimeLog() {
-    this.setState({
-      timeLogs: []
-    });
-    localStorage.setItem("timeLogs", "[]");
-    toast.error(strings.resetLog);
-  }
-
-  setLanguage(language) {
-    this.setState({
-      language: language
-    });
-    strings.setLanguage(language);
-    localStorage.setItem("language", language);
   }
 
   render() {
@@ -111,14 +25,11 @@ class MyApp extends App {
     return (
       <Container>
         <ThemeProvider theme={theme}>
-          <>
+          <ContextProvider>
             <GlobalStyle />
             <ToastContainer position={toast.POSITION.TOP_LEFT} />
             <GridLines />
-            <L10n
-              language={this.state.language}
-              setLanguage={this.setLanguage}
-            />
+            <L10n />
             <TransitionGroup component={null}>
               <CSSTransition
                 key={this.props.router.route}
@@ -132,26 +43,13 @@ class MyApp extends App {
               >
                 <Transition>
                   <Grid>
-                    <Component
-                      {...pageProps}
-                      timeLogs={this.state.timeLogs}
-                      addTimeLog={this.addTimeLog}
-                      removeTimeLog={this.removeTimeLog}
-                      resetTimeLog={this.resetTimeLog}
-                      time={this.state.time}
-                      resetTime={this.resetTime}
-                      language={this.state.language}
-                      setLanguage={this.setLanguage}
-                    />
+                    <Component {...pageProps} />
                   </Grid>
                 </Transition>
               </CSSTransition>
             </TransitionGroup>
-            <Sidebar
-              language={this.state.language}
-              setLanguage={this.setLanguage}
-            />
-          </>
+            <Sidebar />
+          </ContextProvider>
         </ThemeProvider>
       </Container>
     );
