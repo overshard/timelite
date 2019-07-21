@@ -56,7 +56,7 @@ const Log = () => {
                       <EntryNote>{entry.note}</EntryNote>
                       <EntryRemove
                         onClick={() => {
-                          () => dispatch({ type: "REMOVE_LOG", id: entry.id });
+                          dispatch({ type: "REMOVE_LOG", id: entry.id });
                         }}
                       >
                         x
