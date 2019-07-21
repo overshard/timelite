@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
@@ -9,14 +9,8 @@ import { timeString } from "../utils/time";
 
 const Log = () => {
   const { state, dispatch } = useContext(Context);
-  const [firstEntryDate, setFirstEntryDate] = useState(null);
 
   strings.setLanguage(state.language);
-
-  useEffect(() => {
-    if (state.log.length > 0) setFirstEntryDate(state.log.start);
-    else setFirstEntryDate(null);
-  }, [state.log]);
 
   const getTotalMilliseconds = () => {
     return state.log.reduce((total, entry) => {
@@ -29,17 +23,17 @@ const Log = () => {
       <Main>
         <TopBar>
           <Heading>{strings.log}</Heading>
-          {firstEntryDate && (
-            <Start>
-              <span>{strings.start}</span>
-              {firstEntryDate.toLocaleTimeString()}
-            </Start>
-          )}
           {state.log.length > 0 && (
-            <Total>
-              <span>{strings.total}</span>
-              {timeString(getTotalMilliseconds())}
-            </Total>
+            <>
+              <Start>
+                <span>{strings.start}</span>
+                {state.log[state.log.length - 1].start.toLocaleTimeString()}
+              </Start>
+              <Total>
+                <span>{strings.total}</span>
+                {timeString(getTotalMilliseconds())}
+              </Total>
+            </>
           )}
         </TopBar>
         {state.log.length > 0 ? (
