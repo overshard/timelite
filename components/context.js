@@ -17,14 +17,13 @@ const Context = createContext();
 
 const reducer = (state, action) => {
   let newState = {};
+
   strings.setLanguage(state.language);
 
   switch (action.type) {
     case "LOCALDATA_READY":
       toast.info(strings.loaded);
-      return {
-        ...action.localdata
-      };
+      return { ...action.localdata };
     case "SET_LANGUAGE":
       newState = {
         ...state,
@@ -85,7 +84,9 @@ const ContextProvider = ({ children }) => {
     localForage
       .getItem("context")
       .then(value => {
-        dispatch({ type: "LOCALDATA_READY", localdata: value });
+        let newState = value;
+        if (newState === null) newState = initialState;
+        dispatch({ type: "LOCALDATA_READY", localdata: newState });
       })
       // FIXME: localForage will error with SSR rendering, what do if anything?
       .catch(() => {});
