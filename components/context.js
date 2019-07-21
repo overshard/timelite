@@ -22,6 +22,7 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "LOCALDATA_READY":
+      strings.setLanguage(action.localdata.language);
       toast.info(strings.loaded);
       return { ...action.localdata };
     case "SET_LANGUAGE":
@@ -84,9 +85,8 @@ const ContextProvider = ({ children }) => {
     localForage
       .getItem("context")
       .then(value => {
-        let newState = value;
-        if (newState === null) newState = initialState;
-        dispatch({ type: "LOCALDATA_READY", localdata: newState });
+        if (value !== null)
+          dispatch({ type: "LOCALDATA_READY", localdata: value });
       })
       // FIXME: localForage will error with SSR rendering, what do if anything?
       .catch(() => {});
