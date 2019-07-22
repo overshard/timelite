@@ -49,7 +49,12 @@ const reducer = (state, action) => {
             start: state.timer,
             end: new Date(),
             note: action.note,
-            tags: action.note.split(" ").filter(word => word.startsWith("#"))
+            tags: action.note
+              .split(" ")
+              .filter(word => word.startsWith("#"))
+              .map(word => {
+                return word.toLowerCase();
+              })
           },
           ...state.log
         ]

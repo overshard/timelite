@@ -19,6 +19,10 @@ class MyApp extends App {
     return { pageProps };
   }
 
+  componentDidMount() {
+    toast("NEW: Try adding hashtags to your notes! #filters #features");
+  }
+
   render() {
     const { Component, pageProps } = this.props;
 

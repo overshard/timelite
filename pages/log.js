@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
@@ -9,8 +9,26 @@ import { timeString } from "../utils/time";
 
 const Log = () => {
   const { state, dispatch } = useContext(Context);
+  const [filter, setFilter] = useState({ type: "SHOW_ALL" });
 
   strings.setLanguage(state.language);
+
+  const getTags = entries => {
+    let tags = [];
+    entries.map(entry => tags.push(...entry.tags));
+    return [...new Set(tags)];
+  };
+
+  const getVisibleEntries = (entries, filter) => {
+    switch (filter.type) {
+      case "SHOW_ALL":
+        return entries;
+      case "SHOW_TAG":
+        return entries.filter(entry => entry.tags.includes(filter.tag));
+      default:
+        return entries;
+    }
+  };
 
   const getTotalMilliseconds = () => {
     return state.log.reduce((total, entry) => {
@@ -36,10 +54,28 @@ const Log = () => {
             </>
           )}
         </TopBar>
-        {state.log.length > 0 ? (
+        {getTags(state.log).length > 0 && (
+          <Filters>
+            <span>Tags</span>
+            {getTags(state.log).map(tag => {
+              return (
+                <FilterButton
+                  key={tag}
+                  onClick={() => setFilter({ type: "SHOW_TAG", tag: tag })}
+                >
+                  {tag}
+                </FilterButton>
+              );
+            })}
+            <FilterButton onClick={() => setFilter({ type: "SHOW_ALL" })}>
+              Show All
+            </FilterButton>
+          </Filters>
+        )}
+        {getVisibleEntries(state.log, filter).length > 0 ? (
           <>
             <TransitionGroup component={null}>
-              {state.log.map((entry, index) => {
+              {getVisibleEntries(state.log, filter).map((entry, index) => {
                 const timeout = (index + 1) * 250;
                 const transitionDelay = index * 125;
                 return (
@@ -125,6 +161,28 @@ const Heading = styled.h1`
   }
 `;
 
+const Filters = styled.div`
+  margin-top: 30px;
+  margin-bottom: 30px;
+  & span {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-weight: lighter;
+    display: block;
+  }
+`;
+
+const FilterButton = styled.button`
+  background: green;
+  border-radius: 3px;
+  padding: 6px 9px;
+  color: white;
+  border: none;
+  margin-right: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+`;
+
 const Entry = styled.div`
   background-color: #ffffff;
   color: black;
@@ -182,8 +240,7 @@ const EntryTime = styled.div`
 
 const EntryNote = styled.div`
   padding: 15px;
-
-  small {
+  & small {
     display: block;
     color: gray;
     margin-top: 5px;
@@ -240,12 +297,12 @@ const BottomBar = styled.div`
 `;
 
 const Reset = styled.button`
-  font-size: 1.2em;
+  font-size: 1.1em;
   border: 0;
   border-radius: 3px;
   background-color: #ff0000;
   padding: 10px 25px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   margin-top: 30px;
   color: white;
