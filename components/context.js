@@ -48,7 +48,8 @@ const reducer = (state, action) => {
             id: uuid(), // HACK: react-transition-group requires an id?
             start: state.timer,
             end: new Date(),
-            note: action.note
+            note: action.note,
+            tags: action.note.split(" ").filter(word => word.startsWith("#"))
           },
           ...state.log
         ]

@@ -53,7 +53,18 @@ const Log = () => {
                       <EntryTime>
                         {timeString(entry.end - entry.start)}
                       </EntryTime>
-                      <EntryNote>{entry.note}</EntryNote>
+                      <EntryNote>
+                        {entry.note}
+                        {entry.tags.length > 0 && (
+                          <small>
+                            {entry.tags
+                              .map(tag => {
+                                return tag;
+                              })
+                              .join(", ")}
+                          </small>
+                        )}
+                      </EntryNote>
                       <EntryRemove
                         onClick={() => {
                           dispatch({ type: "REMOVE_LOG", id: entry.id });
@@ -161,6 +172,9 @@ const EntryTime = styled.div`
   height: 100%;
   background-color: #e2e2e2;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -168,6 +182,12 @@ const EntryTime = styled.div`
 
 const EntryNote = styled.div`
   padding: 15px;
+
+  small {
+    display: block;
+    color: gray;
+    margin-top: 5px;
+  }
 `;
 
 const EntryRemove = styled.button`
