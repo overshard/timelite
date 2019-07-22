@@ -40,7 +40,6 @@ const reducer = (state, action) => {
       localForage.setItem("context", newState);
       return newState;
     case "ADD_LOG":
-      toast.success(strings.addedEntry);
       newState = {
         ...state,
         timer: new Date(),
@@ -55,22 +54,23 @@ const reducer = (state, action) => {
         ]
       };
       localForage.setItem("context", newState);
+      toast.success(strings.addedEntry);
       return newState;
     case "REMOVE_LOG":
-      toast.error(strings.deletedEntry);
       newState = {
         ...state,
         log: [...state.log.filter(entry => entry.id !== action.id)]
       };
       localForage.setItem("context", newState);
+      toast.error(strings.deletedEntry);
       return newState;
     case "RESET_LOG":
-      toast.error(strings.resetLog);
       newState = {
         ...state,
         log: []
       };
       localForage.setItem("context", newState);
+      toast.error(strings.resetLog);
       return newState;
     default:
       return state;
