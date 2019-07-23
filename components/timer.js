@@ -94,8 +94,6 @@ const Note = styled.input`
     transform: scale(1.1);
   }
   &::placeholder {
-    text-transform: uppercase;
-    letter-spacing: 2px;
     font-size: 0.8em;
   }
   @media (${props => props.theme.breakpoint}) {
