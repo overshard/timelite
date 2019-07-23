@@ -36,6 +36,12 @@ const Log = () => {
     }, 0);
   };
 
+  const getVisibleTotalMilliseconds = () => {
+    return getVisibleEntries(state.log, filter).reduce((total, entry) => {
+      return total + (entry.end - entry.start);
+    }, 0);
+  };
+
   return (
     <Page title="Log">
       <Main>
@@ -47,6 +53,10 @@ const Log = () => {
                 <span>{strings.start}</span>
                 {state.log[state.log.length - 1].start.toLocaleTimeString()}
               </Start>
+              <Total>
+                <span>{strings.subtotal}</span>
+                {timeString(getVisibleTotalMilliseconds())}
+              </Total>
               <Total>
                 <span>{strings.total}</span>
                 {timeString(getTotalMilliseconds())}
@@ -157,7 +167,7 @@ const Heading = styled.h1`
     display: block;
   }
   @media (${props => props.theme.breakpoint}) {
-    font-size: 3em;
+    font-size: 2em;
   }
 `;
 
@@ -283,6 +293,12 @@ const Total = styled.div`
     text-transform: uppercase;
     font-weight: lighter;
     display: block;
+  }
+  @media (${props => props.theme.breakpoint}) {
+    font-size: 1.2em;
+    & span {
+      font-size: 0.2em;
+    }
   }
 `;
 
