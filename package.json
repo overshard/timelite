@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "now dev -p 8000",
+    "start": "now dev --listen 8000",
     "deploy": "now"
   },
   "dependencies": {
