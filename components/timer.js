@@ -80,65 +80,66 @@ const Note = styled.input`
   width: 600px;
   text-align: center;
   margin-top: 40px;
-  margin-bottom: 40px;
   border: 0;
-  background: white;
+  background: rgba(255, 255, 255, 0.7);
   color: black;
   padding: 15px 30px;
   font-size: 1.6em;
-  box-shadow: 1px 1px 0px white;
+  border: none;
   transform: scale(1);
-  transition: transform 250ms;
+  transition: transform 250ms, background 250ms;
   &:hover,
   &:focus {
     transform: scale(1.1);
+    background: rgba(255, 255, 255, 1);
+    z-index: 3;
+    position: relative;
   }
   &::placeholder {
-    font-size: 0.8em;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: 100;
   }
   @media (${props => props.theme.breakpoint}) {
     padding: 5px 15px;
     font-size: 1.2em;
     width: 225px;
     margin-top: 20px;
-    margin-bottom: 30px;
   }
 `;
 
 const Buttons = styled.div`
   text-align: center;
   display: flex;
-  justify-content: space-around;
 `;
 
 const Button = styled.button`
-  border: 0;
   color: white;
   padding: 15px 30px;
   font-size: 1em;
-  letter-spacing: 4px;
-  width: 40%;
+  letter-spacing: 2px;
+  width: 100%;
   cursor: pointer;
   text-transform: uppercase;
-  font-weight: lighter;
+  font-weight: 700;
+  border: none;
   transform: scale(1);
   transition: transform 250ms;
-  border-radius: 3px;
-  margin: 0 10px;
   &:hover,
   &:focus {
     transform: scale(1.1);
+    z-index: 3;
+    position: relative;
   }
   @media (${props => props.theme.breakpoint}) {
-    font-size: 0.9em;
-    padding: 5px 10px;
-    width: 50%;
-    margin: 0 5px;
+    font-size: 0.7em;
+    padding: 10px 15px;
+    width: 100%;
   }
 `;
 
 const ResetButton = styled(Button)`
-  background: ${props => props.theme.colors.two};
+  background: ${props => props.theme.colors.one};
 `;
 
 const AddButton = styled(Button)`

@@ -85,13 +85,6 @@ const Heading = styled.h1`
   animation-fill-mode: forwards;
   animation-duration: 1000ms;
   animation-timing-function: ease-out;
-  &::before {
-    content: "";
-    width: 50px;
-    height: 5px;
-    background-color: blue;
-    display: block;
-  }
   @media (${props => props.theme.breakpoint}) {
     font-size: 3em;
   }
@@ -101,8 +94,9 @@ const Blockquote = styled.blockquote`
   font-size: 2.5em;
   margin: 0 auto 40px auto;
   position: relative;
-  max-width: 650px;
+  max-width: 500px;
   opacity: 0;
+  color: ${props => props.theme.colors.four};
   animation-name: ${FadeRight};
   animation-fill-mode: forwards;
   animation-duration: 1000ms;
