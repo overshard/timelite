@@ -8,9 +8,11 @@ const Index = () => {
   return (
     <Page title="Timer">
       <Background />
-      <Main>
-        <Timer />
-      </Main>
+      <Grid>
+        <Main>
+          <Timer />
+        </Main>
+      </Grid>
     </Page>
   );
 };
@@ -42,8 +44,16 @@ const Background = styled.div`
   background-size: cover;
 `;
 
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100vh;
+`;
+
 const Main = styled.main`
-  grid-area: main;
+  grid-area: 2/2;
   justify-content: center;
   align-items: center;
   display: flex;

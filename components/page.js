@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const Page = props => {
   const baseTitle = "Timelite";
@@ -16,7 +17,7 @@ const Page = props => {
           {props.title ? `${props.title} — ${baseTitle}` : baseTitle}
         </title>
       </Head>
-      {props.children}
+      <Content>{props.children}</Content>
     </>
   );
 };
@@ -30,3 +31,10 @@ Page.propTypes = {
 };
 
 export default Page;
+
+const Content = styled.div`
+  margin-left: 60px;
+  @media (${props => props.theme.breakpoint}) {
+    margin-left: 0;
+  }
+`;

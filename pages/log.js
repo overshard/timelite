@@ -44,15 +44,15 @@ const Log = () => {
 
   return (
     <Page title="Log">
-      <Main>
-        <TopBar>
+      <Grid>
+        <Details>
           <Heading>{strings.log}</Heading>
           {state.log.length > 0 && (
             <>
-              <Start>
+              <Total>
                 <span>{strings.start}</span>
                 {state.log[state.log.length - 1].start.toLocaleTimeString()}
-              </Start>
+              </Total>
               <Total>
                 <span>{strings.subtotal}</span>
                 {timeString(getVisibleTotalMilliseconds())}
@@ -63,102 +63,128 @@ const Log = () => {
               </Total>
             </>
           )}
-        </TopBar>
-        {getTags(state.log).length > 0 && (
-          <Filters>
-            <span>Tags</span>
-            {getTags(state.log).map(tag => {
-              return (
-                <FilterButton
-                  key={tag}
-                  onClick={() => setFilter({ type: "SHOW_TAG", tag: tag })}
-                >
-                  {tag}
-                </FilterButton>
-              );
-            })}
-            <FilterButton onClick={() => setFilter({ type: "SHOW_ALL" })}>
-              Show All
-            </FilterButton>
-          </Filters>
-        )}
-        {getVisibleEntries(state.log, filter).length > 0 ? (
-          <>
-            <TransitionGroup component={null}>
-              {getVisibleEntries(state.log, filter).map((entry, index) => {
-                const timeout = (index + 1) * 250;
-                const transitionDelay = index * 125;
+        </Details>
+        <Main>
+          {getTags(state.log).length > 0 && (
+            <Filters>
+              <span>Tags</span>
+              {getTags(state.log).map(tag => {
                 return (
-                  <CSSTransition
-                    key={entry.id}
-                    appear
-                    timeout={{ appear: timeout, enter: 250, exit: 250 }}
-                    classNames="fade"
+                  <FilterButton
+                    key={tag}
+                    onClick={() => setFilter({ type: "SHOW_TAG", tag: tag })}
                   >
-                    <Entry style={{ transitionDelay: `${transitionDelay}ms` }}>
-                      <EntryTime>
-                        {timeString(entry.end - entry.start)}
-                      </EntryTime>
-                      <EntryNote>
-                        {entry.note}
-                        {entry.tags.length > 0 && (
-                          <small>
-                            {entry.tags
-                              .map(tag => {
-                                return tag;
-                              })
-                              .join(", ")}
-                          </small>
-                        )}
-                      </EntryNote>
-                      <EntryRemove
-                        onClick={() => {
-                          dispatch({ type: "REMOVE_LOG", id: entry.id });
-                        }}
-                      >
-                        x
-                      </EntryRemove>
-                    </Entry>
-                  </CSSTransition>
+                    {tag}
+                  </FilterButton>
                 );
               })}
-            </TransitionGroup>
-            <BottomBar>
-              <Reset onClick={() => dispatch({ type: "RESET_LOG" })}>
-                {strings.clear}
-              </Reset>
-            </BottomBar>
-          </>
-        ) : (
-          <Nothing>{strings.nothing}</Nothing>
-        )}
-      </Main>
+              <FilterButton onClick={() => setFilter({ type: "SHOW_ALL" })}>
+                Show All
+              </FilterButton>
+            </Filters>
+          )}
+          {getVisibleEntries(state.log, filter).length > 0 ? (
+            <>
+              <TransitionGroup component={null}>
+                {getVisibleEntries(state.log, filter).map((entry, index) => {
+                  const timeout = (index + 1) * 250;
+                  const transitionDelay = index * 125;
+                  return (
+                    <CSSTransition
+                      key={entry.id}
+                      appear
+                      timeout={{ appear: timeout, enter: 250, exit: 250 }}
+                      classNames="fade"
+                    >
+                      <Entry
+                        style={{ transitionDelay: `${transitionDelay}ms` }}
+                      >
+                        <EntryTime>
+                          {timeString(entry.end - entry.start)}
+                        </EntryTime>
+                        <EntryNote>
+                          {entry.note}
+                          {entry.tags.length > 0 && (
+                            <small>
+                              {entry.tags
+                                .map(tag => {
+                                  return tag;
+                                })
+                                .join(", ")}
+                            </small>
+                          )}
+                        </EntryNote>
+                        <EntryRemove
+                          onClick={() => {
+                            dispatch({ type: "REMOVE_LOG", id: entry.id });
+                          }}
+                        >
+                          x
+                        </EntryRemove>
+                      </Entry>
+                    </CSSTransition>
+                  );
+                })}
+              </TransitionGroup>
+              <BottomBar>
+                <Reset onClick={() => dispatch({ type: "RESET_LOG" })}>
+                  {strings.clear}
+                </Reset>
+              </BottomBar>
+            </>
+          ) : (
+            <Nothing>{strings.nothing}</Nothing>
+          )}
+        </Main>
+      </Grid>
     </Page>
   );
 };
 
 export default Log;
 
-const Main = styled.main`
-  grid-area: main;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 10% 20% 60% 10%;
+  grid-template-rows: repeat(3, auto);
+  width: 100%;
+  height: 100vh;
+  @media (${props => props.theme.breakpoint}) {
+    grid-template-columns: 10% 80% 10%;
+    grid-auto-rows: min-content;
+  }
+`;
+
+const Details = styled.div`
+  grid-area: 2/2;
   min-height: 100vh;
   padding-top: 50px;
   padding-bottom: 50px;
   box-sizing: border-box;
+  @media (${props => props.theme.breakpoint}) {
+    grid-area: 1/2;
+    min-height: auto;
+    padding-bottom: 0;
+  }
 `;
 
-const TopBar = styled.div`
-  display: flex;
-  margin-bottom: 40px;
-  justify-content: space-between;
-  align-items: flex-end;
+const Main = styled.main`
+  grid-area: 2/3;
+  min-height: 100vh;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  @media (${props => props.theme.breakpoint}) {
+    grid-area: 2/2;
+    padding-top: 0;
+  }
 `;
 
 const Heading = styled.h1`
   font-size: 5em;
   font-weight: lighter;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 40px;
   &::before {
     content: "";
     width: 50px;
@@ -172,7 +198,6 @@ const Heading = styled.h1`
 `;
 
 const Filters = styled.div`
-  margin-top: 30px;
   margin-bottom: 30px;
   & span {
     font-size: 0.8em;
@@ -288,21 +313,13 @@ const Total = styled.div`
   font-weight: bolder;
   font-size: 2em;
   padding: 5px;
+  margin-bottom: 20px;
   & span {
     font-size: 0.4em;
     text-transform: uppercase;
     font-weight: lighter;
     display: block;
   }
-  @media (${props => props.theme.breakpoint}) {
-    font-size: 1.2em;
-    & span {
-      font-size: 0.2em;
-    }
-  }
-`;
-
-const Start = styled(Total)`
   @media (${props => props.theme.breakpoint}) {
     display: none;
   }

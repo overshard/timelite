@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { ContextProvider } from "../components/context";
 
-import { Grid, GridLines } from "../components/grid";
 import L10n from "../components/l10n";
 import Sidebar from "../components/sidebar";
 
@@ -27,8 +26,7 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           <ContextProvider>
             <GlobalStyle />
-            <ToastContainer position={toast.POSITION.TOP_LEFT} />
-            <GridLines />
+            <ToastContainer position={toast.POSITION.TOP_RIGHT} />
             <L10n />
             <TransitionGroup component={null}>
               <CSSTransition
@@ -42,9 +40,7 @@ class MyApp extends App {
                 classNames="page-transition"
               >
                 <Transition>
-                  <Grid>
-                    <Component {...pageProps} />
-                  </Grid>
+                  <Component {...pageProps} />
                 </Transition>
               </CSSTransition>
             </TransitionGroup>

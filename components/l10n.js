@@ -33,7 +33,7 @@ export default L10n;
 const Buttons = styled.div`
   position: fixed;
   bottom: 5px;
-  left: 5px;
+  right: 5px;
   z-index: 2;
   @media (${props => props.theme.breakpoint}) {
     top: 5px;

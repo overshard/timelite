@@ -11,17 +11,19 @@ const About = () => {
 
   return (
     <Page title="About">
-      <Main>
-        <Heading>{strings.title}</Heading>
-        <Blockquote>{strings.quote}</Blockquote>
-        <Creator
-          href="https://www.isaacbythewood.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {strings.name}
-        </Creator>
-      </Main>
+      <Grid>
+        <Main>
+          <Heading>{strings.title}</Heading>
+          <Blockquote>{strings.quote}</Blockquote>
+          <Creator
+            href="https://www.isaacbythewood.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {strings.name}
+          </Creator>
+        </Main>
+      </Grid>
     </Page>
   );
 };
@@ -59,8 +61,16 @@ const ScaleLeft = keyframes`
   }
 `;
 
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100vh;
+`;
+
 const Main = styled.main`
-  grid-area: main;
+  grid-area: 2/2;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -89,7 +99,7 @@ const Heading = styled.h1`
 
 const Blockquote = styled.blockquote`
   font-size: 2.5em;
-  margin: 0 auto;
+  margin: 0 auto 40px auto;
   position: relative;
   max-width: 650px;
   opacity: 0;

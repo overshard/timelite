@@ -42,7 +42,7 @@ export default withRouter(Sidebar);
 
 const Side = styled.div`
   position: fixed;
-  right: 0;
+  left: 0;
   top: 0;
   bottom: 0;
   width: 60px;
@@ -70,7 +70,6 @@ const Title = styled.div`
   justify-content: center;
   align-items: center;
   padding: 15px;
-  transform: rotate(-180deg);
   white-space: nowrap;
   @media (${props => props.theme.breakpoint}) {
     writing-mode: horizontal-tb;
@@ -120,7 +119,7 @@ const Page = styled.a`
 
 const Tooltip = styled.div`
   position: absolute;
-  right: 150%;
+  left: 150%;
   padding: 5px 10px;
   background: rgba(0, 0, 0, 0.8);
   color: white;
