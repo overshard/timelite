@@ -62,7 +62,7 @@ const Side = styled.div`
 `;
 
 const Title = styled.div`
-  color: #000000;
+  color: ${props => props.theme.colors.one};
   text-transform: uppercase;
   font-size: 2em;
   font-weight: 900;

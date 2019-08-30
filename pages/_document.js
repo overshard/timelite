@@ -45,7 +45,7 @@ class MyDocument extends Document {
             name="description"
             content="Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all this time?"
           />
-          <meta name="theme-color" content="#1b1a23" />
+          <meta name="theme-color" content="#0D0221" />
           <link rel="manifest" href="/manifest.json" />
         </Head>
         <body>

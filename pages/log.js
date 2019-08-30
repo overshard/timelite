@@ -160,7 +160,7 @@ const Details = styled.div`
   padding: 50px;
   box-sizing: border-box;
   background-color: #e2e2e2;
-  color: black;
+  color: ${props => props.theme.colors.one};
 
   @media (${props => props.theme.breakpoint}) {
     grid-column: 1;
@@ -187,20 +187,13 @@ const Heading = styled.h1`
   font-weight: lighter;
   margin-top: 0;
   margin-bottom: 40px;
-  &::before {
-    content: "";
-    width: 50px;
-    height: 5px;
-    background-color: blue;
-    display: block;
-  }
   @media (${props => props.theme.breakpoint}) {
     font-size: 2em;
   }
 `;
 
 const Filters = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   & span {
     font-size: 0.8em;
     text-transform: uppercase;
@@ -210,8 +203,8 @@ const Filters = styled.div`
 `;
 
 const FilterButton = styled.button`
-  background: green;
-  border-radius: 3px;
+  background: ${props => props.theme.colors.three};
+  border-bottom: 1px solid ${props => props.theme.colors.four};
   padding: 6px 9px;
   color: white;
   border: none;
@@ -224,10 +217,10 @@ const Entry = styled.div`
   background-color: #ffffff;
   color: black;
   margin-bottom: 15px;
-  border-radius: 3px;
   display: grid;
   grid-template-columns: 150px 1fr 50px;
   align-items: center;
+  border-bottom: 1px solid ${props => props.theme.colors.four};
 
   &.fade-appear,
   &.fade-enter {
@@ -265,14 +258,13 @@ const EntryTime = styled.div`
   font-size: 1.3em;
   padding: 15px;
   height: 100%;
-  background-color: #e2e2e2;
+  background-color: ${props => props.theme.colors.four};
+  color: white;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
 `;
 
 const EntryNote = styled.div`
@@ -290,11 +282,9 @@ const EntryRemove = styled.button`
   color: white;
   cursor: pointer;
   border: 0;
-  background: red;
+  background: ${props => props.theme.colors.five};
   margin: 0;
   padding: 15px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
   height: 100%;
   @media (${props => props.theme.breakpoint}) {
     padding: 5px;
@@ -334,8 +324,8 @@ const BottomBar = styled.div`
 const Reset = styled.button`
   font-size: 1.1em;
   border: 0;
-  border-radius: 3px;
-  background-color: #ff0000;
+  background-color: ${props => props.theme.colors.five};
+  border-bottom: 1px solid ${props => props.theme.colors.four};
   padding: 10px 25px;
   letter-spacing: 1px;
   text-transform: uppercase;

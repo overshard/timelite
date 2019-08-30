@@ -138,9 +138,9 @@ const Button = styled.button`
 `;
 
 const ResetButton = styled(Button)`
-  background: #790000;
+  background: ${props => props.theme.colors.two};
 `;
 
 const AddButton = styled(Button)`
-  background: #007900;
+  background: ${props => props.theme.colors.two};
 `;

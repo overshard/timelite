@@ -2,7 +2,7 @@
   "short_name": "Timelite",
   "name": "Timelite",
   "start_url": "/",
-  "background_color": "#1b1a23",
+  "background_color": "#0D0221",
   "icons": [
     {
       "src": "/static/logo.png",
@@ -12,5 +12,5 @@
   ],
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#1b1a23"
+  "theme_color": "#0D0221"
 }

@@ -7,7 +7,7 @@ const strings = new LocalizedStrings({
     subtotal: "Subtotal",
     start: "Start Time",
     nothing: "No times added to your log yet!",
-    clear: "Clear Log"
+    clear: "Clear"
   },
   // None of this is accurate past this line, someone please help me translate...
   jp: {
