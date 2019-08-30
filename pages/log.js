@@ -145,37 +145,39 @@ export default Log;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 10% 20% 60% 10%;
-  grid-template-rows: repeat(3, auto);
+  grid-template-columns: 30% 70%;
   width: 100%;
   height: 100vh;
   @media (${props => props.theme.breakpoint}) {
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 100%;
     grid-auto-rows: min-content;
   }
 `;
 
 const Details = styled.div`
-  grid-area: 2/2;
+  grid-column: 1;
   min-height: 100vh;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px;
   box-sizing: border-box;
+  background-color: #e2e2e2;
+  color: black;
+
   @media (${props => props.theme.breakpoint}) {
-    grid-area: 1/2;
+    grid-column: 1;
     min-height: auto;
     padding-bottom: 0;
+    margin-bottom: 50px;
   }
 `;
 
 const Main = styled.main`
-  grid-area: 2/3;
+  grid-column: 2;
   min-height: 100vh;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px;
   box-sizing: border-box;
+
   @media (${props => props.theme.breakpoint}) {
-    grid-area: 2/2;
+    grid-column: 1;
     padding-top: 0;
   }
 `;

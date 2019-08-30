@@ -9,6 +9,7 @@ import { ContextProvider } from "../components/context";
 
 import L10n from "../components/l10n";
 import Sidebar from "../components/sidebar";
+import { theme } from "../site.config";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -53,14 +54,6 @@ class MyApp extends App {
 }
 
 export default MyApp;
-
-const theme = {
-  colors: {
-    primary: "#1b1a23"
-  },
-  breakpoint: "max-width: 1023.99px"
-};
-
 // NOTE: Prevent renderblocking of Google WebFonts CSS by importing it here
 const GlobalStyle = createGlobalStyle`
   body {

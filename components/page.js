@@ -33,7 +33,7 @@ Page.propTypes = {
 export default Page;
 
 const Content = styled.div`
-  margin-left: 60px;
+  margin-left: 200px;
   @media (${props => props.theme.breakpoint}) {
     margin-left: 0;
   }
