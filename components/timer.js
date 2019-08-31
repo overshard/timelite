@@ -64,7 +64,7 @@ const Timer = () => {
 export default Timer;
 
 const Time = styled.div`
-  font-size: 12em;
+  font-size: 11em;
   text-align: center;
   font-weight: lighter;
   @media (${props => props.theme.breakpoint}) {
