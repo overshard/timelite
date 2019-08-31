@@ -50,7 +50,7 @@ const Button = styled.button`
   color: white;
   font-size: 1.2em;
   font-weight: lighter;
-  opacity: 0.5;
+  opacity: 0.7;
   transition: opacity 250ms;
   cursor: pointer;
   &:hover {

@@ -45,7 +45,7 @@ const Side = styled.div`
   left: 0;
   top: 0;
   bottom: 0;
-  width: 200px;
+  width: 250px;
   background-color: #ffffff;
   display: flex;
   justify-content: space-between;

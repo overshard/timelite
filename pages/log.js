@@ -46,7 +46,6 @@ const Log = () => {
     <Page title="Log">
       <Grid>
         <Details>
-          <Heading>{strings.log}</Heading>
           {state.log.length > 0 && (
             <>
               <Total>
@@ -148,6 +147,7 @@ const Grid = styled.div`
   grid-template-columns: 30% 70%;
   width: 100%;
   height: 100vh;
+
   @media (${props => props.theme.breakpoint}) {
     grid-template-columns: 100%;
     grid-auto-rows: min-content;
@@ -155,6 +155,9 @@ const Grid = styled.div`
 `;
 
 const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   grid-column: 1;
   min-height: 100vh;
   padding: 50px;
@@ -165,7 +168,6 @@ const Details = styled.div`
   @media (${props => props.theme.breakpoint}) {
     grid-column: 1;
     min-height: auto;
-    padding-bottom: 0;
     margin-bottom: 50px;
   }
 `;
@@ -182,18 +184,9 @@ const Main = styled.main`
   }
 `;
 
-const Heading = styled.h1`
-  font-size: 5em;
-  font-weight: lighter;
-  margin-top: 0;
-  margin-bottom: 40px;
-  @media (${props => props.theme.breakpoint}) {
-    font-size: 2em;
-  }
-`;
-
 const Filters = styled.div`
   margin-bottom: 40px;
+
   & span {
     font-size: 0.8em;
     text-transform: uppercase;
@@ -227,6 +220,7 @@ const Entry = styled.div`
     opacity: 0;
     transform: translateX(-100px);
   }
+
   &.fade-appear-active,
   &.fade-enter-active {
     opacity: 1;
@@ -234,10 +228,12 @@ const Entry = styled.div`
     transition-duration: 250ms;
     transition-property: opacity, transform;
   }
+
   &.fade-exit {
     opacity: 1;
     transform: translateX(0);
   }
+
   &.fade-exit-active {
     opacity: 0;
     transition-delay: 0ms !important;
@@ -269,6 +265,7 @@ const EntryTime = styled.div`
 
 const EntryNote = styled.div`
   padding: 15px;
+
   & small {
     display: block;
     color: gray;
@@ -286,6 +283,7 @@ const EntryRemove = styled.button`
   margin: 0;
   padding: 15px;
   height: 100%;
+
   @media (${props => props.theme.breakpoint}) {
     padding: 5px;
   }
@@ -293,9 +291,9 @@ const EntryRemove = styled.button`
 
 const Nothing = styled.div`
   text-align: center;
-  margin-top: 100px;
   opacity: 0.5;
   font-size: 2em;
+
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.4em;
   }
@@ -306,14 +304,16 @@ const Total = styled.div`
   font-size: 2em;
   padding: 5px;
   margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   & span {
     font-size: 0.4em;
     text-transform: uppercase;
     font-weight: lighter;
     display: block;
-  }
-  @media (${props => props.theme.breakpoint}) {
-    display: none;
   }
 `;
 
@@ -333,6 +333,7 @@ const Reset = styled.button`
   color: white;
   font-weight: bolder;
   cursor: pointer;
+
   @media (${props => props.theme.breakpoint}) {
     font-size: 1em;
     padding: 8px 15px;
