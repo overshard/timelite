@@ -66,7 +66,7 @@ const Log = () => {
         <Main>
           {getTags(state.log).length > 0 && (
             <Filters>
-              <span>Tags</span>
+              <span>{strings.tags}</span>
               {getTags(state.log).map(tag => {
                 return (
                   <FilterButton
@@ -78,7 +78,7 @@ const Log = () => {
                 );
               })}
               <FilterButton onClick={() => setFilter({ type: "SHOW_ALL" })}>
-                Show All
+                {strings.show}
               </FilterButton>
             </Filters>
           )}

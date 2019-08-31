@@ -6,6 +6,8 @@ const strings = new LocalizedStrings({
     subtotal: "Subtotal",
     start: "Start Time",
     nothing: "No times added to your log yet!",
+    tags: "Tags",
+    show: "Show All",
     clear: "Clear"
   },
   // None of this is accurate past this line, someone please help me translate...
@@ -14,6 +16,8 @@ const strings = new LocalizedStrings({
     subtotal: "小計",
     start: "開始",
     nothing: "時間はまだログに追加されていません。",
+    tags: "タグ",
+    show: "すべて",
     clear: "クリア"
   }
 });
