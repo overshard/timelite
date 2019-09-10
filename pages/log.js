@@ -155,6 +155,7 @@ const Grid = styled.div`
 `;
 
 const Details = styled.div`
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -166,6 +167,7 @@ const Details = styled.div`
   color: ${props => props.theme.colors.one};
 
   @media (${props => props.theme.breakpoint}) {
+    position: relative;
     grid-column: 1;
     min-height: auto;
     margin-bottom: 50px;
