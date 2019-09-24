@@ -120,6 +120,8 @@ const About = styled.a`
   display: block;
   text-decoration: none;
   font-family: monospace;
+  background: ${props => props.theme.colors.two};
+  color: white;
 
   @media (${props => props.theme.breakpoint}) {
     padding: 0 15px;
