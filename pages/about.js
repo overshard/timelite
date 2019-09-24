@@ -85,6 +85,7 @@ const Heading = styled.h1`
   animation-fill-mode: forwards;
   animation-duration: 1000ms;
   animation-timing-function: ease-out;
+
   @media (${props => props.theme.breakpoint}) {
     font-size: 3em;
   }
@@ -96,12 +97,12 @@ const Blockquote = styled.blockquote`
   position: relative;
   max-width: 500px;
   opacity: 0;
-  color: ${props => props.theme.colors.four};
   animation-name: ${FadeRight};
   animation-fill-mode: forwards;
   animation-duration: 1000ms;
   animation-delay: 500ms;
   animation-timing-function: ease-out;
+
   &::before {
     content: "”";
     position: absolute;
@@ -111,6 +112,7 @@ const Blockquote = styled.blockquote`
     opacity: 0.1;
     line-height: 0.5em;
   }
+
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.2em;
   }
@@ -131,6 +133,7 @@ const Creator = styled.a`
   animation-duration: 1000ms;
   animation-delay: 1000ms;
   animation-timing-function: ease-out;
+
   &::before {
     content: "";
     position: absolute;
@@ -142,6 +145,7 @@ const Creator = styled.a`
     transform-origin: left;
     animation: ${ScaleLeft} 300ms normal forwards;
   }
+
   &::after {
     content: "";
     position: absolute;
@@ -151,11 +155,13 @@ const Creator = styled.a`
     height: 2px;
     background: rgba(255, 255, 255, 0.2);
   }
+
   &:hover {
     &::before {
       animation: ${ScaleRight} 300ms normal forwards;
     }
   }
+
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.2em;
   }

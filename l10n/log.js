@@ -5,7 +5,7 @@ const strings = new LocalizedStrings({
     total: "Total",
     subtotal: "Subtotal",
     start: "Start Time",
-    nothing: "No times added to your log yet!",
+    nothing: "Your log is empty.",
     tags: "Tags",
     show: "Show All",
     clear: "Clear"
@@ -15,7 +15,7 @@ const strings = new LocalizedStrings({
     total: "合計",
     subtotal: "小計",
     start: "開始",
-    nothing: "時間はまだログに追加されていません。",
+    nothing: "ログは空です。",
     tags: "タグ",
     show: "すべて",
     clear: "クリア"

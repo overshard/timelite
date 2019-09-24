@@ -61,7 +61,11 @@ const Log = () => {
             </Total>
           </Details>
         )}
-        <Main>
+        <Main
+          className={
+            getVisibleEntries(state.log, filter).length === 0 && "empty"
+          }
+        >
           {getTags(state.log).length > 0 && (
             <Filters>
               <span>{strings.tags}</span>
@@ -99,7 +103,9 @@ const Log = () => {
                         <EntryTime>
                           {timeString(entry.end - entry.start)}
                         </EntryTime>
-                        <EntryNote>
+                        <EntryNote
+                          className={entry.note.length === 0 && "empty"}
+                        >
                           {entry.note}
                           {entry.tags.length > 0 && (
                             <small>
@@ -177,6 +183,13 @@ const Main = styled.main`
   min-height: 100vh;
   padding: 50px;
   box-sizing: border-box;
+
+  &.empty {
+    grid-column: 1 / span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   @media (${props => props.theme.breakpoint}) {
     grid-column: 1;
@@ -266,6 +279,10 @@ const EntryTime = styled.div`
 const EntryNote = styled.div`
   padding: 15px;
 
+  &.empty {
+    padding: 0;
+  }
+
   & small {
     display: block;
     color: gray;
@@ -290,13 +307,20 @@ const EntryRemove = styled.button`
 `;
 
 const Nothing = styled.div`
-  opacity: 0.5;
-  font-size: 2em;
-  height: calc(100vh - 50px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: 100;
+  font-size: 2.5em;
   text-align: center;
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -15px;
+    height: 3px;
+    background-color: ${props => props.theme.colors.three};
+  }
 
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.4em;
