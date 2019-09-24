@@ -45,24 +45,22 @@ const Log = () => {
   return (
     <Page title="Log">
       <Grid>
-        <Details>
-          {state.log.length > 0 && (
-            <>
-              <Total>
-                <span>{strings.start}</span>
-                {state.log[state.log.length - 1].start.toLocaleTimeString()}
-              </Total>
-              <Total>
-                <span>{strings.subtotal}</span>
-                {timeString(getVisibleTotalMilliseconds())}
-              </Total>
-              <Total>
-                <span>{strings.total}</span>
-                {timeString(getTotalMilliseconds())}
-              </Total>
-            </>
-          )}
-        </Details>
+        {state.log.length > 0 && (
+          <Details>
+            <Total>
+              <span>{strings.start}</span>
+              {state.log[state.log.length - 1].start.toLocaleTimeString()}
+            </Total>
+            <Total>
+              <span>{strings.subtotal}</span>
+              {timeString(getVisibleTotalMilliseconds())}
+            </Total>
+            <Total>
+              <span>{strings.total}</span>
+              {timeString(getTotalMilliseconds())}
+            </Total>
+          </Details>
+        )}
         <Main>
           {getTags(state.log).length > 0 && (
             <Filters>
@@ -292,9 +290,13 @@ const EntryRemove = styled.button`
 `;
 
 const Nothing = styled.div`
-  text-align: center;
   opacity: 0.5;
   font-size: 2em;
+  height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.4em;
