@@ -189,6 +189,7 @@ const Main = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
   }
 
   @media (${props => props.theme.breakpoint}) {
