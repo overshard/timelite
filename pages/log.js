@@ -153,12 +153,12 @@ export default Log;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 250px 1fr;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 
   @media (${props => props.theme.breakpoint}) {
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
     grid-auto-rows: min-content;
   }
 `;
@@ -169,8 +169,9 @@ const Details = styled.div`
   flex-direction: column;
   justify-content: center;
   grid-column: 1;
-  min-height: 100vh;
-  padding: 50px;
+  width: 250px;
+  height: 100vh;
+  padding: 15px;
   box-sizing: border-box;
   background-color: #e2e2e2;
   color: ${props => props.theme.colors.one};
@@ -178,8 +179,9 @@ const Details = styled.div`
   @media (${props => props.theme.breakpoint}) {
     position: relative;
     grid-column: 1;
-    min-height: auto;
+    height: auto;
     margin-bottom: 50px;
+    width: 100%;
   }
 `;
 
