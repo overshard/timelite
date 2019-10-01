@@ -119,6 +119,11 @@ const Log = () => {
                         </EntryNote>
                         <EntryRemove
                           onClick={() => {
+                            if (
+                              getVisibleEntries(state.log, filter).length === 1
+                            ) {
+                              setFilter({ type: "SHOW_ALL" });
+                            }
                             dispatch({ type: "REMOVE_LOG", id: entry.id });
                           }}
                         >
