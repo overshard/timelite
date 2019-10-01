@@ -139,11 +139,12 @@ const Creator = styled.a`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -10px;
     height: 2px;
-    background: rgba(255, 255, 255, 1);
+    background: ${props => props.theme.colors.three};
     transform-origin: left;
     animation: ${ScaleLeft} 300ms normal forwards;
+    pointer-events: none;
   }
 
   &::after {
@@ -151,9 +152,11 @@ const Creator = styled.a`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -10px;
     height: 2px;
-    background: rgba(255, 255, 255, 0.2);
+    background: ${props => props.theme.colors.three};
+    opacity: 0.2;
+    pointer-events: none;
   }
 
   &:hover {
