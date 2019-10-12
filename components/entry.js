@@ -94,7 +94,7 @@ const EntryContainer = styled.div`
   transition-property: transform;
 
   &.zoom {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
   &.fade-appear,
