@@ -53,11 +53,12 @@ const Side = styled.div`
 
   @media (${props => props.theme.breakpoint}) {
     width: 100%;
-    height: 40px;
+    height: 60px;
     bottom: 0;
     left: 0;
     top: auto;
     flex-direction: row;
+    align-items: center;
   }
 `;
 
@@ -72,7 +73,7 @@ const Title = styled.div`
 
   @media (${props => props.theme.breakpoint}) {
     padding: 4px 10px;
-    font-size: 1.5em;
+    font-size: 1.4em;
   }
 `;
 
@@ -104,7 +105,7 @@ const Page = styled.a`
   }
 
   @media (${props => props.theme.breakpoint}) {
-    font-size: 1.5em;
+    font-size: 1.4em;
     margin-bottom: 0;
     margin-right: 15px;
 
@@ -128,5 +129,6 @@ const About = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60px;
   }
 `;
