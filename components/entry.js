@@ -30,7 +30,7 @@ const Entry = ({ entry, removeEntry }) => {
   };
 
   return (
-    <EntryContainer>
+    <EntryContainer className={edit && "zoom"}>
       {edit ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>{timeString(entry.end - entry.start)}</EntryTime>
@@ -42,7 +42,9 @@ const Entry = ({ entry, removeEntry }) => {
             />
           </EntryNote>
           <EntrySubmit type="submit">✔</EntrySubmit>
-          <EntryRemove onClick={() => removeEntry(entry.id)}>x</EntryRemove>
+          <EntryRemove type="button" onClick={() => removeEntry(entry.id)}>
+            x
+          </EntryRemove>
         </EntryForm>
       ) : (
         <>
@@ -88,6 +90,12 @@ const EntryContainer = styled.div`
   grid-template-columns: 150px 1fr 50px 50px;
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.four};
+  transition-duration: 250ms;
+  transition-property: transform;
+
+  &.zoom {
+    transform: scale(1.1);
+  }
 
   &.fade-appear,
   &.fade-enter {
