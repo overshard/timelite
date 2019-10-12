@@ -3,10 +3,3 @@ version: "3"
 services:
   app:
     build: .
-    command: npm start
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
-    ports:
-      - 8000:8000

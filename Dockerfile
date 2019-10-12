@@ -9,4 +9,4 @@ RUN npm i
 
 COPY . .
 
-RUN npm i
+RUN npm run docker-build
