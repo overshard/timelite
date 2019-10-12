@@ -54,7 +54,7 @@ class MyApp extends App {
 }
 
 export default MyApp;
-// NOTE: Prevent renderblocking of Google WebFonts CSS by importing it here
+
 const GlobalStyle = createGlobalStyle`
   body {
     font-family:
@@ -69,6 +69,12 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
     text-rendering: optimizeLegibility;
+  }
+
+  input {
+    font-family:
+      -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 `;
 

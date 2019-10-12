@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Page from "../components/page";
 import { Context } from "../components/context";
+import Entry from "../components/entry";
 import strings from "../l10n/log";
 import { timeString } from "../utils/time";
 
@@ -40,6 +41,13 @@ const Log = () => {
     return getVisibleEntries(state.log, filter).reduce((total, entry) => {
       return total + (entry.end - entry.start);
     }, 0);
+  };
+
+  const removeEntry = id => {
+    if (getVisibleEntries(state.log, filter).length === 1) {
+      setFilter({ type: "SHOW_ALL" });
+    }
+    dispatch({ type: "REMOVE_LOG", id: id });
   };
 
   return (
@@ -99,37 +107,9 @@ const Log = () => {
                     >
                       <Entry
                         style={{ transitionDelay: `${transitionDelay}ms` }}
-                      >
-                        <EntryTime>
-                          {timeString(entry.end - entry.start)}
-                        </EntryTime>
-                        <EntryNote
-                          className={entry.note.length === 0 && "empty"}
-                        >
-                          {entry.note}
-                          {entry.tags.length > 0 && (
-                            <small>
-                              {entry.tags
-                                .map(tag => {
-                                  return tag;
-                                })
-                                .join(", ")}
-                            </small>
-                          )}
-                        </EntryNote>
-                        <EntryRemove
-                          onClick={() => {
-                            if (
-                              getVisibleEntries(state.log, filter).length === 1
-                            ) {
-                              setFilter({ type: "SHOW_ALL" });
-                            }
-                            dispatch({ type: "REMOVE_LOG", id: entry.id });
-                          }}
-                        >
-                          x
-                        </EntryRemove>
-                      </Entry>
+                        entry={entry}
+                        removeEntry={removeEntry}
+                      />
                     </CSSTransition>
                   );
                 })}
@@ -202,6 +182,12 @@ const Main = styled.main`
   @media (${props => props.theme.breakpoint}) {
     grid-column: 1;
     padding-top: 0;
+    min-height: auto;
+    padding-bottom: 100px;
+
+    &.empty {
+      height: 100vh;
+    }
   }
 `;
 
@@ -225,93 +211,6 @@ const FilterButton = styled.button`
   margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
-`;
-
-const Entry = styled.div`
-  background-color: #ffffff;
-  color: black;
-  margin-bottom: 15px;
-  display: grid;
-  grid-template-columns: 150px 1fr 50px;
-  align-items: center;
-  border-bottom: 1px solid ${props => props.theme.colors.four};
-
-  &.fade-appear,
-  &.fade-enter {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-
-  &.fade-appear-active,
-  &.fade-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition-duration: 250ms;
-    transition-property: opacity, transform;
-  }
-
-  &.fade-exit {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  &.fade-exit-active {
-    opacity: 0;
-    transition-delay: 0ms !important;
-    transition-duration: 250ms;
-    transition-property: opacity, transform;
-    transform: translateX(100px);
-  }
-
-  @media (${props => props.theme.breakpoint}) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    text-align: center;
-  }
-`;
-
-const EntryTime = styled.div`
-  font-weight: bold;
-  font-size: 1.3em;
-  padding: 15px;
-  height: 100%;
-  background-color: ${props => props.theme.colors.four};
-  color: white;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-`;
-
-const EntryNote = styled.div`
-  padding: 15px;
-
-  &.empty {
-    padding: 0;
-  }
-
-  & small {
-    display: block;
-    color: gray;
-    margin-top: 5px;
-  }
-`;
-
-const EntryRemove = styled.button`
-  font-size: 1.3em;
-  font-weight: bolder;
-  color: white;
-  cursor: pointer;
-  border: 0;
-  background: ${props => props.theme.colors.five};
-  margin: 0;
-  padding: 15px;
-  height: 100%;
-
-  @media (${props => props.theme.breakpoint}) {
-    padding: 5px;
-  }
 `;
 
 const Nothing = styled.div`

@@ -45,7 +45,7 @@ const reducer = (state, action) => {
         timer: new Date(),
         log: [
           {
-            id: uuid(), // HACK: react-transition-group requires an id?
+            id: uuid(),
             start: state.timer,
             end: new Date(),
             note: action.note,
@@ -61,6 +61,18 @@ const reducer = (state, action) => {
       };
       localForage.setItem("context", newState);
       toast.success(strings.addedEntry);
+      return newState;
+    case "EDIT_LOG":
+      newState = {
+        ...state,
+        log: [
+          ...state.log.map(entry => {
+            return entry.id == action.entry.id ? action.entry : entry;
+          })
+        ]
+      };
+      localForage.setItem("context", newState);
+      toast.success(strings.editedEntry);
       return newState;
     case "REMOVE_LOG":
       newState = {
