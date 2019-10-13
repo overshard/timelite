@@ -2,7 +2,6 @@
     <img src="https://github.com/overshard/timelite/raw/master/static/logo.png"
          width="200"
          height="200"
-         style="border: 5px solid black;"
          alt="Timelite Logo" />
 </p>
 
