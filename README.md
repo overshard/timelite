@@ -1,3 +1,8 @@
+<p align="center">
+    <img src="https://github.com/overshard/timelite/raw/master/static/logo.png"
+         alt="Timelite Logo" />
+</p>
+
 # Timelite
 
 Why is it 5 AM? Isn't there something simple I can use to track what I'm doing with all
