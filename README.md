@@ -26,7 +26,7 @@ liking. You can create your own Zeit Now account and deploy this there.
 ## Docker
 
 For running everything via docker on both development and production. Have docker and
-docker-compose installed. You may have to append `sudo` to this commands depending on
+docker-compose installed. You may have to append `sudo` to these commands depending on
 your system.
 
 ### Development
