@@ -11,6 +11,13 @@ const About = () => {
 
   return (
     <Page title="About">
+      <GitHubLink
+        href="https://github.com/overshard/timelite"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <GitHubImage src="/static/github.png" alt="Timelite Github" />
+      </GitHubLink>
       <Grid>
         <Main>
           <Heading>{strings.title}</Heading>
@@ -58,6 +65,25 @@ const ScaleLeft = keyframes`
 
   to {
     transform: scaleX(0);
+  }
+`;
+
+const GitHubLink = styled.a`
+  text-decoration: none;
+`;
+
+const GitHubImage = styled.img`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  opacity: 0.5;
+  transition-property: opacity;
+  transition-duration: 250ms;
+
+  &:hover {
+    opacity: 1;
   }
 `;
 
