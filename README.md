@@ -14,7 +14,7 @@ https://timelite.app/
 
 ## Clone
 
-For any possible way of running Timelite you'll need a copy of the repo:
+For any possible way of running Timelite yourself you'll need a copy of the repo:
 
     git clone https://github.com/overshard/timelite.git
 
