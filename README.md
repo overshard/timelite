@@ -31,6 +31,11 @@ your system.
 
 ### Development
 
+The majority of changes you make while running docker and timelite in development mode
+should be autocompiled and hot reloaded in your browser. You can edit the code any way
+you like. If you are making changes to docker configurations or packages you may need to
+build the container again, you can append `--build` to the end of this command.
+
     docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 ### Production
@@ -49,7 +54,7 @@ properly publish those ports.
 
 ### Troubleshooting
 
-You may need to manually rebuild your docker instances at times depending on changes
+You may need to manually rebuild your docker container at times depending on changes
 you have made that may not automatically trigger a rebuild. To do that you can run
 either of the above commands, depending on your environment, and replace `up` with
 `build`.
