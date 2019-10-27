@@ -2,11 +2,9 @@ FROM node:10
 
 WORKDIR /app
 
-RUN npm i -g now
-
 COPY package.json package-lock.json /app/
-RUN npm i
+RUN yarn install
 
 COPY . .
 
-RUN npm run docker-build
+RUN yarn run build:prod

@@ -1,11 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "start": "now dev --listen 8000",
-    "deploy": "now",
-    "docker-build": "next build",
-    "docker-run-dev": "next --port 8000",
-    "docker-run-prod": "next start --port 80"
+    "start": "next --port 8000",
+    "build:prod": "next build",
+    "start:prod": "next start --port 80"
   },
   "dependencies": {
     "localforage": "^1.7.3",

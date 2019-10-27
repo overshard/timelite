@@ -31,12 +31,9 @@ your system.
 
 ### Development
 
-The majority of changes you make while running docker and timelite in development mode
-should be autocompiled and hot reloaded in your browser. You can edit the code any way
-you like. If you are making changes to docker configurations or packages you may need to
-build the container again, you can append `--build` to the end of this command.
-
-    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+Have the `Remote - Containers` plugin installed for VSCode and
+`Remote-Containers: Reopen in Container`, you can then just run `yarn start` to
+have a fully functioning dev system.
 
 ### Production
 
@@ -44,7 +41,7 @@ Appending `-d` to the end after `up` will run this container in detached mode. W
 `restart: always` configured so on system restarts or possible crashes the container
 will start back up automatically.
 
-    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+    docker-compose up
 
 ### Ports
 

@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  workspace:
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    user: vscode
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ..:/workspace
+      - ~/.ssh:/home/vscode/.ssh:ro
+      - /workspace/node_modules
+      - /workspace/.next
