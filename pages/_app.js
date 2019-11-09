@@ -1,5 +1,5 @@
 import React from "react";
-import App, { Container } from "next/app";
+import App from "next/app";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,32 +23,30 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Container>
-        <ThemeProvider theme={theme}>
-          <ContextProvider>
-            <GlobalStyle />
-            <ToastContainer position={toast.POSITION.TOP_RIGHT} />
-            <L10n />
-            <TransitionGroup component={null}>
-              <CSSTransition
-                key={this.props.router.route}
-                appear
-                timeout={{
-                  appear: 500,
-                  enter: 500,
-                  exit: 250
-                }}
-                classNames="page-transition"
-              >
-                <Transition>
-                  <Component {...pageProps} />
-                </Transition>
-              </CSSTransition>
-            </TransitionGroup>
-            <Sidebar />
-          </ContextProvider>
-        </ThemeProvider>
-      </Container>
+      <ThemeProvider theme={theme}>
+        <ContextProvider>
+          <GlobalStyle />
+          <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+          <L10n />
+          <TransitionGroup component={null}>
+            <CSSTransition
+              key={this.props.router.route}
+              appear
+              timeout={{
+                appear: 500,
+                enter: 500,
+                exit: 250
+              }}
+              classNames="page-transition"
+            >
+              <Transition>
+                <Component {...pageProps} />
+              </Transition>
+            </CSSTransition>
+          </TransitionGroup>
+          <Sidebar />
+        </ContextProvider>
+      </ThemeProvider>
     );
   }
 }
