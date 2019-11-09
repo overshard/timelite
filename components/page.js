@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Page = props => {
   const baseTitle = "Timelite";
-
-  useEffect(() => {
-    window.scrollTo = 0;
-  });
 
   return (
     <>
