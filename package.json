@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "start": "next --port 8000",
-    "build:prod": "next build",
-    "start:prod": "next start --port 80"
+    "prod:build": "next build",
+    "prod:start": "next start --port 80"
   },
   "dependencies": {
     "localforage": "^1.7.3",

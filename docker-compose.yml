@@ -3,7 +3,7 @@ version: "3"
 services:
   app:
     build: .
-    command: yarn run start:prod
+    command: yarn run prod:start
     ports:
       - 80:80
     restart: always

@@ -7,4 +7,4 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn run build:prod
+RUN yarn run prod:build
