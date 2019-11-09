@@ -1,21 +1,9 @@
-# next
-.next
-
-# node
-node_modules
-
-# git
-.gitignore
-
-# license
-LICENSE.md
-
-# readme
-README.md
-
-# docker
-Dockerfile
-docker-compose.yml
-
-# vscode
-.vscode
+/.next
+/.nowignore
+/.git
+/.gitignore
+/node_modules
+/LICENSE.md
+/README.md
+/.editorconfig
+/.eslintrc.js
