@@ -58,5 +58,7 @@ that you can run:
 ## Sponsors
 
 Where I work, VanNoppen Marketing (https://www.vannoppen.co/), they let me code
-stuff on my free time and do whatever I want with it. If you need some custom
+stuff on my free time and do whatever I want with it. We've been in business for
+over 18 years, and offer the full range of marketing services (website
+development, app development, graphic design, PR, etc). If you need some custom
 software written or a new website check us out, we're pretty good at what we do.
