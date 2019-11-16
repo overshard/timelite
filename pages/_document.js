@@ -4,15 +4,6 @@ import { ServerStyleSheet } from "styled-components";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    // Redirect to www if no www used
-    if (ctx.req.headers.host === "www.timelite.app") {
-      ctx.res.writeHead(301, {
-        Location: `https://timelite.app${ctx.req.url}`
-      });
-      ctx.res.end();
-      return {};
-    }
-
     // Setup styled-components for rendering server side
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
