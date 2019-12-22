@@ -115,9 +115,20 @@ const Log = () => {
                 })}
               </TransitionGroup>
               <BottomBar>
-                <Reset onClick={() => dispatch({ type: "RESET_LOG" })}>
-                  {strings.clear}
-                </Reset>
+                {filter.tag ? (
+                  <Reset
+                    onClick={() => {
+                      dispatch({ type: "CLEAR_TAG", tag: filter.tag });
+                      setFilter({ type: "SHOW_ALL" });
+                    }}
+                  >
+                    {strings.clear} {filter.tag}
+                  </Reset>
+                ) : (
+                  <Reset onClick={() => dispatch({ type: "CLEAR_LOG" })}>
+                    {strings.clear}
+                  </Reset>
+                )}
               </BottomBar>
             </>
           ) : (

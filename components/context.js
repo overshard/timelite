@@ -82,13 +82,21 @@ const reducer = (state, action) => {
       localForage.setItem("context", newState);
       toast.error(strings.deletedEntry);
       return newState;
-    case "RESET_LOG":
+    case "CLEAR_LOG":
       newState = {
         ...state,
         log: []
       };
       localForage.setItem("context", newState);
       toast.error(strings.resetLog);
+      return newState;
+    case "CLEAR_TAG":
+      newState = {
+        ...state,
+        log: [...state.log.filter(entry => !entry.tags.includes(action.tag))]
+      };
+      localForage.setItem("context", newState);
+      toast.error(strings.deletedEntry);
       return newState;
     default:
       return state;
