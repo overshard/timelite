@@ -12,7 +12,6 @@ const Entry = ({ entry, removeEntry }) => {
   const [edit, setEdit] = useState(false);
 
   const onSubmit = data => {
-    console.log(data);
     dispatch({
       type: "EDIT_LOG",
       entry: {
