@@ -47,7 +47,11 @@ const Entry = ({ entry, removeEntry }) => {
         </EntryForm>
       ) : (
         <>
-          <EntryTime>{timeString(entry.end - entry.start)}</EntryTime>
+          <EntryTime>
+            {entry.start.toLocaleTimeString()}
+            <br/>
+            {timeString(entry.end - entry.start)}
+          </EntryTime>
           <EntryNote className={entry.note.length === 0 && "empty"}>
             {entry.note}
             {entry.tags.length > 0 && (
