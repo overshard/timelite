@@ -67,6 +67,7 @@ const Time = styled.div`
   font-size: 10em;
   text-align: center;
   font-weight: lighter;
+  font-variant-numeric: tabular-nums;
   @media (${props => props.theme.breakpoint}) {
     font-size: 4em;
   }
