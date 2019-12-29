@@ -92,6 +92,24 @@ const Log = () => {
               </FilterButton>
             </Filters>
           )}
+          {state.log.length > 0 && (
+            <TopBar>
+              {filter.tag ? (
+                <Reset
+                  onClick={() => {
+                    dispatch({ type: "CLEAR_TAG", tag: filter.tag });
+                    setFilter({ type: "SHOW_ALL" });
+                  }}
+                >
+                  {strings.clear} {filter.tag}
+                </Reset>
+              ) : (
+                <Reset onClick={() => dispatch({ type: "CLEAR_LOG" })}>
+                  {strings.clear}
+                </Reset>
+              )}
+            </TopBar>
+          )}
           {getVisibleEntries(state.log, filter).length > 0 ? (
             <>
               <TransitionGroup component={null}>
@@ -114,22 +132,6 @@ const Log = () => {
                   );
                 })}
               </TransitionGroup>
-              <BottomBar>
-                {filter.tag ? (
-                  <Reset
-                    onClick={() => {
-                      dispatch({ type: "CLEAR_TAG", tag: filter.tag });
-                      setFilter({ type: "SHOW_ALL" });
-                    }}
-                  >
-                    {strings.clear} {filter.tag}
-                  </Reset>
-                ) : (
-                  <Reset onClick={() => dispatch({ type: "CLEAR_LOG" })}>
-                    {strings.clear}
-                  </Reset>
-                )}
-              </BottomBar>
             </>
           ) : (
             <Nothing>{strings.nothing}</Nothing>
@@ -263,8 +265,14 @@ const Total = styled.div`
   }
 `;
 
-const BottomBar = styled.div`
-  text-align: right;
+const TopBar = styled.div`
+  position: absolute;
+  top: -0.3em;
+  right: 3em;
+
+  @media (${props => props.theme.breakpoint}) {
+    top: 17.5em;
+  }
 `;
 
 const Reset = styled.button`
