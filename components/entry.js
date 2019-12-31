@@ -32,7 +32,10 @@ const Entry = ({ entry, removeEntry }) => {
     <EntryContainer className={edit && "zoom"}>
       {edit ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
-          <EntryTime>{timeString(entry.end - entry.start)}</EntryTime>
+          <EntryTime>
+            {timeString(entry.end - entry.start)}
+            <span>{entry.start.toLocaleTimeString()}</span>
+          </EntryTime>
           <EntryNote>
             <EntryNoteInput
               name="note"
@@ -48,9 +51,8 @@ const Entry = ({ entry, removeEntry }) => {
       ) : (
         <>
           <EntryTime>
-            {entry.start.toLocaleTimeString()}
-            <br/>
             {timeString(entry.end - entry.start)}
+            <span>{entry.start.toLocaleTimeString()}</span>
           </EntryTime>
           <EntryNote className={entry.note.length === 0 && "empty"}>
             {entry.note}
@@ -158,9 +160,16 @@ const EntryTime = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  flex-direction: column;
 
   @media (${props => props.theme.breakpoint}) {
     grid-column: 1 / span 2;
+  }
+
+  span {
+    font-size: 0.7em;
+    opacity: 0.8;
+    font-weight: lighter;
   }
 `;
 
