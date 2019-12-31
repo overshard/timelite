@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 import Page from "../components/page";
 import { Context } from "../components/context";
