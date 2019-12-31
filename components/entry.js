@@ -41,7 +41,7 @@ const Entry = ({ entry, removeEntry }) => {
             />
           </EntryNote>
           <EntrySubmit type="submit">✔</EntrySubmit>
-          <EntryRemove type="button" onClick={() => removeEntry(entry.id)}>
+          <EntryRemove type="button" onClick={() => setEdit(false)}>
             x
           </EntryRemove>
         </EntryForm>
