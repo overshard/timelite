@@ -75,25 +75,23 @@ const Log = () => {
           }
         >
           {getTags(state.log).length > 0 && (
-            <Filters>
-              <span>{strings.tags}</span>
-              {getTags(state.log).map(tag => {
-                return (
-                  <FilterButton
-                    key={tag}
-                    onClick={() => setFilter({ type: "SHOW_TAG", tag: tag })}
-                  >
-                    {tag}
-                  </FilterButton>
-                );
-              })}
-              <FilterButton onClick={() => setFilter({ type: "SHOW_ALL" })}>
-                {strings.show}
-              </FilterButton>
-            </Filters>
-          )}
-          {state.log.length > 0 && (
             <TopBar>
+              <Filters>
+                <span>{strings.tags}</span>
+                {getTags(state.log).map(tag => {
+                  return (
+                    <FilterButton
+                      key={tag}
+                      onClick={() => setFilter({ type: "SHOW_TAG", tag: tag })}
+                    >
+                      {tag}
+                    </FilterButton>
+                  );
+                })}
+                <FilterButton onClick={() => setFilter({ type: "SHOW_ALL" })}>
+                  {strings.show}
+                </FilterButton>
+              </Filters>
               {filter.tag ? (
                 <Reset
                   onClick={() => {
@@ -204,9 +202,13 @@ const Main = styled.main`
   }
 `;
 
-const Filters = styled.div`
+const TopBar = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 40px;
+`;
 
+const Filters = styled.div`
   & span {
     font-size: 0.8em;
     text-transform: uppercase;
@@ -224,6 +226,24 @@ const FilterButton = styled.button`
   margin-right: 10px;
   margin-top: 10px;
   cursor: pointer;
+`;
+
+const Reset = styled.button`
+  font-size: 1.1em;
+  border: 0;
+  background-color: ${props => props.theme.colors.five};
+  border-bottom: 1px solid ${props => props.theme.colors.four};
+  padding: 10px 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  font-weight: bolder;
+  cursor: pointer;
+
+  @media (${props => props.theme.breakpoint}) {
+    font-size: 1em;
+    padding: 8px 15px;
+  }
 `;
 
 const Nothing = styled.div`
@@ -262,34 +282,5 @@ const Total = styled.div`
     text-transform: uppercase;
     font-weight: lighter;
     display: block;
-  }
-`;
-
-const TopBar = styled.div`
-  position: absolute;
-  top: -0.3em;
-  right: 3em;
-
-  @media (${props => props.theme.breakpoint}) {
-    top: 17.5em;
-  }
-`;
-
-const Reset = styled.button`
-  font-size: 1.1em;
-  border: 0;
-  background-color: ${props => props.theme.colors.five};
-  border-bottom: 1px solid ${props => props.theme.colors.four};
-  padding: 10px 25px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-top: 30px;
-  color: white;
-  font-weight: bolder;
-  cursor: pointer;
-
-  @media (${props => props.theme.breakpoint}) {
-    font-size: 1em;
-    padding: 8px 15px;
   }
 `;
