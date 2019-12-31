@@ -10,6 +10,7 @@
     "next": "^9.0.2",
     "next-offline": "^4.0.2",
     "react": "^16.8.6",
+    "react-csv": "^1.1.2",
     "react-dom": "^16.8.6",
     "react-hook-form": "^3.23.18",
     "react-localization": "^1.0.14",

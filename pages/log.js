@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
+import { CSVLink, CSVDownload } from "react-csv";
 
 import Page from "../components/page";
 import { Context } from "../components/context";
@@ -67,6 +68,9 @@ const Log = () => {
               <span>{strings.total}</span>
               {timeString(getTotalMilliseconds())}
             </Total>
+            <CSVButton data={state.log} filename={"timelite-export.csv"}>
+              {strings.export}
+            </CSVButton>
           </Details>
         )}
         <Main
@@ -248,6 +252,21 @@ const Reset = styled.button`
     font-size: 0.8em;
     padding: 8px 15px;
     margin-top: 15px;
+  }
+`;
+
+const CSVButton = styled(CSVLink)`
+  text-align: center;
+  padding: 5px 0;
+  display: block;
+  text-decoration: none;
+  font-family: monospace;
+  background: ${props => props.theme.colors.one};
+  color: white;
+  margin: 5px;
+
+  @media (${props => props.theme.breakpoint}) {
+    padding: 10px 0;
   }
 `;
 

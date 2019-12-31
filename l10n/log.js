@@ -8,7 +8,8 @@ const strings = new LocalizedStrings({
     nothing: "Your log is empty.",
     tags: "Tags",
     show: "Show All",
-    clear: "Clear"
+    clear: "Clear",
+    export: "Export"
   },
   // None of this is accurate past this line, someone please help me translate...
   jp: {
@@ -18,7 +19,8 @@ const strings = new LocalizedStrings({
     nothing: "ログは空です。",
     tags: "タグ",
     show: "すべて",
-    clear: "すべてクリア"
+    clear: "すべてクリア",
+    export: "書き出す"
   }
 });
 
