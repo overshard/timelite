@@ -206,6 +206,10 @@ const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
+
+  @media (${props => props.theme.breakpoint}) {
+    flex-direction: column;
+  }
 `;
 
 const Filters = styled.div`
@@ -241,8 +245,9 @@ const Reset = styled.button`
   cursor: pointer;
 
   @media (${props => props.theme.breakpoint}) {
-    font-size: 1em;
+    font-size: 0.8em;
     padding: 8px 15px;
+    margin-top: 15px;
   }
 `;
 
