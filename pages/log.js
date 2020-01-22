@@ -12,6 +12,9 @@ import { timeString } from "../utils/time";
 const Log = () => {
   const { state, dispatch } = useContext(Context);
   const [filter, setFilter] = useState({ type: "SHOW_ALL" });
+  const [currentDate, setCurrentdate] = useState(
+    new Date().setHours(0, 0, 0, 0)
+  );
 
   strings.setLanguage(state.language);
 
@@ -22,13 +25,21 @@ const Log = () => {
   };
 
   const getVisibleEntries = (entries, filter) => {
+    let startDate = new Date(currentDate);
+    let endDate = new Date(currentDate).setHours(23, 59, 59, 999);
+    let dateFilteredEntries = entries.filter(entry => {
+      return startDate < entry.start && entry.start < endDate;
+    });
+    console.log(dateFilteredEntries);
     switch (filter.type) {
       case "SHOW_ALL":
-        return entries;
+        return dateFilteredEntries;
       case "SHOW_TAG":
-        return entries.filter(entry => entry.tags.includes(filter.tag));
+        return dateFilteredEntries.filter(entry =>
+          entry.tags.includes(filter.tag)
+        );
       default:
-        return entries;
+        return dateFilteredEntries;
     }
   };
 
@@ -79,6 +90,29 @@ const Log = () => {
           }
         >
           {getTags(state.log).length > 0 && (
+            <DateBar>
+              <DateButton
+                onClick={() => {
+                  let newDate = new Date(currentDate);
+                  newDate.setDate(newDate.getDate() - 1);
+                  setCurrentdate(newDate);
+                }}
+              >
+                ← Previous
+              </DateButton>
+              <div>{new Date(currentDate).toLocaleDateString()}</div>
+              <DateButton
+                onClick={() => {
+                  let newDate = new Date(currentDate);
+                  newDate.setDate(newDate.getDate() + 1);
+                  setCurrentdate(newDate);
+                }}
+              >
+                Next →
+              </DateButton>
+            </DateBar>
+          )}
+          {getVisibleEntries(state.log, filter).length > 0 && (
             <TopBar>
               <Filters>
                 <span>{strings.tags}</span>
@@ -156,6 +190,26 @@ const Grid = styled.div`
     grid-template-columns: 1fr;
     grid-auto-rows: min-content;
   }
+`;
+
+const DateBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  font-size: 1.3em;
+  font-weight: bolder;
+  background: ${props => props.theme.colors.four};
+  align-items: center;
+`;
+
+const DateButton = styled.button`
+  background: ${props => props.theme.colors.three};
+  padding: 9px 12px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 0.7em;
 `;
 
 const Details = styled.div`
