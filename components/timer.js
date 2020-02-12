@@ -8,7 +8,6 @@ import { timeString, timeDiff } from "../utils/time";
 const Timer = () => {
   const { state, dispatch } = useContext(Context);
   const [time, setTime] = useState(timeString(timeDiff(state.timer)));
-  const [note, setNote] = useState("");
 
   strings.setLanguage(state.language);
 
@@ -27,8 +26,8 @@ const Timer = () => {
 
   const submitForm = e => {
     e.preventDefault();
-    dispatch({ type: "ADD_LOG", note: note });
-    setNote("");
+    dispatch({ type: "ADD_LOG", note: state.note });
+    dispatch({type:"NOTE_UPDATED", note:""})
   };
 
   return (
@@ -40,8 +39,8 @@ const Timer = () => {
             type="text"
             aria-label={strings.note}
             placeholder={strings.note}
-            value={note}
-            onChange={e => setNote(e.target.value)}
+            value={state.note || ''}
+            onChange={e => dispatch({type:"NOTE_UPDATED", note:e.target.value})}
           />
         </Inputs>
         <Buttons>

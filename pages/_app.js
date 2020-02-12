@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { ContextProvider } from "../components/context";
 
+import HotKeysMapping from "../components/HotKeysMapping"
 import L10n from "../components/l10n";
 import Sidebar from "../components/sidebar";
 import { theme } from "../site.config";
@@ -18,26 +19,28 @@ class MyApp extends App {
     return (
       <ThemeProvider theme={theme}>
         <ContextProvider>
-          <GlobalStyle />
-          <ToastContainer position={toast.POSITION.TOP_RIGHT} />
-          <L10n />
-          <TransitionGroup component={null}>
-            <CSSTransition
-              key={this.props.router.route}
-              appear
-              timeout={{
-                appear: 500,
-                enter: 500,
-                exit: 250
-              }}
-              classNames="page-transition"
-            >
-              <Transition>
-                <Component {...pageProps} />
-              </Transition>
-            </CSSTransition>
-          </TransitionGroup>
-          <Sidebar />
+          <HotKeysMapping>
+            <GlobalStyle />
+            <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+            <L10n />
+            <TransitionGroup component={null}>
+              <CSSTransition
+                key={this.props.router.route}
+                appear
+                timeout={{
+                  appear: 500,
+                  enter: 500,
+                  exit: 250
+                }}
+                classNames="page-transition"
+              >
+                <Transition>
+                  <Component {...pageProps} />
+                </Transition>
+              </CSSTransition>
+            </TransitionGroup>
+            <Sidebar />
+          </HotKeysMapping>
         </ContextProvider>
       </ThemeProvider>
     );
