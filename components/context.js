@@ -8,6 +8,7 @@ import localForage from "localforage";
 import strings from "../l10n/context";
 
 const initialState = {
+  note: "",
   language: "en",
   timer: new Date(),
   log: []
@@ -39,6 +40,13 @@ const reducer = (state, action) => {
       };
       localForage.setItem("context", newState);
       return newState;
+    case "NOTE_UPDATED":
+      newState = {
+        ...state,
+        note: action.note
+      };
+      localForage.setItem("context", newState);
+      return newState;
     case "ADD_LOG":
       newState = {
         ...state,
@@ -57,7 +65,8 @@ const reducer = (state, action) => {
               })
           },
           ...state.log
-        ]
+        ],
+        note: ""
       };
       localForage.setItem("context", newState);
       toast.success(strings.addedEntry);

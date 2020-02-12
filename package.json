@@ -13,6 +13,7 @@
     "react-csv": "^1.1.2",
     "react-dom": "^16.8.6",
     "react-hook-form": "^3.23.18",
+    "react-hotkeys": "^2.0.0",
     "react-localization": "^1.0.14",
     "react-toastify": "^5.3.2",
     "react-transition-group": "^4.2.1",
