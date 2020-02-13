@@ -4,9 +4,8 @@ import { HotKeys, configure } from "react-hotkeys";
 import { Context } from "../components/context";
 
 configure({
-  //  logLevel : 'debug',
-    ignoreTags: []
-})
+  ignoreTags: []
+});
 
 const keyMap = {
   RESET: "alt+r",
@@ -14,7 +13,7 @@ const keyMap = {
   TIMER_PAGE: "alt+m",
   LOG_PAGE: "alt+l",
   ABOUT_PAGE: "alt+o",
-  CLEAR_LOG: "alt+c",
+  CLEAR_LOG: "alt+c"
 };
 
 const HotKeysMapping = props => {
@@ -26,13 +25,11 @@ const HotKeysMapping = props => {
     TIMER_PAGE: event => router.push("/"),
     LOG_PAGE: event => router.push("/log"),
     ABOUT_PAGE: event => router.push("/about"),
-    CLEAR_LOG: event => dispatch({type:"CLEAR_LOG"}),
+    CLEAR_LOG: event => dispatch({ type: "CLEAR_LOG" })
   };
 
   return (
-    <HotKeys keyMap={keyMap} handlers={handlers} 
-
-    >
+    <HotKeys keyMap={keyMap} handlers={handlers}>
       {props.children}
     </HotKeys>
   );
