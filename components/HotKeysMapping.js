@@ -24,6 +24,7 @@ const HotKeysMapping = props => {
 
   const router = useRouter();
   const handlers = {
+    RESET: event => dispatch({ type: "NEW_TIMER" }),
     ADD_LOG: event => dispatch({ type: "ADD_LOG", note: state.note }),
     TIMER_PAGE: event => router.push("/"),
     LOG_PAGE: event => router.push("/log"),
