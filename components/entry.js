@@ -30,7 +30,7 @@ const Entry = ({ entry, removeEntry,isSelected }) => {
 console.log(isSelected)
 const higlight = isSelected ? "border 5px solid blue" : ""
   return (
-    <EntryContainer className={edit && "zoom"} selected={higlight} >
+    <EntryContainer className={edit && "zoom"} selected={isSelected ? "border 5px solid blue" : ""} >
       {edit ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>

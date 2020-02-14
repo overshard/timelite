@@ -57,8 +57,8 @@ const reducer = (state, action) => {
             id: uuid(),
             start: state.timer,
             end: new Date(),
-            note: action.note,
-            tags: action.note
+            note: state.note,
+            tags: state.note
               .split(" ")
               .filter(word => word.startsWith("#"))
               .map(word => {
@@ -108,6 +108,28 @@ const reducer = (state, action) => {
       localForage.setItem("context", newState);
       toast.error(strings.deletedEntry);
       return newState;
+    case "NEXT_LOG_ITEM":
+      console.log("next item context", state);
+      if (state.log.length === 0) return;
+    //  console.log("TCL: reducer -> state.log.length", state.log.length);
+      console.log(
+        "TCL: reducer -> state.logSelectedEntry",
+        state.logSelectedEntry, (state.logSelectedEntry)? "true":""
+      );
+      if (!state.logSelectedEntry) {
+        console.log("logSelectedEntry updating",state.logSelectedEntry)
+        newState = { ...state, logSelectedEntry: state.log[0].id };
+      } else {
+        console.log("ok");
+        console.log(state.log.find((o, i) => {
+          if (o.id == state.logSelectedEntry) return console.log(i)
+        }
+        ) )
+      }
+      console.log("TCL: reducer -> newState", newState.logSelectedEntry);
+      localForage.setItem("context", newState);
+      return state;
+
     default:
       return state;
   }
