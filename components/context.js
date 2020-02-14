@@ -11,7 +11,8 @@ const initialState = {
   note: "",
   language: "en",
   timer: new Date(),
-  log: []
+  log: [],
+  logSelectedEntry: ""
 };
 
 const Context = createContext();

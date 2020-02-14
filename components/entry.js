@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { timeString } from "../utils/time";
 import { Context } from "../components/context";
 
-const Entry = ({ entry, removeEntry }) => {
+const Entry = ({ entry, removeEntry,isSelected }) => {
   const { state, dispatch } = useContext(Context);
   const { register, handleSubmit } = useForm();
   const [edit, setEdit] = useState(false);
@@ -27,9 +27,10 @@ const Entry = ({ entry, removeEntry }) => {
     });
     setEdit(false);
   };
-
+console.log(isSelected)
+const higlight = isSelected ? "border 5px solid blue" : ""
   return (
-    <EntryContainer className={edit && "zoom"}>
+    <EntryContainer className={edit && "zoom"} selected={higlight} >
       {edit ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>
@@ -97,7 +98,7 @@ const EntryContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.four};
   transition-duration: 250ms;
   transition-property: transform;
-
+  ${props => props.selected };
   &.zoom {
     transform: scale(1.05);
   }

@@ -4,6 +4,7 @@ import { HotKeys, configure } from "react-hotkeys";
 import { Context } from "../components/context";
 
 configure({
+ // logLevel: 'debug',  //verbose debug, info
   ignoreTags: []
 });
 
@@ -13,7 +14,9 @@ const keyMap = {
   TIMER_PAGE: "alt+m",
   LOG_PAGE: "alt+l",
   ABOUT_PAGE: "alt+o",
-  CLEAR_LOG: "alt+c"
+  CLEAR_LOG: "alt+c",
+  LOG_NEXT: "ArrowDown",
+  LOG_PREVIOUS: "ArrowUp"
 };
 
 const HotKeysMapping = props => {
@@ -25,7 +28,9 @@ const HotKeysMapping = props => {
     TIMER_PAGE: event => router.push("/"),
     LOG_PAGE: event => router.push("/log"),
     ABOUT_PAGE: event => router.push("/about"),
-    CLEAR_LOG: event => dispatch({ type: "CLEAR_LOG" })
+    CLEAR_LOG: event => dispatch({ type: "CLEAR_LOG" }),
+    LOG_NEXT: event => console.log("next, down"),
+    LOG_PREVIOUS: event => console.log("previous, up")
   };
 
   return (

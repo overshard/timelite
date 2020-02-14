@@ -129,6 +129,7 @@ const Log = () => {
                         style={{ transitionDelay: `${transitionDelay}ms` }}
                         entry={entry}
                         removeEntry={removeEntry}
+                        isSelected={state.logSelectedEntry}
                       />
                     </CSSTransition>
                   );
