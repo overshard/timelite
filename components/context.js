@@ -109,26 +109,32 @@ const reducer = (state, action) => {
       toast.error(strings.deletedEntry);
       return newState;
     case "NEXT_LOG_ITEM":
-      console.log("next item context", state);
       if (state.log.length === 0) return;
-    //  console.log("TCL: reducer -> state.log.length", state.log.length);
-      console.log(
-        "TCL: reducer -> state.logSelectedEntry",
-        state.logSelectedEntry, (state.logSelectedEntry)? "true":""
-      );
       if (!state.logSelectedEntry) {
-        console.log("logSelectedEntry updating",state.logSelectedEntry)
         newState = { ...state, logSelectedEntry: state.log[0].id };
       } else {
-        console.log("ok");
-        console.log(state.log.find((o, i) => {
-          if (o.id == state.logSelectedEntry) return console.log(i)
-        }
-        ) )
+        const index = state.log.findIndex(
+          el => el.id == state.logSelectedEntry
+        );
+        if (index + 1 < state.log.length)
+          newState = { ...state, logSelectedEntry: state.log[index + 1].id };
+        else newState = { ...state };
       }
-      console.log("TCL: reducer -> newState", newState.logSelectedEntry);
-      localForage.setItem("context", newState);
-      return state;
+      return newState;
+      case "PREVIOUS_LOG_ITEM":
+        if (state.log.length === 0) return;
+        if (!state.logSelectedEntry) {
+          newState = { ...state, logSelectedEntry: state.log[0].id };
+        } else {
+          const index = state.log.findIndex(
+            el => el.id == state.logSelectedEntry
+          );
+          if (index -1 >= 0){
+          
+            newState = { ...state, logSelectedEntry: state.log[index - 1].id };}
+          else newState = { ...state };
+        }
+        return newState;
 
     default:
       return state;

@@ -30,7 +30,7 @@ const HotKeysMapping = props => {
     LOG_PAGE: event => router.push("/log"),
     ABOUT_PAGE: event => router.push("/about"),
     CLEAR_LOG: event => dispatch({ type: "CLEAR_LOG" }),
-    LOG_NEXT: event => {if (window.location.href.substr(window.location.href.length - 3) == 'log') dispatch({type : "NEXT_LOG_ITEM"})},
+    LOG_NEXT: event => {if (window.location.href.substr(window.location.href.length - 3) == 'log') { dispatch({type : "NEXT_LOG_ITEM"})}},
     LOG_PREVIOUS: event => {if (window.location.href.substr(window.location.href.length - 3) == 'log') dispatch({type : "PREVIOUS_LOG_ITEM"})},
   };
 

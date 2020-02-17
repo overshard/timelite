@@ -1,15 +1,16 @@
 import React, { useState, useContext } from "react";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import useForm from "react-hook-form";
 import PropTypes from "prop-types";
 
 import { timeString } from "../utils/time";
 import { Context } from "../components/context";
 
-const Entry = ({ entry, removeEntry,isSelected }) => {
+const Entry = ({ entry, removeEntry, isSelected }) => {
   const { state, dispatch } = useContext(Context);
   const { register, handleSubmit } = useForm();
   const [edit, setEdit] = useState(false);
+  const themeContext = useContext(ThemeContext);
 
   const onSubmit = data => {
     dispatch({
@@ -27,10 +28,15 @@ const Entry = ({ entry, removeEntry,isSelected }) => {
     });
     setEdit(false);
   };
-console.log(isSelected)
-const higlight = isSelected ? "border 5px solid blue" : ""
+
+  const higlight =
+    isSelected == entry.id
+      ? {
+          backgroundColor: themeContext.colors.five
+        }
+      : {};
   return (
-    <EntryContainer className={edit && "zoom"} selected={isSelected ? "border 5px solid blue" : ""} >
+    <EntryContainer style={higlight} className={edit && "zoom"}>
       {edit ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>
@@ -98,7 +104,7 @@ const EntryContainer = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.four};
   transition-duration: 250ms;
   transition-property: transform;
-  ${props => props.selected };
+
   &.zoom {
     transform: scale(1.05);
   }
