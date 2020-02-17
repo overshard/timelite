@@ -4,7 +4,6 @@ import { HotKeys, configure } from "react-hotkeys";
 import { Context } from "../components/context";
 
 configure({
- // logLevel: 'debug',  //verbose debug, info
   ignoreTags: []
 });
 
@@ -17,6 +16,7 @@ const keyMap = {
   CLEAR_LOG: "alt+c",
   LOG_NEXT: "ArrowDown",
   LOG_PREVIOUS: "ArrowUp"
+
 };
 
 const HotKeysMapping = props => {
