@@ -11,12 +11,7 @@ const strings = new LocalizedStrings({
     note: "#tagでメモを追加",
     reset: "リセット",
     add: "追加する"
-  },
-  pl: {
-    note: "Dodaj wpis z #tagiem",
-    reset: "Zeruj",
-    add: "Dodaj"
-  },
+  }
 });
 
 export default strings;

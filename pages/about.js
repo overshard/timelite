@@ -29,14 +29,6 @@ const About = () => {
           >
             {strings.name}
           </Creator>
-          <KeysDescription>{strings.keyReset}</KeysDescription>
-          <KeysDescription>{strings.keyAddLog}</KeysDescription>
-          <KeysDescription>{strings.keyTimerPage}</KeysDescription>
-          <KeysDescription>{strings.keyLogPage}</KeysDescription>
-          <KeysDescription>{strings.keyAboutPage}</KeysDescription>
-          <KeysDescription>{strings.keyClearLog}</KeysDescription>
-          <KeysDescription>{strings.keyNextLogEntry}</KeysDescription>
-          <KeysDescription>{strings.keyPreviousLogEntry}</KeysDescription>
         </Main>
       </Grid>
     </Page>
@@ -111,7 +103,7 @@ const Main = styled.main`
 `;
 
 const Heading = styled.h1`
-  font-size: 4em;
+  font-size: 5em;
   font-weight: lighter;
   margin-top: 0;
   opacity: 0;
@@ -126,7 +118,7 @@ const Heading = styled.h1`
 `;
 
 const Blockquote = styled.blockquote`
-  font-size: 1.5em;
+  font-size: 2.5em;
   margin: 0 auto 40px auto;
   position: relative;
   max-width: 500px;
@@ -152,27 +144,8 @@ const Blockquote = styled.blockquote`
   }
 `;
 
-const KeysDescription = styled.blockquote`
-  font-size: 1.5em;
-  margin: 0 0 0 0;
-  position: relative;
-  text-align: left;
-  max-width: 500px;
-  opacity: 0;
-  animation-name: ${FadeRight};
-  animation-fill-mode: forwards;
-  animation-duration: 1000ms;
-  animation-delay: 500ms;
-  animation-timing-function: ease-out;
-
-
-  @media (${props => props.theme.breakpoint}) {
-    font-size: 1.2em;
-  }
-`;
-
 const Creator = styled.a`
-  font-size: 1em;
+  font-size: 2em;
   display: block;
   margin-left: auto;
   opacity: 0.7;
