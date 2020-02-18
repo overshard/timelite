@@ -40,6 +40,7 @@ const Timer = () => {
             aria-label={strings.note}
             placeholder={strings.note}
             value={state.note || ''}
+            autoFocus
             onChange={e => dispatch({type:"NOTE_UPDATED", note:e.target.value})}
           />
         </Inputs>

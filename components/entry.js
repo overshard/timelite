@@ -9,11 +9,10 @@ import { Context } from "../components/context";
 const Entry = ({ entry, removeEntry, isSelected }) => {
   const { state, dispatch } = useContext(Context);
   const { register, handleSubmit } = useForm();
-  const [edit, setEdit] = useState(false);
   const themeContext = useContext(ThemeContext);
 
   const onSubmit = data => {
-    dispatch({
+     dispatch({
       type: "EDIT_LOG",
       entry: {
         ...entry,
@@ -26,7 +25,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           })
       }
     });
-    setEdit(false);
+    dispatch({type:"LOG_EDIT", edit:false});
   };
 
   const higlight =
@@ -36,8 +35,8 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
         }
       : {};
   return (
-    <EntryContainer style={higlight} className={edit && "zoom"}>
-      {edit ? (
+    <EntryContainer style={higlight} className={state.edit && "zoom"}>
+      {(state.edit && isSelected==entry.id) ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>
             {timeString(entry.end - entry.start)}
@@ -48,10 +47,11 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
               name="note"
               defaultValue={entry.note}
               ref={register}
+              autoFocus
             />
           </EntryNote>
           <EntrySubmit type="submit">✔</EntrySubmit>
-          <EntryRemove type="button" onClick={() => setEdit(false)}>
+          <EntryRemove type="button" onClick={() =>  dispatch({type:"LOG_EDIT", edit:false})}>
             x
           </EntryRemove>
         </EntryForm>
@@ -75,12 +75,20 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           </EntryNote>
           <EntryEdit
             onClick={() => {
-              setEdit(true);
+              dispatch({ type: "SELECT_LOG_ITEM", id: entry.id });
+              dispatch({type:"LOG_EDIT", edit:true})
             }}
           >
             _
           </EntryEdit>
-          <EntryRemove onClick={() => removeEntry(entry.id)}>x</EntryRemove>
+          <EntryRemove
+            onClick={() => {
+              dispatch({ type: "SELECT_LOG_ITEM", id: "" });
+              removeEntry(entry.id);
+            }}
+          >
+            x
+          </EntryRemove>
         </>
       )}
     </EntryContainer>

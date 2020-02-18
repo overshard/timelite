@@ -12,7 +12,8 @@ const initialState = {
   language: "en",
   timer: new Date(),
   log: [],
-  logSelectedEntry: ""
+  logSelectedEntry: "",
+  edit: false
 };
 
 const Context = createContext();
@@ -87,7 +88,8 @@ const reducer = (state, action) => {
     case "REMOVE_LOG":
       newState = {
         ...state,
-        log: [...state.log.filter(entry => entry.id !== action.id)]
+        log: [...state.log.filter(entry => entry.id !== action.id)],
+        logSelectedEntry : state.logSelectedEntry==action.id ? "": state.logSelectedEntry
       };
       localForage.setItem("context", newState);
       toast.error(strings.deletedEntry);
@@ -95,7 +97,9 @@ const reducer = (state, action) => {
     case "CLEAR_LOG":
       newState = {
         ...state,
-        log: []
+        log: [],
+        logSelectedEntry: "",
+        edit: false
       };
       localForage.setItem("context", newState);
       toast.error(strings.resetLog);
@@ -135,7 +139,13 @@ const reducer = (state, action) => {
           else newState = { ...state };
         }
         return newState;
-
+      case "SELECT_LOG_ITEM":
+        newState = {...state, logSelectedEntry: action.id}
+        return newState;
+      case "LOG_EDIT":
+        newState = {...state, edit: action.edit}
+        console.log("edit",action.edit);
+        return newState
     default:
       return state;
   }
