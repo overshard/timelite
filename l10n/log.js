@@ -21,17 +21,7 @@ const strings = new LocalizedStrings({
     show: "すべて",
     clear: "すべてクリア",
     export: "書き出す"
-  },
-  pl: {
-    total: "Razem",
-    subtotal: "Podsuma",
-    start: "Czas początkowy",
-    nothing: "Twój dziennik nie ma wpisów.",
-    tags: "Tagi",
-    show: "Pokaż wszystko",
-    clear: "Wyczyść",
-    export: "Wyeksportuj"
-  },
+  }
 });
 
 export default strings;
