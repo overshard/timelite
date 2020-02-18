@@ -18,6 +18,7 @@ const keyMap = {
   LOG_NEXT: "ArrowDown",
   LOG_PREVIOUS: "ArrowUp",
   LOG_EDIT: "alt+e"
+
 };
 
 const HotKeysMapping = props => {
@@ -52,6 +53,7 @@ const HotKeysMapping = props => {
       if (window.location.href.substr(window.location.href.length - 3) == "log")
         dispatch({ type: "LOG_EDIT", edit: true });
     }
+
   };
 
   return (
