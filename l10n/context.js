@@ -15,14 +15,7 @@ const strings = new LocalizedStrings({
     editedEntry: "エントリを編集しました。",
     deletedEntry: "エントリを削除しました。",
     resetLog: "ログをリセットしました。"
-  },
-  pl: {
-    loaded: "Wczytano stan z lokalnego zapisu.",
-    addedEntry: "Dodałeś wpis.",
-    editedEntry: "Zmieniłeś wpis.",
-    deletedEntry: "Skasowałeś wpis.",
-    resetLog: "Wyczyściłeś dziennik."
-  },
+  }
 });
 
 export default strings;
