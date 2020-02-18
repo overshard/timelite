@@ -139,13 +139,13 @@ const reducer = (state, action) => {
           else newState = { ...state };
         }
         return newState;
-      case "SELECT_LOG_ITEM":
-        newState = {...state, logSelectedEntry: action.id}
-        return newState;
-      case "LOG_EDIT":
-        newState = {...state, edit: action.edit}
-        console.log("edit",action.edit);
-        return newState
+        case "SELECT_LOG_ITEM":
+          newState = {...state, logSelectedEntry: action.id}
+          return newState;
+        case "LOG_EDIT":
+          newState = {...state, edit: action.edit}
+          console.log("edit",action.edit);
+          return newState
     default:
       return state;
   }

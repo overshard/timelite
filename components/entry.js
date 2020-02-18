@@ -12,7 +12,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
   const themeContext = useContext(ThemeContext);
 
   const onSubmit = data => {
-     dispatch({
+    dispatch({
       type: "EDIT_LOG",
       entry: {
         ...entry,
