@@ -13,7 +13,13 @@ const strings = new LocalizedStrings({
     timer: "タイマー",
     log: "ログ",
     about: "約"
-  }
+  },
+  pl: {
+    name: "Timelite",
+    timer: "Zegar",
+    log: "Dziennik",
+    about: "O Timelite"
+  },
 });
 
 export default strings;
