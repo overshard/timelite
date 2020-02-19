@@ -29,14 +29,26 @@ const About = () => {
           >
             {strings.name}
           </Creator>
-          <KeysDescription>{strings.keyReset}</KeysDescription>
-          <KeysDescription>{strings.keyAddLog}</KeysDescription>
-          <KeysDescription>{strings.keyTimerPage}</KeysDescription>
-          <KeysDescription>{strings.keyLogPage}</KeysDescription>
-          <KeysDescription>{strings.keyAboutPage}</KeysDescription>
-          <KeysDescription>{strings.keyClearLog}</KeysDescription>
-          <KeysDescription>{strings.keyNextLogEntry}</KeysDescription>
-          <KeysDescription>{strings.keyPreviousLogEntry}</KeysDescription>
+          <DescriptionContainer>
+            <KeysColumn>
+              <SectionTitle>Timer</SectionTitle>
+              <KeysDescription>{strings.keyReset}</KeysDescription>
+              <KeysDescription>{strings.keyAddLog}</KeysDescription>
+              <KeysDescription><p></p></KeysDescription>
+              <SectionTitle>Navigation</SectionTitle>
+              <KeysDescription>{strings.keyTimerPage}</KeysDescription>
+              <KeysDescription>{strings.keyLogPage}</KeysDescription>
+              <KeysDescription>{strings.keyAboutPage}</KeysDescription>
+            </KeysColumn>
+            <KeysColumn>
+              <SectionTitle>Log</SectionTitle>
+              <KeysDescription>{strings.keyNextLogEntry}</KeysDescription>
+              <KeysDescription>{strings.keyPreviousLogEntry}</KeysDescription>
+              <KeysDescription>{strings.keyEditEntry}</KeysDescription>
+              <KeysDescription>{strings.keyDeleteSingleEntry}</KeysDescription>
+              <KeysDescription>{strings.keyClearLog}</KeysDescription>
+            </KeysColumn>
+          </DescriptionContainer>
         </Main>
       </Grid>
     </Page>
@@ -151,14 +163,33 @@ const Blockquote = styled.blockquote`
     font-size: 1.2em;
   }
 `;
+const  DescriptionContainer = styled.div`
+display: flex;
+`
+const KeysColumn = styled.div`
+flex: 1;
+`;
+const SectionTitle = styled.div`
+font-size: 1.5em;
+text-decoration: underline;
+margin: 0 0 0 0;
+position: relative;
+text-align: left;
+max-width: 500px;
+opacity: 0;
+animation-name: ${FadeRight};
+animation-fill-mode: forwards;
+animation-duration: 1000ms;
+animation-delay: 500ms;
+animation-timing-function: ease-out;
 
+`;
 const KeysDescription = styled.blockquote`
-  font-size: 1.5em;
-  margin: 0 0 0 0;
+  font-size: 1em;
   position: relative;
-  text-align: left;
-  max-width: 500px;
-  opacity: 0;
+  text-indent: 1em;
+text-align: left;
+  margin: 0 0 0 0;
   animation-name: ${FadeRight};
   animation-fill-mode: forwards;
   animation-duration: 1000ms;
