@@ -34,7 +34,6 @@ const About = () => {
               <SectionTitle>Timer</SectionTitle>
               <KeysDescription>{strings.keyReset}</KeysDescription>
               <KeysDescription>{strings.keyAddLog}</KeysDescription>
-              <KeysDescription><p></p></KeysDescription>
               <SectionTitle>Navigation</SectionTitle>
               <KeysDescription>{strings.keyTimerPage}</KeysDescription>
               <KeysDescription>{strings.keyLogPage}</KeysDescription>
@@ -163,44 +162,6 @@ const Blockquote = styled.blockquote`
     font-size: 1.2em;
   }
 `;
-const  DescriptionContainer = styled.div`
-display: flex;
-`
-const KeysColumn = styled.div`
-flex: 1;
-`;
-const SectionTitle = styled.div`
-font-size: 1.5em;
-text-decoration: underline;
-margin: 0 0 0 0;
-position: relative;
-text-align: left;
-max-width: 500px;
-opacity: 0;
-animation-name: ${FadeRight};
-animation-fill-mode: forwards;
-animation-duration: 1000ms;
-animation-delay: 500ms;
-animation-timing-function: ease-out;
-
-`;
-const KeysDescription = styled.blockquote`
-  font-size: 1em;
-  position: relative;
-  text-indent: 1em;
-text-align: left;
-  margin: 0 0 0 0;
-  animation-name: ${FadeRight};
-  animation-fill-mode: forwards;
-  animation-duration: 1000ms;
-  animation-delay: 500ms;
-  animation-timing-function: ease-out;
-
-
-  @media (${props => props.theme.breakpoint}) {
-    font-size: 1.2em;
-  }
-`;
 
 const Creator = styled.a`
   font-size: 1em;
@@ -248,6 +209,50 @@ const Creator = styled.a`
       animation: ${ScaleRight} 300ms normal forwards;
     }
   }
+
+  @media (${props => props.theme.breakpoint}) {
+    font-size: 1.2em;
+  }
+`;
+
+const DescriptionContainer = styled.div`
+  display: flex;
+  margin-top: 2em;
+
+  @media (${props => props.theme.breakpoint}) {
+    display: none;
+  }
+`;
+
+const KeysColumn = styled.div`
+  flex: 1;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.5em;
+  position: relative;
+  text-align: left;
+  max-width: 500px;
+  opacity: 0;
+  margin-bottom: 0;
+  animation-name: ${FadeRight};
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-delay: 1500ms;
+  animation-timing-function: ease-out;
+`;
+
+const KeysDescription = styled.div`
+  font-size: 1em;
+  position: relative;
+  margin-left: 1em;
+  opacity: 0;
+  animation-name: ${FadeRight};
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-delay: 2000ms;
+  animation-timing-function: ease-out;
+  margin-bottom: 0;
 
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.2em;
