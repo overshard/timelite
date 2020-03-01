@@ -32,20 +32,40 @@ const About = () => {
           <DescriptionContainer>
             <KeysColumn>
               <SectionTitle>Timer</SectionTitle>
-              <KeysDescription>{strings.keyReset}</KeysDescription>
-              <KeysDescription>{strings.keyAddLog}</KeysDescription>
+              <KeysDescription>
+                <span>⎇+r</span> {strings.keyReset}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+a</span> {strings.keyAddLog}
+              </KeysDescription>
               <SectionTitle>Navigation</SectionTitle>
-              <KeysDescription>{strings.keyTimerPage}</KeysDescription>
-              <KeysDescription>{strings.keyLogPage}</KeysDescription>
-              <KeysDescription>{strings.keyAboutPage}</KeysDescription>
+              <KeysDescription>
+                <span>⎇+t</span> {strings.keyTimerPage}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+l</span> {strings.keyLogPage}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+o</span> {strings.keyAboutPage}
+              </KeysDescription>
             </KeysColumn>
             <KeysColumn>
               <SectionTitle>Log</SectionTitle>
-              <KeysDescription>{strings.keyNextLogEntry}</KeysDescription>
-              <KeysDescription>{strings.keyPreviousLogEntry}</KeysDescription>
-              <KeysDescription>{strings.keyEditEntry}</KeysDescription>
-              <KeysDescription>{strings.keyDeleteSingleEntry}</KeysDescription>
-              <KeysDescription>{strings.keyClearLog}</KeysDescription>
+              <KeysDescription>
+                <span>↓</span> {strings.keyNextLogEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>↑</span> {strings.keyPreviousLogEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+e</span> {strings.keyEditEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+d</span> {strings.keyDeleteSingleEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+c</span> {strings.keyClearLog}
+              </KeysDescription>
             </KeysColumn>
           </DescriptionContainer>
         </Main>
@@ -164,7 +184,7 @@ const Blockquote = styled.blockquote`
 `;
 
 const Creator = styled.a`
-  font-size: 1em;
+  font-size: 1.5em;
   display: block;
   margin-left: auto;
   opacity: 0.7;
@@ -245,7 +265,6 @@ const SectionTitle = styled.h2`
 const KeysDescription = styled.div`
   font-size: 1em;
   position: relative;
-  margin-left: 1em;
   opacity: 0;
   animation-name: ${FadeRight};
   animation-fill-mode: forwards;
@@ -253,6 +272,15 @@ const KeysDescription = styled.div`
   animation-delay: 2000ms;
   animation-timing-function: ease-out;
   margin-bottom: 0;
+
+  span {
+    width: 45px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.3);
+    font-family: monospace;
+    text-align: center;
+    font-size: 1.1em;
+  }
 
   @media (${props => props.theme.breakpoint}) {
     font-size: 1.2em;
