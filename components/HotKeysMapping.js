@@ -68,8 +68,9 @@ const HotKeysMapping = props => {
     },
     SUBMIT_LOG: event => {
       if (
-        window.location.href.substr(window.location.href.length - 3) == "log"
+        (window.location.href.substr(window.location.href.length - 3) == "log") && (state.edit)
       ) {
+        console.log("rrrrr")
         event.preventDefault();
         dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
       }
