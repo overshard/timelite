@@ -17,7 +17,8 @@ const keyMap = {
   LOG_NEXT: "ArrowDown",
   LOG_PREVIOUS: "ArrowUp",
   LOG_EDIT: "alt+e",
-  LOG_DELETE_SINGLE: "alt+d"
+  LOG_DELETE_SINGLE: "alt+d",
+  SUBMIT_LOG: "Enter"
 };
 
 const HotKeysMapping = props => {
@@ -64,6 +65,14 @@ const HotKeysMapping = props => {
       if (!state.logSelectedEntry) return;
       if (window.location.href.substr(window.location.href.length - 3) == "log")
         dispatch({ type: "REMOVE_LOG" });
+    },
+    SUBMIT_LOG: event => {
+      if (
+        window.location.href.substr(window.location.href.length - 3) == "log"
+      ) {
+        event.preventDefault();
+        dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
+      }
     }
   };
 

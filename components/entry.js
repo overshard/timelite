@@ -13,23 +13,12 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
   const focusedEntry = useRef(null);
 
   useEffect(() => {
-   if (isSelected==entry.id) focusedEntry.current.scrollIntoView({ behavior: "smooth" })
+    if (isSelected == entry.id)
+      focusedEntry.current.scrollIntoView({ behavior: "smooth" });
   });
-  const onSubmit = data => {
-    dispatch({
-      type: "EDIT_LOG",
-      entry: {
-        ...entry,
-        note: data.note,
-        tags: data.note
-          .split(" ")
-          .filter(word => word.startsWith("#"))
-          .map(word => {
-            return word.toLowerCase();
-          })
-      }
-    });
-    dispatch({type:"LOG_EDIT_TOGLE", edit:false});
+  const onSubmit = event => {
+    event.preventDefault();
+    dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
   };
 
   const higlight =
@@ -38,9 +27,13 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           backgroundColor: themeContext.colors.five
         }
       : {};
-     return (
-    <EntryContainer style={higlight} className={state.edit && "zoom"} autoFocus={isSelected==entry.id}  ref={focusedEntry} >
-      {(state.edit && isSelected==entry.id) ? (
+  return (
+    <EntryContainer
+      style={higlight}
+      className={state.edit && "zoom"}
+      ref={focusedEntry}
+    >
+      {state.edit && isSelected == entry.id ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>
             {timeString(entry.end - entry.start)}
@@ -49,26 +42,38 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           <EntryNote>
             <EntryNoteInput
               name="note"
-              defaultValue={state.log.find(entry2 =>  entry2.id == isSelected ).note || ""}
+              defaultValue={
+                state.log.find(entry2 => entry2.id == isSelected).note || ""
+              }
               ref={register}
               autoFocus
-              onChange={e => dispatch({
-                type: "EDIT_LOG",
-                entry: {
-                  ...entry,
-                  note: e.target.value, //data.note,
-                  tags: e.target.value //data.note
-                    .split(" ")
-                    .filter(word => word.startsWith("#"))
-                    .map(word => {
-                      return word.toLowerCase();
-                    })
-                }
-              })}
+              onChange={e =>
+                dispatch({
+                  type: "EDIT_LOG",
+                  entry: {
+                    ...entry,
+                    note: e.target.value, //data.note,
+                    tags: e.target.value //data.note
+                      .split(" ")
+                      .filter(word => word.startsWith("#"))
+                      .map(word => {
+                        return word.toLowerCase();
+                      })
+                  }
+                })
+              }
             />
           </EntryNote>
-          <EntrySubmit type="button" onClick={() =>  dispatch({type:"LOG_EDIT_TOGLE", edit:false})}>✔</EntrySubmit>
-          <EntryRemove type="button" onClick={() =>  dispatch({type:"LOG_EDIT_TOGLE", edit:false})}>
+          <EntrySubmit
+            type="button"
+            onClick={() => dispatch({ type: "LOG_EDIT_TOGLE", edit: false })}
+          >
+            ✔
+          </EntrySubmit>
+          <EntryRemove
+            type="button"
+            onClick={() => dispatch({ type: "LOG_EDIT_TOGLE", edit: false })}
+          >
             x
           </EntryRemove>
         </EntryForm>
@@ -93,7 +98,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           <EntryEdit
             onClick={() => {
               dispatch({ type: "SELECT_LOG_ITEM", id: entry.id });
-              dispatch({type:"LOG_EDIT_TOGLE", edit:true})
+              dispatch({ type: "LOG_EDIT_TOGLE", edit: true });
             }}
           >
             _
