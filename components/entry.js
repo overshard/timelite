@@ -16,8 +16,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
     if (isSelected == entry.id)
       focusedEntry.current.scrollIntoView({ behavior: "smooth" });
   });
-  const onSubmit = event => {
-    event.preventDefault();
+  const onSubmit = () => {
     dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
   };
 
@@ -52,8 +51,8 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
                   type: "EDIT_LOG",
                   entry: {
                     ...entry,
-                    note: e.target.value, //data.note,
-                    tags: e.target.value //data.note
+                    note: e.target.value,
+                    tags: e.target.value
                       .split(" ")
                       .filter(word => word.startsWith("#"))
                       .map(word => {
@@ -64,12 +63,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
               }
             />
           </EntryNote>
-          <EntrySubmit
-            type="button"
-            onClick={() => dispatch({ type: "LOG_EDIT_TOGLE", edit: false })}
-          >
-            ✔
-          </EntrySubmit>
+          <EntrySubmit type="submit">✔</EntrySubmit>
           <EntryRemove
             type="button"
             onClick={() => dispatch({ type: "LOG_EDIT_TOGLE", edit: false })}
