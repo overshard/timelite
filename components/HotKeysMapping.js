@@ -18,7 +18,6 @@ const keyMap = {
   LOG_PREVIOUS: "ArrowUp",
   LOG_EDIT: "alt+e",
   LOG_DELETE_SINGLE: "alt+d"
-
 };
 
 const HotKeysMapping = props => {
@@ -28,35 +27,44 @@ const HotKeysMapping = props => {
   const handlers = {
     RESET: event => dispatch({ type: "NEW_TIMER" }),
     ADD_LOG: event => dispatch({ type: "ADD_LOG", note: state.note }),
-    TIMER_PAGE: event => {event.preventDefault(); router.push("/")},
+    TIMER_PAGE: event => {
+      event.preventDefault();
+      router.push("/");
+    },
     LOG_PAGE: event => router.push("/log"),
     ABOUT_PAGE: event => router.push("/about"),
     CLEAR_LOG: event => dispatch({ type: "CLEAR_LOG" }),
     LOG_NEXT: event => {
       event.preventDefault();
-      if (state.edit) return;
-      if (window.location.href.substr(window.location.href.length - 3) == "log")
+      if (
+        window.location.href.substr(window.location.href.length - 3) == "log"
+      ) {
+        dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
         dispatch({ type: "NEXT_LOG_ITEM" });
+      }
     },
     LOG_PREVIOUS: event => {
       event.preventDefault();
-      if (state.edit) return;
-      if (window.location.href.substr(window.location.href.length - 3) == "log")
+
+      if (
+        window.location.href.substr(window.location.href.length - 3) == "log"
+      ) {
+        dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
         dispatch({ type: "PREVIOUS_LOG_ITEM" });
+      }
     },
     LOG_EDIT: event => {
       event.preventDefault();
       if (!state.logSelectedEntry) return;
       if (window.location.href.substr(window.location.href.length - 3) == "log")
-        dispatch({ type: "LOG_EDIT", edit: true });
+        dispatch({ type: "LOG_EDIT_TOGLE", edit: true });
     },
     LOG_DELETE_SINGLE: event => {
       event.preventDefault();
       if (!state.logSelectedEntry) return;
       if (window.location.href.substr(window.location.href.length - 3) == "log")
-      dispatch({ type: "REMOVE_LOG" });
+        dispatch({ type: "REMOVE_LOG" });
     }
-
   };
 
   return (
