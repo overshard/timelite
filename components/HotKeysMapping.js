@@ -4,7 +4,8 @@ import { HotKeys, configure } from "react-hotkeys";
 import { Context } from "../components/context";
 
 configure({
-  ignoreTags: []
+  ignoreTags: [],
+  logLevel: 'debug'
 });
 
 const keyMap = {
@@ -18,7 +19,7 @@ const keyMap = {
   LOG_PREVIOUS: "ArrowUp",
   LOG_EDIT: "alt+e",
   LOG_DELETE_SINGLE: "alt+d",
-  SUBMIT_LOG: "Enter"
+  SUBMIT_LOG: ["Enter", "alt+s"],
 };
 
 const HotKeysMapping = props => {

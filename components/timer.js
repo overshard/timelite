@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import styled from "styled-components";
 
 import { Context } from "./context";
@@ -8,6 +8,7 @@ import { timeString, timeDiff } from "../utils/time";
 const Timer = () => {
   const { state, dispatch } = useContext(Context);
   const [time, setTime] = useState(timeString(timeDiff(state.timer)));
+  const refToMain = useRef(null);
 
   strings.setLanguage(state.language);
 
@@ -23,6 +24,10 @@ const Timer = () => {
       clearInterval(timerInterval);
     };
   }, [state.timer]);
+
+  useEffect(() => {
+     refToMain.current.focus();
+   });
 
   const submitForm = e => {
     e.preventDefault();
@@ -40,7 +45,7 @@ const Timer = () => {
             aria-label={strings.note}
             placeholder={strings.note}
             value={state.note || ''}
-            autoFocus
+            ref={refToMain}
             onChange={e => dispatch({type:"NOTE_UPDATED", note:e.target.value})}
           />
         </Inputs>

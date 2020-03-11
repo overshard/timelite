@@ -14,7 +14,10 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
 
   useEffect(() => {
     if (isSelected == entry.id)
-      focusedEntry.current.scrollIntoView({ behavior: "smooth" });
+    {
+    focusedEntry.current.focus();
+    focusedEntry.current.scrollIntoView({ behavior: "smooth" });
+    }
   });
   const onSubmit = () => {
     dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
