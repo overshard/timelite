@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { ContextProvider } from "../components/context";
 
-import HotKeysMapping from "../components/HotKeysMapping"
+import HotKeysMapping from "../components/HotKeysMapping";
 import L10n from "../components/l10n";
 import Sidebar from "../components/sidebar";
 import { theme } from "../site.config";
@@ -24,7 +24,7 @@ class MyApp extends App {
             <ToastContainer position={toast.POSITION.TOP_RIGHT} />
             <L10n />
             <TransitionGroup component={null}>
-              <CSSTransition
+              {/*}  <CSSTransition                     //Transitions are causing hotKeys to loose focus
                 key={this.props.router.route}
                 appear
                 timeout={{
@@ -34,10 +34,10 @@ class MyApp extends App {
                 }}
                 classNames="page-transition"
               >
-                <Transition>
-                  <Component {...pageProps} />
-                </Transition>
-              </CSSTransition>
+              <Transition>*/}
+              <Component {...pageProps} />
+              {/*}   </Transition>
+              </CSSTransition>*/}
             </TransitionGroup>
             <Sidebar />
           </HotKeysMapping>
