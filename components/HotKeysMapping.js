@@ -1,10 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { HotKeys, configure } from "react-hotkeys";
 import { Context } from "../components/context";
 
 configure({
-  ignoreTags: []
+  ignoreTags: [],
+  //logLevel: "debug",
+  /* below is workaround for bug in react-hotkeys 
+  "[BUG] typing a space in <input /> will disable all hotkeys in that <input /> #237" 
+  causing hotkeys to after pressing a whitespace character (space, enter,..) 
+  in one of the per default ignored elements (input, textarea...), 
+  this whitespace character is included in the combination for all further hotkeys.*/
+  ignoreEventsCondition: keyEvent => {
+    if (keyEvent.key === "Enter" || keyEvent.key === " ") {
+      return true;
+    }
+    return false;
+  }
 });
 
 const keyMap = {
@@ -18,7 +30,6 @@ const keyMap = {
   LOG_PREVIOUS: "ArrowUp",
   LOG_EDIT: "alt+e",
   LOG_DELETE_SINGLE: "alt+d"
-
 };
 
 const HotKeysMapping = props => {
@@ -27,36 +38,42 @@ const HotKeysMapping = props => {
   const router = useRouter();
   const handlers = {
     RESET: event => dispatch({ type: "NEW_TIMER" }),
-    ADD_LOG: event => dispatch({ type: "ADD_LOG", note: state.note }),
-    TIMER_PAGE: event => {event.preventDefault(); router.push("/")},
+    ADD_LOG: event => {
+      event.preventDefault();
+      dispatch({ type: "ADD_LOG", note: state.note });
+    },
+    TIMER_PAGE: event => {
+      event.preventDefault();
+      router.push("/");
+    },
     LOG_PAGE: event => router.push("/log"),
     ABOUT_PAGE: event => router.push("/about"),
     CLEAR_LOG: event => dispatch({ type: "CLEAR_LOG" }),
     LOG_NEXT: event => {
       event.preventDefault();
-      if (state.edit) return;
       if (window.location.href.substr(window.location.href.length - 3) == "log")
         dispatch({ type: "NEXT_LOG_ITEM" });
+      dispatch({ type: "TOGGLE_EDITION", edit: false });
     },
     LOG_PREVIOUS: event => {
       event.preventDefault();
-      if (state.edit) return;
+      //   if (state.edit) return;
       if (window.location.href.substr(window.location.href.length - 3) == "log")
         dispatch({ type: "PREVIOUS_LOG_ITEM" });
+      dispatch({ type: "TOGGLE_EDITION", edit: false });
     },
     LOG_EDIT: event => {
       event.preventDefault();
       if (!state.logSelectedEntry) return;
       if (window.location.href.substr(window.location.href.length - 3) == "log")
-        dispatch({ type: "LOG_EDIT", edit: true });
+        dispatch({ type: "TOGGLE_EDITION", edit: true });
     },
     LOG_DELETE_SINGLE: event => {
       event.preventDefault();
       if (!state.logSelectedEntry) return;
       if (window.location.href.substr(window.location.href.length - 3) == "log")
-      dispatch({ type: "REMOVE_LOG" });
+        dispatch({ type: "REMOVE_LOG" });
     }
-
   };
 
   return (

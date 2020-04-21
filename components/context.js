@@ -83,7 +83,7 @@ const reducer = (state, action) => {
         ]
       };
       localForage.setItem("context", newState);
-      toast.success(strings.editedEntry);
+      // toast.success(strings.editedEntry);
       return newState;
     case "REMOVE_LOG":
       if (action.id !== undefined)
@@ -94,10 +94,13 @@ const reducer = (state, action) => {
             state.logSelectedEntry == action.id ? "" : state.logSelectedEntry
         };
       else {
-        newState = { ...state,
-          log: [...state.log.filter(entry => entry.id !== state.logSelectedEntry)],
+        newState = {
+          ...state,
+          log: [
+            ...state.log.filter(entry => entry.id !== state.logSelectedEntry)
+          ],
           logSelectedEntry: ""
-         };
+        };
       }
       localForage.setItem("context", newState);
       toast.error(strings.deletedEntry);
@@ -152,9 +155,10 @@ const reducer = (state, action) => {
       newState = { ...state, logSelectedEntry: action.id };
       localForage.setItem("context", newState);
       return newState;
-    case "LOG_EDIT":
+    case "TOGGLE_EDITION":
       newState = { ...state, edit: action.edit };
       localForage.setItem("context", newState);
+      action.submited ? toast.success(strings.editedEntry) : "";
       return newState;
     default:
       return state;
