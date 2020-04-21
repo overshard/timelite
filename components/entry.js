@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import useForm from "react-hook-form";
 import PropTypes from "prop-types";
@@ -10,6 +10,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
   const { state, dispatch } = useContext(Context);
   const { register, handleSubmit } = useForm();
   const themeContext = useContext(ThemeContext);
+  const focusedEntry = useRef(null);
 
   const onSubmit = data => {
     dispatch({
@@ -26,7 +27,14 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
       }
     });
     dispatch({ type: "TOGGLE_EDITION", edit: false, submited: true });
-  };
+  useEffect(() => {
+    if (isSelected == entry.id)
+    {
+    focusedEntry.current.focus();
+    focusedEntry.current.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
 
   const higlight =
     isSelected == entry.id
@@ -35,7 +43,11 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
         }
       : {};
   return (
-    <EntryContainer style={higlight} className={state.edit && "zoom"}>
+    <EntryContainer
+      style={higlight}
+      className={state.edit && "zoom"}
+      ref={focusedEntry}
+    >
       {state.edit && isSelected == entry.id ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>
@@ -54,8 +66,8 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
                   type: "EDIT_LOG",
                   entry: {
                     ...entry,
-                    note: e.target.value, //data.note,
-                    tags: e.target.value //data.note
+                    note: e.target.value,
+                    tags: e.target.value
                       .split(" ")
                       .filter(word => word.startsWith("#"))
                       .map(word => {

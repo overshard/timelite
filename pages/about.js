@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 import Page from "../components/page";
@@ -7,8 +7,12 @@ import strings from "../l10n/about";
 
 const About = () => {
   const { state } = useContext(Context);
+  const refToMain = useRef(null);
   strings.setLanguage(state.language);
-
+  useEffect(() => {
+    refToMain.current.focus();
+  });
+  
   return (
     <Page title="About">
       <GitHubLink
@@ -26,6 +30,7 @@ const About = () => {
             href="https://www.isaacbythewood.com/"
             target="_blank"
             rel="noopener noreferrer"
+            ref={refToMain}
           >
             {strings.name}
           </Creator>

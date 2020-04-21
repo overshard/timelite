@@ -83,7 +83,6 @@ const reducer = (state, action) => {
         ]
       };
       localForage.setItem("context", newState);
-      // toast.success(strings.editedEntry);
       return newState;
     case "REMOVE_LOG":
       if (action.id !== undefined)
