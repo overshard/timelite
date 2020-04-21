@@ -25,7 +25,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           })
       }
     });
-    dispatch({type:"LOG_EDIT", edit:false});
+    dispatch({ type: "TOGGLE_EDITION", edit: false, submited: true });
   };
 
   const higlight =
@@ -36,7 +36,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
       : {};
   return (
     <EntryContainer style={higlight} className={state.edit && "zoom"}>
-      {(state.edit && isSelected==entry.id) ? (
+      {state.edit && isSelected == entry.id ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>
             {timeString(entry.end - entry.start)}
@@ -45,18 +45,39 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           <EntryNote>
             <EntryNoteInput
               name="note"
-              defaultValue={entry.note}
+              // defaultValue={entry.note || ""}
               ref={register}
               autoFocus
+              value={state.log.find(x => x.id == entry.id).note || ""}
+              onChange={e =>
+                dispatch({
+                  type: "EDIT_LOG",
+                  entry: {
+                    ...entry,
+                    note: e.target.value, //data.note,
+                    tags: e.target.value //data.note
+                      .split(" ")
+                      .filter(word => word.startsWith("#"))
+                      .map(word => {
+                        return word.toLowerCase();
+                      })
+                  }
+                })
+              }
             />
           </EntryNote>
           <EntrySubmit type="submit">✔</EntrySubmit>
-          <EntryRemove type="button" onClick={() =>  dispatch({type:"LOG_EDIT", edit:false})}>
+          <EntryRemove
+            type="button"
+            onClick={() => dispatch({ type: "TOGGLE_EDITION", edit: false })}
+          >
             x
           </EntryRemove>
         </EntryForm>
       ) : (
-        <>
+        <
+          // autoFocus= {(isSelected==entry.id)}
+        >
           <EntryTime>
             {timeString(entry.end - entry.start)}
             <span>{entry.start.toLocaleTimeString()}</span>
@@ -76,7 +97,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           <EntryEdit
             onClick={() => {
               dispatch({ type: "SELECT_LOG_ITEM", id: entry.id });
-              dispatch({type:"LOG_EDIT", edit:true})
+              dispatch({ type: "TOGGLE_EDITION", edit: true });
             }}
           >
             _
