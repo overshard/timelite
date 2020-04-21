@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
+import ReactDOM from "react-dom";
 import { useRouter } from "next/router";
 import { HotKeys, configure } from "react-hotkeys";
 import { Context } from "../components/context";
 
 configure({
   ignoreTags: [],
-  //logLevel: "debug",
+  logLevel: "debug",
   /* below is workaround for bug in react-hotkeys 
   "[BUG] typing a space in <input /> will disable all hotkeys in that <input /> #237" 
   causing hotkeys to after pressing a whitespace character (space, enter,..) 
@@ -36,6 +37,13 @@ const HotKeysMapping = props => {
   const { state, dispatch } = useContext(Context);
 
   const router = useRouter();
+
+  const autofocus = el => {
+    const found = ReactDOM.findDOMNode(el);
+    if (found && !state.edit) {
+      found.focus();
+    }
+  };
   const handlers = {
     RESET: event => dispatch({ type: "NEW_TIMER" }),
     ADD_LOG: event => {
@@ -83,7 +91,7 @@ const HotKeysMapping = props => {
   };
 
   return (
-    <HotKeys keyMap={keyMap} handlers={handlers}>
+    <HotKeys keyMap={keyMap} handlers={handlers} ref={autofocus}>
       {props.children}
     </HotKeys>
   );

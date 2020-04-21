@@ -27,14 +27,13 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
       }
     });
     dispatch({ type: "TOGGLE_EDITION", edit: false, submited: true });
+  };
   useEffect(() => {
-    if (isSelected == entry.id)
-    {
-    focusedEntry.current.focus();
-    focusedEntry.current.scrollIntoView({ behavior: "smooth" });
+    if (isSelected == entry.id) {
+      focusedEntry.current.focus();
+      focusedEntry.current.scrollIntoView({ behavior: "smooth" });
     }
   });
-
 
   const higlight =
     isSelected == entry.id
@@ -57,7 +56,6 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           <EntryNote>
             <EntryNoteInput
               name="note"
-              // defaultValue={entry.note || ""}
               ref={register}
               autoFocus
               value={state.log.find(x => x.id == entry.id).note || ""}
