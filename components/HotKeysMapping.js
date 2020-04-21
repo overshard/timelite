@@ -6,7 +6,7 @@ import { Context } from "../components/context";
 
 configure({
   ignoreTags: [],
-  logLevel: "debug",
+  //logLevel: "debug",
   /* below is workaround for bug in react-hotkeys 
   "[BUG] typing a space in <input /> will disable all hotkeys in that <input /> #237" 
   causing hotkeys to after pressing a whitespace character (space, enter,..) 
