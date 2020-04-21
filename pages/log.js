@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import { CSVLink } from "react-csv";
@@ -12,6 +12,12 @@ import { timeString } from "../utils/time";
 const Log = () => {
   const { state, dispatch } = useContext(Context);
   const [filter, setFilter] = useState({ type: "SHOW_ALL" });
+  const refToMain = useRef(null);
+
+  useEffect(() => {
+    if (!state.edit && state.logSelectedEntry==='') 
+    refToMain.current.focus();
+  });
 
   strings.setLanguage(state.language);
 
@@ -77,6 +83,8 @@ const Log = () => {
           className={
             getVisibleEntries(state.log, filter).length === 0 && "empty"
           }
+         tabIndex="1"
+         ref={refToMain}
         >
           {getTags(state.log).length > 0 && (
             <TopBar>

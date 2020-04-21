@@ -51,16 +51,22 @@ const HotKeysMapping = props => {
     CLEAR_LOG: event => dispatch({ type: "CLEAR_LOG" }),
     LOG_NEXT: event => {
       event.preventDefault();
-      if (window.location.href.substr(window.location.href.length - 3) == "log")
+      if (
+        window.location.href.substr(window.location.href.length - 3) == "log"
+      ) {
+        dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
         dispatch({ type: "NEXT_LOG_ITEM" });
-      dispatch({ type: "TOGGLE_EDITION", edit: false });
+      }
     },
     LOG_PREVIOUS: event => {
       event.preventDefault();
-      //   if (state.edit) return;
-      if (window.location.href.substr(window.location.href.length - 3) == "log")
+
+      if (
+        window.location.href.substr(window.location.href.length - 3) == "log"
+      ) {
+        dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
         dispatch({ type: "PREVIOUS_LOG_ITEM" });
-      dispatch({ type: "TOGGLE_EDITION", edit: false });
+      }
     },
     LOG_EDIT: event => {
       event.preventDefault();
