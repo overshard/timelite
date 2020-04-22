@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useReducer, createContext } from "react";
 import PropTypes from "prop-types";
-import uuid from "uuid";
 import { toast } from "react-toastify";
 import localForage from "localforage";
+import { v4 as uuid } from "uuid";
 
 import strings from "../l10n/context";
 
