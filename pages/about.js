@@ -29,6 +29,45 @@ const About = () => {
           >
             {strings.name}
           </Creator>
+          <DescriptionContainer>
+            <KeysColumn>
+              <SectionTitle>Timer</SectionTitle>
+              <KeysDescription>
+                <span>⎇+r</span> {strings.keyReset}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+a</span> {strings.keyAddLog}
+              </KeysDescription>
+              <SectionTitle>Navigation</SectionTitle>
+              <KeysDescription>
+                <span>⎇+t</span> {strings.keyTimerPage}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+l</span> {strings.keyLogPage}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+o</span> {strings.keyAboutPage}
+              </KeysDescription>
+            </KeysColumn>
+            <KeysColumn>
+              <SectionTitle>Log</SectionTitle>
+              <KeysDescription>
+                <span>↓</span> {strings.keyNextLogEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>↑</span> {strings.keyPreviousLogEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+e</span> {strings.keyEditEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+d</span> {strings.keyDeleteSingleEntry}
+              </KeysDescription>
+              <KeysDescription>
+                <span>⎇+c</span> {strings.keyClearLog}
+              </KeysDescription>
+            </KeysColumn>
+          </DescriptionContainer>
         </Main>
       </Grid>
     </Page>
@@ -103,7 +142,7 @@ const Main = styled.main`
 `;
 
 const Heading = styled.h1`
-  font-size: 5em;
+  font-size: 4em;
   font-weight: lighter;
   margin-top: 0;
   opacity: 0;
@@ -118,7 +157,7 @@ const Heading = styled.h1`
 `;
 
 const Blockquote = styled.blockquote`
-  font-size: 2.5em;
+  font-size: 1.5em;
   margin: 0 auto 40px auto;
   position: relative;
   max-width: 500px;
@@ -145,7 +184,7 @@ const Blockquote = styled.blockquote`
 `;
 
 const Creator = styled.a`
-  font-size: 2em;
+  font-size: 1.5em;
   display: block;
   margin-left: auto;
   opacity: 0.7;
@@ -189,6 +228,58 @@ const Creator = styled.a`
     &::before {
       animation: ${ScaleRight} 300ms normal forwards;
     }
+  }
+
+  @media (${props => props.theme.breakpoint}) {
+    font-size: 1.2em;
+  }
+`;
+
+const DescriptionContainer = styled.div`
+  display: flex;
+  margin-top: 2em;
+
+  @media (${props => props.theme.breakpoint}) {
+    display: none;
+  }
+`;
+
+const KeysColumn = styled.div`
+  flex: 1;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.5em;
+  position: relative;
+  text-align: left;
+  max-width: 500px;
+  opacity: 0;
+  margin-bottom: 0;
+  animation-name: ${FadeRight};
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-delay: 1500ms;
+  animation-timing-function: ease-out;
+`;
+
+const KeysDescription = styled.div`
+  font-size: 1em;
+  position: relative;
+  opacity: 0;
+  animation-name: ${FadeRight};
+  animation-fill-mode: forwards;
+  animation-duration: 1000ms;
+  animation-delay: 2000ms;
+  animation-timing-function: ease-out;
+  margin-bottom: 0;
+
+  span {
+    width: 45px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.3);
+    font-family: monospace;
+    text-align: center;
+    font-size: 1.1em;
   }
 
   @media (${props => props.theme.breakpoint}) {

@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import { useRouter } from "next/router";
 import { HotKeys, configure } from "react-hotkeys";
+import PropTypes from "prop-types";
+
 import { Context } from "../components/context";
 
 configure({
@@ -95,6 +97,13 @@ const HotKeysMapping = props => {
       {props.children}
     </HotKeys>
   );
+};
+
+HotKeysMapping.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ])
 };
 
 export default HotKeysMapping;
