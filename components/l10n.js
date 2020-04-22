@@ -18,6 +18,7 @@ const L10n = () => {
     >
       <option value="en">English</option>
       <option value="jp">日本語</option>
+      <option value="pl">Polski</option>
     </Select>
   );
 };

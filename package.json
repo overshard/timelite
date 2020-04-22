@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "localforage": "^1.7.3",
-    "next": "^9.0.2",
+    "next": "^9.3.2",
     "next-offline": "^4.0.2",
     "react": "^16.8.6",
     "react-csv": "^1.1.2",
