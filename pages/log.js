@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import { CSVLink } from "react-csv";
@@ -77,6 +77,7 @@ const Log = () => {
           className={
             getVisibleEntries(state.log, filter).length === 0 && "empty"
           }
+          tabIndex="1"
         >
           {getTags(state.log).length > 0 && (
             <TopBar>
@@ -129,6 +130,7 @@ const Log = () => {
                         style={{ transitionDelay: `${transitionDelay}ms` }}
                         entry={entry}
                         removeEntry={removeEntry}
+                        isSelected={state.logSelectedEntry}
                       />
                     </CSSTransition>
                   );
