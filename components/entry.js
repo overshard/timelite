@@ -1,15 +1,16 @@
-import React, { useState, useContext } from "react";
-import styled from "styled-components";
+import React, { useState, useContext, useRef, useEffect } from "react";
+import styled, { ThemeContext } from "styled-components";
 import useForm from "react-hook-form";
 import PropTypes from "prop-types";
 
 import { timeString } from "../utils/time";
 import { Context } from "../components/context";
 
-const Entry = ({ entry, removeEntry }) => {
+const Entry = ({ entry, removeEntry, isSelected }) => {
   const { state, dispatch } = useContext(Context);
   const { register, handleSubmit } = useForm();
-  const [edit, setEdit] = useState(false);
+  const themeContext = useContext(ThemeContext);
+  const focusedEntry = useRef(null);
 
   const onSubmit = data => {
     dispatch({
@@ -25,12 +26,28 @@ const Entry = ({ entry, removeEntry }) => {
           })
       }
     });
-    setEdit(false);
+    dispatch({ type: "TOGGLE_EDITION", edit: false, submited: true });
   };
+  useEffect(() => {
+    if (isSelected == entry.id) {
+      focusedEntry.current.focus();
+      focusedEntry.current.scrollIntoView({ behavior: "smooth" });
+    }
+  });
 
+  const higlight =
+    isSelected == entry.id
+      ? {
+          backgroundColor: themeContext.colors.five
+        }
+      : {};
   return (
-    <EntryContainer className={edit && "zoom"}>
-      {edit ? (
+    <EntryContainer
+      style={higlight}
+      className={state.edit && "zoom"}
+      ref={focusedEntry}
+    >
+      {state.edit && isSelected == entry.id ? (
         <EntryForm onSubmit={handleSubmit(onSubmit)}>
           <EntryTime>
             {timeString(entry.end - entry.start)}
@@ -39,17 +56,38 @@ const Entry = ({ entry, removeEntry }) => {
           <EntryNote>
             <EntryNoteInput
               name="note"
-              defaultValue={entry.note}
               ref={register}
+              autoFocus
+              value={state.log.find(x => x.id == entry.id).note || ""}
+              onChange={e =>
+                dispatch({
+                  type: "EDIT_LOG",
+                  entry: {
+                    ...entry,
+                    note: e.target.value,
+                    tags: e.target.value
+                      .split(" ")
+                      .filter(word => word.startsWith("#"))
+                      .map(word => {
+                        return word.toLowerCase();
+                      })
+                  }
+                })
+              }
             />
           </EntryNote>
           <EntrySubmit type="submit">✔</EntrySubmit>
-          <EntryRemove type="button" onClick={() => setEdit(false)}>
+          <EntryRemove
+            type="button"
+            onClick={() => dispatch({ type: "TOGGLE_EDITION", edit: false })}
+          >
             x
           </EntryRemove>
         </EntryForm>
       ) : (
-        <>
+        <
+          // autoFocus= {(isSelected==entry.id)}
+        >
           <EntryTime>
             {timeString(entry.end - entry.start)}
             <span>{entry.start.toLocaleTimeString()}</span>
@@ -68,12 +106,20 @@ const Entry = ({ entry, removeEntry }) => {
           </EntryNote>
           <EntryEdit
             onClick={() => {
-              setEdit(true);
+              dispatch({ type: "SELECT_LOG_ITEM", id: entry.id });
+              dispatch({ type: "TOGGLE_EDITION", edit: true });
             }}
           >
             _
           </EntryEdit>
-          <EntryRemove onClick={() => removeEntry(entry.id)}>x</EntryRemove>
+          <EntryRemove
+            onClick={() => {
+              dispatch({ type: "SELECT_LOG_ITEM", id: "" });
+              removeEntry(entry.id);
+            }}
+          >
+            x
+          </EntryRemove>
         </>
       )}
     </EntryContainer>
