@@ -33,6 +33,15 @@ const Summary = () => {
     return datasets;
   };
 
+  const getTotalTime = (entries) => {
+    let totalTime = 0;
+    entries.map((entry) => {
+      totalTime += entry.end - entry.start;
+    });
+    totalTime = totalTime / 1000 / 60 / 60;
+    return Math.round(totalTime * 100) / 100;
+  };
+
   useEffect(() => {
     const chart = new Chart(canvasRef.current, {
       type: "bar",
@@ -66,6 +75,9 @@ const Summary = () => {
       <Grid>
         <Main>
           <Title>Summary</Title>
+          <p>Total number of hours spent across all tags.</p>
+          <TotalTime>{getTotalTime(state.log)} hours</TotalTime>
+          <p>The number of hours you've spent per-tag.</p>
           <CanvasWrapper>
             <canvas ref={canvasRef} />
           </CanvasWrapper>
@@ -91,10 +103,17 @@ const Main = styled.main`
 const Title = styled.h1`
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 3em;
+  font-size: 6em;
+  margin-bottom: 2rem;
 `;
 
 const CanvasWrapper = styled.div`
   background-color: white;
   padding: 0.25rem;
+`;
+
+const TotalTime = styled.div`
+  font-size: 4em;
+  font-weight: 900;
+  margin-bottom: 3rem;
 `;
