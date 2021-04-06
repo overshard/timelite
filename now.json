@@ -2,5 +2,5 @@
   "version": 2,
   "name": "timelite",
   "alias": "timelite.app",
-  "builds": [{ "src": "package.json", "use": "@now/next" }]
+  "builds": [{ "src": "package.json", "use": "@vercel/next" }]
 }
