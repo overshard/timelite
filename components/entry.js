@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import useForm from "react-hook-form";
 import PropTypes from "prop-types";
