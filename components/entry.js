@@ -35,15 +35,10 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
     }
   });
 
-  const higlight =
-    isSelected == entry.id
-      ? {
-          backgroundColor: themeContext.colors.five
-        }
-      : {};
+  const highlight = isSelected == entry.id ? { filter: "invert(1)" } : {};
   return (
     <EntryContainer
-      style={higlight}
+      style={highlight}
       className={state.edit && "zoom"}
       ref={focusedEntry}
     >
