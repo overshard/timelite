@@ -35,7 +35,7 @@ const Sidebar = ({ router }) => {
 
 Sidebar.propTypes = {
   router: PropTypes.object,
-  language: PropTypes.string
+  language: PropTypes.string,
 };
 
 export default withRouter(Sidebar);
@@ -51,7 +51,7 @@ const Side = styled.div`
   justify-content: space-between;
   flex-direction: column;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     width: 100%;
     height: 60px;
     bottom: 0;
@@ -63,7 +63,7 @@ const Side = styled.div`
 `;
 
 const Title = styled.div`
-  color: ${props => props.theme.colors.one};
+  color: ${(props) => props.theme.colors.one};
   text-transform: uppercase;
   font-size: 2em;
   font-weight: 900;
@@ -71,7 +71,7 @@ const Title = styled.div`
   padding: 15px;
   white-space: nowrap;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     padding: 4px 10px;
     font-size: 1.4em;
   }
@@ -82,7 +82,7 @@ const Pages = styled.div`
   flex-direction: column;
   padding: 15px;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     flex-direction: row;
     padding: 5px;
   }
@@ -96,7 +96,7 @@ const Page = styled.a`
   transition: color 300ms, font-size 300ms;
   font-size: 2em;
   font-weight: 100;
-  ${props =>
+  ${(props) =>
     props.active ? "color: rgba(0, 0, 0, 1);" : "color: rgba(0, 0, 0, 0.5);"}
 
   &:hover {
@@ -104,7 +104,7 @@ const Page = styled.a`
     font-size: 3em;
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 1.4em;
     margin-bottom: 0;
     margin-right: 15px;
@@ -121,10 +121,10 @@ const About = styled.a`
   display: block;
   text-decoration: none;
   font-family: monospace;
-  background: ${props => props.theme.colors.two};
+  background: ${(props) => props.theme.colors.two};
   color: white;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     padding: 0 15px;
     display: flex;
     justify-content: center;

@@ -11,7 +11,7 @@ const L10n = () => {
   // TODO: This should probably not be buttons and be a select box of some kind...
   return (
     <Select
-      onChange={evt => {
+      onChange={(evt) => {
         dispatch({ type: "SET_LANGUAGE", language: evt.target.value });
       }}
       value={state.language}
@@ -24,7 +24,7 @@ const L10n = () => {
 };
 
 L10n.propTypes = {
-  setLanguage: PropTypes.func
+  setLanguage: PropTypes.func,
 };
 
 export default L10n;
@@ -34,12 +34,12 @@ const Select = styled.select`
   bottom: 5px;
   right: 5px;
   z-index: 2;
-  background-color: ${props => props.theme.colors.four};
+  background-color: ${(props) => props.theme.colors.four};
   color: white;
   padding: 5px;
   border: none;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     top: 5px;
     right: 5px;
     text-align: center;

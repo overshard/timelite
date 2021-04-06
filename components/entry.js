@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useEffect } from "react";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import useForm from "react-hook-form";
 import PropTypes from "prop-types";
 
@@ -9,10 +9,9 @@ import { Context } from "../components/context";
 const Entry = ({ entry, removeEntry, isSelected }) => {
   const { state, dispatch } = useContext(Context);
   const { register, handleSubmit } = useForm();
-  const themeContext = useContext(ThemeContext);
   const focusedEntry = useRef(null);
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     dispatch({
       type: "EDIT_LOG",
       entry: {
@@ -20,11 +19,11 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
         note: data.note,
         tags: data.note
           .split(" ")
-          .filter(word => word.startsWith("#"))
-          .map(word => {
+          .filter((word) => word.startsWith("#"))
+          .map((word) => {
             return word.toLowerCase();
-          })
-      }
+          }),
+      },
     });
     dispatch({ type: "TOGGLE_EDITION", edit: false, submited: true });
   };
@@ -53,8 +52,8 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
               name="note"
               ref={register}
               autoFocus
-              value={state.log.find(x => x.id == entry.id).note || ""}
-              onChange={e =>
+              value={state.log.find((x) => x.id == entry.id).note || ""}
+              onChange={(e) =>
                 dispatch({
                   type: "EDIT_LOG",
                   entry: {
@@ -62,11 +61,11 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
                     note: e.target.value,
                     tags: e.target.value
                       .split(" ")
-                      .filter(word => word.startsWith("#"))
-                      .map(word => {
+                      .filter((word) => word.startsWith("#"))
+                      .map((word) => {
                         return word.toLowerCase();
-                      })
-                  }
+                      }),
+                  },
                 })
               }
             />
@@ -90,7 +89,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
             {entry.tags.length > 0 && (
               <small>
                 {entry.tags
-                  .map(tag => {
+                  .map((tag) => {
                     return tag;
                   })
                   .join(", ")}
@@ -121,7 +120,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
 
 Entry.propTypes = {
   entry: PropTypes.object,
-  removeEntry: PropTypes.func
+  removeEntry: PropTypes.func,
 };
 
 export default Entry;
@@ -133,7 +132,7 @@ const EntryContainer = styled.div`
   display: grid;
   grid-template-columns: 150px 1fr 50px 50px;
   align-items: center;
-  border-bottom: 1px solid ${props => props.theme.colors.four};
+  border-bottom: 1px solid ${(props) => props.theme.colors.four};
   transition-duration: 250ms;
   transition-property: transform;
 
@@ -168,7 +167,7 @@ const EntryContainer = styled.div`
     transform: translateX(100px);
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;
     text-align: center;
@@ -184,7 +183,7 @@ const EntryNoteInput = styled.input`
   padding: 12px 0;
   font-size: 1em;
   width: 100%;
-  border-bottom: 2px solid ${props => props.theme.colors.three};
+  border-bottom: 2px solid ${(props) => props.theme.colors.three};
 `;
 
 const EntryTime = styled.div`
@@ -192,7 +191,7 @@ const EntryTime = styled.div`
   font-size: 1.3em;
   padding: 15px;
   height: 100%;
-  background-color: ${props => props.theme.colors.four};
+  background-color: ${(props) => props.theme.colors.four};
   color: white;
   text-align: center;
   display: flex;
@@ -201,7 +200,7 @@ const EntryTime = styled.div`
   box-sizing: border-box;
   flex-direction: column;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     grid-column: 1 / span 2;
   }
 
@@ -225,7 +224,7 @@ const EntryNote = styled.div`
     margin-top: 5px;
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     grid-column: 1 / span 2;
   }
 `;
@@ -236,12 +235,12 @@ const EntryEdit = styled.button`
   color: white;
   cursor: pointer;
   border: 0;
-  background: ${props => props.theme.colors.four};
+  background: ${(props) => props.theme.colors.four};
   margin: 0;
   padding: 15px;
   height: 100%;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     padding: 5px;
   }
 `;
@@ -252,12 +251,12 @@ const EntrySubmit = styled.button`
   color: white;
   cursor: pointer;
   border: 0;
-  background: ${props => props.theme.colors.four};
+  background: ${(props) => props.theme.colors.four};
   margin: 0;
   padding: 15px;
   height: 100%;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     padding: 5px;
   }
 `;
@@ -268,12 +267,12 @@ const EntryRemove = styled.button`
   color: white;
   cursor: pointer;
   border: 0;
-  background: ${props => props.theme.colors.five};
+  background: ${(props) => props.theme.colors.five};
   margin: 0;
   padding: 15px;
   height: 100%;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     padding: 5px;
   }
 `;

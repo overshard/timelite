@@ -151,7 +151,7 @@ const Heading = styled.h1`
   animation-duration: 1000ms;
   animation-timing-function: ease-out;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 3em;
   }
 `;
@@ -178,7 +178,7 @@ const Blockquote = styled.blockquote`
     line-height: 0.5em;
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 1.2em;
   }
 `;
@@ -206,7 +206,7 @@ const Creator = styled.a`
     right: 0;
     bottom: -10px;
     height: 2px;
-    background: ${props => props.theme.colors.three};
+    background: ${(props) => props.theme.colors.three};
     transform-origin: left;
     animation: ${ScaleLeft} 300ms normal forwards;
     pointer-events: none;
@@ -219,7 +219,7 @@ const Creator = styled.a`
     right: 0;
     bottom: -10px;
     height: 2px;
-    background: ${props => props.theme.colors.three};
+    background: ${(props) => props.theme.colors.three};
     opacity: 0.2;
     pointer-events: none;
   }
@@ -230,7 +230,7 @@ const Creator = styled.a`
     }
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 1.2em;
   }
 `;
@@ -239,7 +239,7 @@ const DescriptionContainer = styled.div`
   display: flex;
   margin-top: 2em;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     display: none;
   }
 `;
@@ -282,7 +282,7 @@ const KeysDescription = styled.div`
     font-size: 1.1em;
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 1.2em;
   }
 `;

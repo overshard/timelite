@@ -18,14 +18,14 @@ const strings = new LocalizedStrings({
     keyPreviousLogEntry: "Move to previous log entry",
     keyEditEntry: "Edit log entry",
     keyDeleteSingleEntry: "Delete single log entry",
-    keyClearLog: "Clear all log entries"
+    keyClearLog: "Clear all log entries",
   },
   // None of this is accurate past this line, someone please help me translate...
   jp: {
     title: "タイムライト？",
     quote:
       "なぜ午前5時ですか。常に行っていることを追跡するために使用できる簡単なものはありますか？",
-    name: "アイザックバイザウッド"
+    name: "アイザックバイザウッド",
   },
   pl: {
     title: "Timelite?",
@@ -44,8 +44,8 @@ const strings = new LocalizedStrings({
     keyPreviousLogEntry: "Przejdź do poprzedniego wpisu",
     keyEditEntry: "Edytuj wpis dziennika",
     keyDeleteSingleEntry: "Skasuj pojedynczy wpis dziennika",
-    keyClearLog: "Wyczyść wszystkie wpisy dziennika"
-  }
+    keyClearLog: "Wyczyść wszystkie wpisy dziennika",
+  },
 });
 
 export default strings;
