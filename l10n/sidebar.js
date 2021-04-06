@@ -6,6 +6,7 @@ const strings = new LocalizedStrings({
     timer: "Timer",
     log: "Log",
     about: "About",
+    summary: "Summary",
   },
   // None of this is accurate past this line, someone please help me translate...
   jp: {
@@ -13,12 +14,14 @@ const strings = new LocalizedStrings({
     timer: "タイマー",
     log: "ログ",
     about: "約",
+    summary: "概要",
   },
   pl: {
     name: "Timelite",
     timer: "Zegar",
     log: "Dziennik",
     about: "O Timelite",
+    summary: "Streszczenie",
   },
 });
 

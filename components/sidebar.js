@@ -25,6 +25,14 @@ const Sidebar = ({ router }) => {
             <LogIcon />
           </Page>
         </Link>
+        <Link href="/summary" passHref>
+          <Page
+            active={router.pathname === "/summary"}
+            aria-label={strings.summary}
+          >
+            <SummaryIcon />
+          </Page>
+        </Link>
       </Pages>
       <Link href="/about" passHref>
         <About aria-label={strings.about}>
@@ -186,6 +194,30 @@ const LogIcon = () => {
     >
       <path d="M0 0h24v24H0V0z" fill="none" />
       <path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z" />
+    </svg>
+  );
+};
+
+const SummaryIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      enableBackground="new 0 0 24 24"
+      height="24px"
+      viewBox="0 0 24 24"
+      width="24px"
+      fill="#000000"
+    >
+      <g>
+        <rect fill="none" height="24" width="24" />
+        <g>
+          <path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V5h14V19z" />
+          <rect height="5" width="2" x="7" y="12" />
+          <rect height="10" width="2" x="15" y="7" />
+          <rect height="3" width="2" x="11" y="14" />
+          <rect height="2" width="2" x="11" y="10" />
+        </g>
+      </g>
     </svg>
   );
 };
