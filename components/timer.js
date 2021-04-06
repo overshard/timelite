@@ -75,6 +75,7 @@ const Time = styled.div`
   text-align: center;
   font-weight: lighter;
   font-variant-numeric: tabular-nums;
+
   @media (${(props) => props.theme.breakpoint}) {
     font-size: 4em;
   }
@@ -96,6 +97,7 @@ const Note = styled.input`
   border: none;
   transform: scale(1);
   transition: transform 250ms, background 250ms;
+
   &:hover,
   &:focus {
     transform: scale(1.1);
@@ -103,11 +105,13 @@ const Note = styled.input`
     z-index: 3;
     position: relative;
   }
+
   &::placeholder {
     font-size: 0.7em;
     text-transform: uppercase;
     font-weight: 100;
   }
+
   @media (${(props) => props.theme.breakpoint}) {
     padding: 5px 15px;
     font-size: 1.2em;
@@ -133,12 +137,14 @@ const Button = styled.button`
   border: none;
   transform: scale(1);
   transition: transform 250ms;
+
   &:hover,
   &:focus {
     transform: scale(1.1);
     z-index: 3;
     position: relative;
   }
+
   @media (${(props) => props.theme.breakpoint}) {
     font-size: 0.7em;
     padding: 10px 15px;

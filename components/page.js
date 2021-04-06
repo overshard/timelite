@@ -30,6 +30,7 @@ export default Page;
 
 const Content = styled.div`
   margin-left: 50px;
+
   @media (${(props) => props.theme.breakpoint}) {
     margin-left: 0;
   }

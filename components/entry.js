@@ -121,6 +121,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
 Entry.propTypes = {
   entry: PropTypes.object,
   removeEntry: PropTypes.func,
+  isSelected: PropTypes.string,
 };
 
 export default Entry;
