@@ -29,10 +29,10 @@ const Timer = () => {
     refToMain.current.focus();
   }, []);
 
-  const submitForm = e => {
+  const submitForm = (e) => {
     e.preventDefault();
     dispatch({ type: "ADD_LOG", note: state.note });
-    dispatch({type:"NOTE_UPDATED", note:""})
+    dispatch({ type: "NOTE_UPDATED", note: "" });
   };
 
   return (
@@ -44,9 +44,11 @@ const Timer = () => {
             type="text"
             aria-label={strings.note}
             placeholder={strings.note}
-            value={state.note || ''}
+            value={state.note || ""}
             ref={refToMain}
-            onChange={e => dispatch({type:"NOTE_UPDATED", note:e.target.value})}
+            onChange={(e) =>
+              dispatch({ type: "NOTE_UPDATED", note: e.target.value })
+            }
           />
         </Inputs>
         <Buttons>
@@ -73,7 +75,7 @@ const Time = styled.div`
   text-align: center;
   font-weight: lighter;
   font-variant-numeric: tabular-nums;
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 4em;
   }
 `;
@@ -106,7 +108,7 @@ const Note = styled.input`
     text-transform: uppercase;
     font-weight: 100;
   }
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     padding: 5px 15px;
     font-size: 1.2em;
     width: 225px;
@@ -137,7 +139,7 @@ const Button = styled.button`
     z-index: 3;
     position: relative;
   }
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 0.7em;
     padding: 10px 15px;
     width: 100%;
@@ -145,9 +147,9 @@ const Button = styled.button`
 `;
 
 const ResetButton = styled(Button)`
-  background: ${props => props.theme.colors.one};
+  background: ${(props) => props.theme.colors.one};
 `;
 
 const AddButton = styled(Button)`
-  background: ${props => props.theme.colors.two};
+  background: ${(props) => props.theme.colors.two};
 `;
