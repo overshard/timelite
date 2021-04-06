@@ -85,9 +85,7 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           </EntryRemove>
         </EntryForm>
       ) : (
-        <
-          // autoFocus= {(isSelected==entry.id)}
-        >
+        <>
           <EntryTime>
             {timeString(entry.end - entry.start)}
             <span>{entry.start.toLocaleTimeString()}</span>
