@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/overshard/timelite/raw/master/public/static/logo.png"
+    <img src="https://raw.githubusercontent.com/overshard/timelite/master/public/static/logo.png"
          width="200"
          height="200"
          alt="Timelite Logo" />
