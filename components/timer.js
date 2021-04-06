@@ -26,8 +26,8 @@ const Timer = () => {
   }, [state.timer]);
 
   useEffect(() => {
-     refToMain.current.focus();
-   });
+    refToMain.current.focus();
+  }, []);
 
   const submitForm = e => {
     e.preventDefault();
