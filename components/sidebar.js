@@ -74,6 +74,7 @@ const Title = styled.div`
   white-space: nowrap;
   writing-mode: vertical-rl;
   text-orientation: mixed;
+  line-height: 1.5em;
 
   @media (${(props) => props.theme.breakpoint}) {
     padding: 0px 10px;
