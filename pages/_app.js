@@ -55,7 +55,7 @@ const GlobalStyle = createGlobalStyle`
       -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
       sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: white;
-    background-color: ${props => props.theme.colors.one};
+    background-color: ${(props) => props.theme.colors.one};
     min-height: 100vh;
     width: 100%;
     padding: 0;

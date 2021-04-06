@@ -15,9 +15,9 @@ const Log = () => {
 
   strings.setLanguage(state.language);
 
-  const getTags = entries => {
+  const getTags = (entries) => {
     let tags = [];
-    entries.map(entry => tags.push(...entry.tags));
+    entries.map((entry) => tags.push(...entry.tags));
     return [...new Set(tags)];
   };
 
@@ -26,7 +26,7 @@ const Log = () => {
       case "SHOW_ALL":
         return entries;
       case "SHOW_TAG":
-        return entries.filter(entry => entry.tags.includes(filter.tag));
+        return entries.filter((entry) => entry.tags.includes(filter.tag));
       default:
         return entries;
     }
@@ -44,7 +44,7 @@ const Log = () => {
     }, 0);
   };
 
-  const removeEntry = id => {
+  const removeEntry = (id) => {
     if (getVisibleEntries(state.log, filter).length === 1) {
       setFilter({ type: "SHOW_ALL" });
     }
@@ -83,7 +83,7 @@ const Log = () => {
             <TopBar>
               <Filters>
                 <span>{strings.tags}</span>
-                {getTags(state.log).map(tag => {
+                {getTags(state.log).map((tag) => {
                   return (
                     <FilterButton
                       key={tag}
@@ -154,7 +154,7 @@ const Grid = styled.div`
   width: 100%;
   min-height: 100vh;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     grid-template-columns: 1fr;
     grid-auto-rows: min-content;
   }
@@ -171,9 +171,9 @@ const Details = styled.div`
   padding: 15px;
   box-sizing: border-box;
   background-color: #e2e2e2;
-  color: ${props => props.theme.colors.one};
+  color: ${(props) => props.theme.colors.one};
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     position: relative;
     grid-column: 1;
     height: auto;
@@ -196,7 +196,7 @@ const Main = styled.main`
     flex-direction: column;
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     grid-column: 1;
     padding-top: 0;
     min-height: auto;
@@ -213,7 +213,7 @@ const TopBar = styled.div`
   justify-content: space-between;
   margin-bottom: 40px;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     flex-direction: column;
   }
 `;
@@ -228,8 +228,8 @@ const Filters = styled.div`
 `;
 
 const FilterButton = styled.button`
-  background: ${props => props.theme.colors.three};
-  border-bottom: 1px solid ${props => props.theme.colors.four};
+  background: ${(props) => props.theme.colors.three};
+  border-bottom: 1px solid ${(props) => props.theme.colors.four};
   padding: 6px 9px;
   color: white;
   border: none;
@@ -241,8 +241,8 @@ const FilterButton = styled.button`
 const Reset = styled.button`
   font-size: 1.1em;
   border: 0;
-  background-color: ${props => props.theme.colors.five};
-  border-bottom: 1px solid ${props => props.theme.colors.four};
+  background-color: ${(props) => props.theme.colors.five};
+  border-bottom: 1px solid ${(props) => props.theme.colors.four};
   padding: 10px 25px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -250,7 +250,7 @@ const Reset = styled.button`
   font-weight: bolder;
   cursor: pointer;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 0.8em;
     padding: 8px 15px;
     margin-top: 15px;
@@ -263,11 +263,11 @@ const CSVButton = styled(CSVLink)`
   display: block;
   text-decoration: none;
   font-family: monospace;
-  background: ${props => props.theme.colors.one};
+  background: ${(props) => props.theme.colors.one};
   color: white;
   margin: 5px;
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     padding: 10px 0;
   }
 `;
@@ -285,10 +285,10 @@ const Nothing = styled.div`
     left: 0;
     bottom: -15px;
     height: 3px;
-    background-color: ${props => props.theme.colors.three};
+    background-color: ${(props) => props.theme.colors.three};
   }
 
-  @media (${props => props.theme.breakpoint}) {
+  @media (${(props) => props.theme.breakpoint}) {
     font-size: 1.4em;
   }
 `;

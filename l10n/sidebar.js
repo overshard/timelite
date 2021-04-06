@@ -5,20 +5,20 @@ const strings = new LocalizedStrings({
     name: "Timelite",
     timer: "Timer",
     log: "Log",
-    about: "About"
+    about: "About",
   },
   // None of this is accurate past this line, someone please help me translate...
   jp: {
     name: "タイムライト",
     timer: "タイマー",
     log: "ログ",
-    about: "約"
+    about: "約",
   },
   pl: {
     name: "Timelite",
     timer: "Zegar",
     log: "Dziennik",
-    about: "O Timelite"
+    about: "O Timelite",
   },
 });
 

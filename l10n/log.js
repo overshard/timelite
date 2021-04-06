@@ -9,7 +9,7 @@ const strings = new LocalizedStrings({
     tags: "Tags",
     show: "Show All",
     clear: "Clear",
-    export: "Export"
+    export: "Export",
   },
   // None of this is accurate past this line, someone please help me translate...
   jp: {
@@ -20,7 +20,7 @@ const strings = new LocalizedStrings({
     tags: "タグ",
     show: "すべて",
     clear: "すべてクリア",
-    export: "書き出す"
+    export: "書き出す",
   },
   pl: {
     total: "Razem",
@@ -30,7 +30,7 @@ const strings = new LocalizedStrings({
     tags: "Tagi",
     show: "Pokaż wszystko",
     clear: "Wyczyść",
-    export: "Wyeksportuj"
+    export: "Wyeksportuj",
   },
 });
 

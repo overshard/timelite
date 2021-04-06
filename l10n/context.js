@@ -6,7 +6,7 @@ const strings = new LocalizedStrings({
     addedEntry: "You've added an entry.",
     editedEntry: "You've edited an entry.",
     deletedEntry: "You've deleted an entry.",
-    resetLog: "You've reset your log."
+    resetLog: "You've reset your log.",
   },
   // None of this is accurate past this line, someone please help me translate...
   jp: {
@@ -14,14 +14,14 @@ const strings = new LocalizedStrings({
     addedEntry: "エントリを追加しました。",
     editedEntry: "エントリを編集しました。",
     deletedEntry: "エントリを削除しました。",
-    resetLog: "ログをリセットしました。"
+    resetLog: "ログをリセットしました。",
   },
   pl: {
     loaded: "Wczytano stan z lokalnego zapisu.",
     addedEntry: "Dodałeś wpis.",
     editedEntry: "Zmieniłeś wpis.",
     deletedEntry: "Skasowałeś wpis.",
-    resetLog: "Wyczyściłeś dziennik."
+    resetLog: "Wyczyściłeś dziennik.",
   },
 });
 
