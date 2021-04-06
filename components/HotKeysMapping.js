@@ -21,6 +21,7 @@ const keyMap = {
   TIMER_PAGE: "alt+t",
   LOG_PAGE: "alt+l",
   ABOUT_PAGE: "alt+o",
+  SUMMARY_PAGE: "alt+s",
   CLEAR_LOG: "alt+c",
   LOG_NEXT: "ArrowDown",
   LOG_PREVIOUS: "ArrowUp",
@@ -45,6 +46,7 @@ const HotKeysMapping = (props) => {
     },
     LOG_PAGE: () => router.push("/log"),
     ABOUT_PAGE: () => router.push("/about"),
+    SUMMARY_PAGE: () => router.push("/summary"),
     CLEAR_LOG: () => dispatch({ type: "CLEAR_LOG" }),
     LOG_NEXT: (event) => {
       event.preventDefault();
