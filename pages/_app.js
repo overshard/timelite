@@ -24,20 +24,20 @@ class MyApp extends App {
             <ToastContainer position={toast.POSITION.TOP_RIGHT} />
             <L10n />
             <TransitionGroup component={null}>
-              {/*}  <CSSTransition                     //Transitions are causing hotKeys to loose focus
+              <CSSTransition
                 key={this.props.router.route}
                 appear
                 timeout={{
                   appear: 500,
                   enter: 500,
-                  exit: 250
+                  exit: 250,
                 }}
                 classNames="page-transition"
               >
-              <Transition>*/}
-              <Component {...pageProps} />
-              {/*}   </Transition>
-              </CSSTransition>*/}
+                <Transition>
+                  <Component {...pageProps} />
+                </Transition>
+              </CSSTransition>
             </TransitionGroup>
             <Sidebar />
           </HotKeysMapping>
