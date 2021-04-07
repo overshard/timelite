@@ -75,17 +75,17 @@ const Side = styled.div`
 const Title = styled.div`
   color: ${(props) => props.theme.colors.one};
   text-transform: uppercase;
-  font-size: 2em;
+  font-size: 1.7em;
   font-weight: 900;
   text-align: center;
-  padding: 10px 0px;
+  padding: 15px 0px;
   white-space: nowrap;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  line-height: 1.5em;
+  line-height: 1.7em;
 
   @media (${(props) => props.theme.breakpoint}) {
-    padding: 0px 10px;
+    padding: 0px 15px;
     font-size: 1.4em;
     writing-mode: horizontal-tb;
     text-orientation: mixed;
