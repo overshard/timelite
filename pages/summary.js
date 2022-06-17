@@ -101,6 +101,10 @@ const Grid = styled.div`
   grid-template-columns: 20% 1fr 20%;
   width: 100%;
   height: 100vh;
+
+  @media (${(props) => props.theme.breakpoint}) {
+    grid-template-columns: 5% 1fr 5%;
+  }
 `;
 
 const Main = styled.main`

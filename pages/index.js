@@ -50,6 +50,10 @@ const Grid = styled.div`
   grid-template-rows: repeat(3, 1fr);
   width: 100%;
   height: 100vh;
+
+  @media (${(props) => props.theme.breakpoint}) {
+    grid-template-columns: 5% 1fr 5%;
+  }
 `;
 
 const Main = styled.main`

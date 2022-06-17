@@ -34,7 +34,7 @@ const Select = styled.select`
   bottom: 5px;
   right: 5px;
   z-index: 2;
-  background-color: ${(props) => props.theme.colors.four};
+  background-color: ${(props) => props.theme.colors.two};
   color: white;
   padding: 5px;
   border: none;

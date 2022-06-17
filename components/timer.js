@@ -77,7 +77,7 @@ const Time = styled.div`
   font-variant-numeric: tabular-nums;
 
   @media (${(props) => props.theme.breakpoint}) {
-    font-size: 4em;
+    font-size: 5em;
   }
 `;
 
@@ -113,9 +113,9 @@ const Note = styled.input`
   }
 
   @media (${(props) => props.theme.breakpoint}) {
-    padding: 5px 15px;
+    padding: 10px 20px;
     font-size: 1.2em;
-    width: 225px;
+    width: 280px;
     margin-top: 20px;
   }
 `;
@@ -146,8 +146,8 @@ const Button = styled.button`
   }
 
   @media (${(props) => props.theme.breakpoint}) {
-    font-size: 0.7em;
-    padding: 10px 15px;
+    font-size: 0.9em;
+    padding: 15px 25px;
     width: 100%;
   }
 `;
