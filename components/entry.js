@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
-import useForm from "react-hook-form";
+import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 
 import { timeString } from "../utils/time";
