@@ -2,3 +2,5 @@
 .next
 node_modules
 yarn-error.log
+public/sw*
+public/workbox*
