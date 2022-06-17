@@ -58,13 +58,13 @@ plenty of great guides out there as it is very popular.
 
 ## Production
 
-You can either push to [ZEIT](https://zeit.co/) with an update to the `now.json`
-file to change the alias or install Docker and docker-compose and use that on
-any server.
+You can either push to [Vercel](https://vercel.com/) with an update to the
+`vercel.json` file to change the alias or install Docker and docker-compose and
+use that on any server.
 
 With docker appending `-d` to the end after `up` will run this container in
-detached mode. We have `restart: always` configured so on system restarts or
-crashes the container will start back up automatically.
+detached mode. We have `restart: unless-stopped` configured so on system
+restarts or crashes the container will start back up automatically.
 
     docker-compose up -d
 
