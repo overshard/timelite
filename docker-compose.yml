@@ -2,8 +2,10 @@ version: "3"
 
 services:
   app:
+    container_name: timelite
     build: .
-    command: yarn run prod:start
+    env_file: .env
     ports:
-      - 80:80
+      - "${PORT}:${PORT}"
+    command: npx next start --port ${PORT}
     restart: unless-stopped
