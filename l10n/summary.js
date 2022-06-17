@@ -9,11 +9,11 @@ const strings = new LocalizedStrings({
     numHours: "# of hours",
     logEmpty: "Your log is empty.",
   },
-  // None of this is accurate past this line, someone please help me translate...
+  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     title: "概要",
     totalHours: "すべてのタグで費やされた合計時間数。",
-    varHours: (n) => `${n}時間`,
+    varHours: (n) => `${n} 時間`,
     tagHours: "タグごとに費やした時間数。",
     numHours: "時間数",
     logEmpty: "ログは空です。",
@@ -23,7 +23,7 @@ const strings = new LocalizedStrings({
     totalHours: "Całkowita liczba godzin spędzonych na wszystkich tagach.",
     varHours: (n) => `${n} godzin`,
     tagHours: "Liczba godzin spędzonych na tagu.",
-    numHours: "liczba godzin",
+    numHours: "Liczba godzin",
     logEmpty: "Twój dziennik nie ma wpisów.",
   },
 });
