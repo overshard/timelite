@@ -12,6 +12,7 @@ with all this time?
 
 https://timelite.app/
 
+
 ## Why?
 
 I want to casually track the time I spend on things without any overhead of
@@ -26,6 +27,7 @@ and task to task regularly. Larger solutions have a lot of overhead for basic
 time tracking. I tend to track my time here and then input that time at the end
 of the day or increments that make more sense.
 
+
 ## Clone
 
 For any possible way of running Timelite yourself you'll need a copy of the
@@ -34,6 +36,7 @@ repo:
     git clone https://github.com/overshard/timelite.git
 
 After you get the repo it's up to you how you want to use it.
+
 
 ## Development
 
@@ -52,6 +55,7 @@ that feel free to submit an issue but the best place to start would be just
 searching for `how to install node on <your operating system here>`. There are
 plenty of great guides out there as it is very popular.
 
+
 ## Production
 
 You can either push to [ZEIT](https://zeit.co/) with an update to the `now.json`
@@ -64,11 +68,13 @@ crashes the container will start back up automatically.
 
     docker-compose up -d
 
+
 ## Ports
 
 To change which ports things run on you can update the `package.json` file's
 scripts. You will also need to update the `docker-compose.yml` file, if you use
 that, to properly publish the new port.
+
 
 ## Troubleshooting
 
