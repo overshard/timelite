@@ -1,9 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "next --port 3000",
-    "prod:build": "next build",
-    "prod:start": "next start --port 80"
+    "start": "next --port 3000"
   },
   "dependencies": {
     "chart.js": "^3.0.2",
