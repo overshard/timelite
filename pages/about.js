@@ -15,6 +15,7 @@ const About = () => {
         href="https://github.com/overshard/timelite"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="GitHub"
       >
         <GitHubLogo>
           <svg
