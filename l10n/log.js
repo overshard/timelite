@@ -11,7 +11,7 @@ const strings = new LocalizedStrings({
     clear: "Clear",
     export: "Export",
   },
-  // None of this is accurate past this line, someone please help me translate...
+  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     total: "合計",
     subtotal: "小計",
