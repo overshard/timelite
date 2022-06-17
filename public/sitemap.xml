@@ -1,20 +1,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://timelite.app/</loc>
-    <lastmod>2019-11-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.00</priority>
+    <lastmod>2022-06-16</lastmod>
   </url>
   <url>
     <loc>https://timelite.app/log</loc>
-    <lastmod>2019-11-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <lastmod>2022-06-16</lastmod>
   </url>
   <url>
     <loc>https://timelite.app/about</loc>
-    <lastmod>2019-11-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <lastmod>2022-06-16</lastmod>
   </url>
 </urlset>
