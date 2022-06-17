@@ -6,4 +6,4 @@ services:
     command: yarn run prod:start
     ports:
       - 80:80
-    restart: always
+    restart: unless-stopped
