@@ -47,8 +47,8 @@ can install yarn with `npm i -g yarn`. After that you can run:
     yarn install
     yarn start
 
-This will spin up Timelite to run on port 8000 which you can access via a
-browser at `http://localhost:8000`.
+This will spin up Timelite to run on port 3000 which you can access via a
+browser at `http://localhost:3000`.
 
 I won't really go into how to get `node` installed here, if you need help with
 that feel free to submit an issue but the best place to start would be just

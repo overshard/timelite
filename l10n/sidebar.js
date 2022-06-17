@@ -8,7 +8,7 @@ const strings = new LocalizedStrings({
     about: "About",
     summary: "Summary",
   },
-  // None of this is accurate past this line, someone please help me translate...
+  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     name: "タイムライト",
     timer: "タイマー",
