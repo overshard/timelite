@@ -1,8 +1,10 @@
 {
-  "short_name": "Timelite",
   "name": "Timelite",
-  "start_url": "/",
+  "short_name": "Timelite",
   "background_color": "#0D0221",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "/static/logo.png",
@@ -10,7 +12,5 @@
       "sizes": "512x512"
     }
   ],
-  "display": "standalone",
-  "scope": "/",
   "theme_color": "#0D0221"
 }
