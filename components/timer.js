@@ -37,7 +37,7 @@ const Timer = () => {
 
   return (
     <>
-      <Time>{time}</Time>
+      <Time suppressHydrationWarning>{time}</Time>
       <form onSubmit={submitForm}>
         <Inputs>
           <Note
