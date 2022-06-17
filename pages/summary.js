@@ -4,12 +4,12 @@ import Chart from "chart.js/auto";
 
 import Page from "../components/page";
 import { Context } from "../components/context";
+import strings from "../l10n/summary";
 
 const Summary = () => {
   const { state, dispatch } = useContext(Context);
+  strings.setLanguage(state.language);
   const canvasRef = useRef(null);
-
-  // strings.setLanguage(state.language);
 
   const getLabels = (entries) => {
     let tags = [];
@@ -51,7 +51,7 @@ const Summary = () => {
         labels: getLabels(state.log),
         datasets: [
           {
-            label: "# of Hours",
+            label: strings.numHours,
             data: getDatasets(state.log),
             backgroundColor: [
               "rgba(255, 99, 132, 0.5)",
@@ -69,7 +69,7 @@ const Summary = () => {
     return () => {
       chart.destroy();
     };
-  }, []);
+  }, [state.language]);
 
   return (
     <Page title="Summary">
@@ -77,16 +77,16 @@ const Summary = () => {
         <Main className={state.log.length <= 0 ? "empty" : ""} tabIndex="1">
           {state.log.length > 0 ? (
             <>
-              <Title>Summary</Title>
-              <p>Total number of hours spent across all tags.</p>
-              <TotalTime>{getTotalTime(state.log)} hours</TotalTime>
-              <p>The number of hours you've spent per-tag.</p>
+              <Title>{strings.title}</Title>
+              <p>{strings.totalHours}</p>
+              <TotalTime>{strings.varHours(getTotalTime(state.log))}</TotalTime>
+              <p>{strings.tagHours}</p>
               <CanvasWrapper>
                 <canvas ref={canvasRef} />
               </CanvasWrapper>
             </>
           ) : (
-            <Nothing>Your log is empty.</Nothing>
+            <Nothing>{strings.logEmpty}</Nothing>
           )}
         </Main>
       </Grid>

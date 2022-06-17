@@ -42,14 +42,14 @@ const About = () => {
           </Creator>
           <DescriptionContainer>
             <KeysColumn>
-              <SectionTitle>Timer</SectionTitle>
+              <SectionTitle>{strings.sectionTimer}</SectionTitle>
               <KeysDescription>
                 <span>⎇+r</span> {strings.keyReset}
               </KeysDescription>
               <KeysDescription>
                 <span>⎇+a</span> {strings.keyAddLog}
               </KeysDescription>
-              <SectionTitle>Navigation</SectionTitle>
+              <SectionTitle>{strings.sectionNavigation}</SectionTitle>
               <KeysDescription>
                 <span>⎇+t</span> {strings.keyTimerPage}
               </KeysDescription>
@@ -61,7 +61,7 @@ const About = () => {
               </KeysDescription>
             </KeysColumn>
             <KeysColumn>
-              <SectionTitle>Log</SectionTitle>
+              <SectionTitle>{strings.sectionLog}</SectionTitle>
               <KeysDescription>
                 <span>↓</span> {strings.keyNextLogEntry}
               </KeysDescription>
