@@ -1,0 +1,9 @@
+.editorconfig
+.eslintrc.js
+.git
+.gitignore
+.next
+.nowignore
+LICENSE.md
+node_modules
+README.md

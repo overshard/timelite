@@ -7,5 +7,5 @@ services:
     env_file: .env
     ports:
       - "${PORT}:${PORT}"
-    command: npx next start --port ${PORT}
+    command: yarn next:start
     restart: unless-stopped

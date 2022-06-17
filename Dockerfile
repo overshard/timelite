@@ -14,6 +14,6 @@ RUN yarn install
 
 COPY . .
 
-RUN npx next build
+RUN yarn next:build
 
 USER app:app
