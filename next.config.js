@@ -1,8 +1,10 @@
-const withPlugins = require('next-compose-plugins')
+const withPlugins = require("next-compose-plugins");
 const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
-const withBundleAnalyzer = require("@next/bundle-analyzer");
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.NODE_ENV !== "development",
+});
 
 module.exports = withPlugins([
   [
@@ -15,10 +17,5 @@ module.exports = withPlugins([
       },
     },
   ],
-  [
-    withBundleAnalyzer,
-    {
-      enabled: process.env.NODE_ENV !== "development",
-    },
-  ],
+  [withBundleAnalyzer],
 ]);
