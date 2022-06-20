@@ -10,7 +10,7 @@
 Why is it 5 AM? Isn't there something simple I can use to track what I'm doing
 with all this time?
 
-https://timelite.app/
+https://timelite.bythewood.me/
 
 
 ## Why?
