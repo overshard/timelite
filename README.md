@@ -27,6 +27,9 @@ and task to task regularly. Larger solutions have a lot of overhead for basic
 time tracking. I tend to track my time here and then input that time at the end
 of the day or increments that make more sense.
 
+For an overview of how to get this project running and why it's useful check out
+the DB Tech video on it here: https://www.youtube.com/watch?v=woG6qOmxlOA
+
 
 ## Clone
 
