@@ -6,6 +6,7 @@
     "next:build": "next build"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
     "@next/bundle-analyzer": "^12.1.6",
     "chart.js": "^3.0.2",
     "localforage": "^1.9.0",
