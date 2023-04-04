@@ -49,8 +49,8 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
           </EntryTime>
           <EntryNote>
             <EntryNoteInput
+              {...register("note")}
               name="note"
-              ref={register}
               autoFocus
               value={state.log.find((x) => x.id == entry.id).note || ""}
               onChange={(e) =>
