@@ -1,13 +1,15 @@
+"use client";
+
 import React, { useContext } from "react";
-import { withRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Context } from "./context";
 import strings from "../l10n/sidebar";
 
-const Sidebar = ({ router }) => {
+const Sidebar = () => {
+  const pathname = usePathname();
   const { state } = useContext(Context);
   strings.setLanguage(state.language);
 
@@ -15,26 +17,26 @@ const Sidebar = ({ router }) => {
     <Side>
       <Title>{strings.name}</Title>
       <Pages>
-        <Link href="/" passHref>
-          <Page active={router.pathname === "/"} aria-label={strings.timer}>
+        <Link href="/" passHref legacyBehavior>
+          <Page active={pathname === "/" ? 1 : 0} aria-label={strings.timer}>
             <TimerIcon />
           </Page>
         </Link>
-        <Link href="/log" passHref>
-          <Page active={router.pathname === "/log"} aria-label={strings.log}>
+        <Link href="/log" passHref legacyBehavior>
+          <Page active={pathname === "/log" ? 1 : 0} aria-label={strings.log}>
             <LogIcon />
           </Page>
         </Link>
-        <Link href="/summary" passHref>
+        <Link href="/summary" passHref legacyBehavior>
           <Page
-            active={router.pathname === "/summary"}
+            active={pathname === "/summary" ? 1 : 0}
             aria-label={strings.summary}
           >
             <SummaryIcon />
           </Page>
         </Link>
       </Pages>
-      <Link href="/about" passHref>
+      <Link href="/about" passHref legacyBehavior>
         <About aria-label={strings.about}>
           <HelpIcon />
         </About>
@@ -43,12 +45,8 @@ const Sidebar = ({ router }) => {
   );
 };
 
-Sidebar.propTypes = {
-  router: PropTypes.object,
-  language: PropTypes.string,
-};
-
-export default withRouter(Sidebar);
+export default Sidebar;
+//export default withRouter(Sidebar);
 
 const Side = styled.div`
   position: fixed;

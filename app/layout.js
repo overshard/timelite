@@ -1,53 +1,58 @@
+"use client";
+
 import React from "react";
-import App from "next/app";
+import PropTypes from "prop-types";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { ContextProvider } from "../components/context";
+import { ContextProvider } from "./components/context";
 
-import HotKeysMapping from "../components/HotKeysMapping";
-import L10n from "../components/l10n";
-import Sidebar from "../components/sidebar";
+import HotKeysMapping from "./components/HotKeysMapping";
+import L10n from "./components/l10n";
+import Sidebar from "./components/sidebar";
 import { theme } from "../site.config";
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-
-    return (
-      <ThemeProvider theme={theme}>
-        <ContextProvider>
-          <HotKeysMapping>
-            <GlobalStyle />
-            <ToastContainer position={toast.POSITION.TOP_RIGHT} />
-            <L10n />
-            <TransitionGroup component={null}>
-              <CSSTransition
-                key={this.props.router.route}
-                appear
-                timeout={{
-                  appear: 500,
-                  enter: 500,
-                  exit: 250,
-                }}
-                classNames="page-transition"
-              >
-                <Transition>
-                  <Component {...pageProps} />
-                </Transition>
-              </CSSTransition>
-            </TransitionGroup>
-            <Sidebar />
-          </HotKeysMapping>
-        </ContextProvider>
-      </ThemeProvider>
-    );
-  }
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <ThemeProvider theme={theme}>
+          <ContextProvider>
+            <HotKeysMapping>
+              <GlobalStyle />
+              <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+              <L10n />
+              <TransitionGroup component={null}>
+                <CSSTransition
+                  key={children.key}
+                  appear
+                  timeout={{
+                    appear: 500,
+                    enter: 500,
+                    exit: 250,
+                  }}
+                  classNames="page-transition"
+                >
+                  <Transition>{children}</Transition>
+                </CSSTransition>
+              </TransitionGroup>
+              <Sidebar />
+            </HotKeysMapping>
+          </ContextProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
 }
 
-export default MyApp;
+RootLayout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
+};
 
 const GlobalStyle = createGlobalStyle`
   body {

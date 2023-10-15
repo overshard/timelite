@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect } from "react";
 import { useReducer, createContext } from "react";
 import PropTypes from "prop-types";
@@ -25,6 +27,7 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "LOCALDATA_READY":
+      console.log("...calledd...");
       strings.setLanguage(action.localdata.language);
       toast.info(strings.loaded);
       return { ...action.localdata };
@@ -172,8 +175,9 @@ const ContextProvider = ({ children }) => {
     localForage
       .getItem("context")
       .then((value) => {
-        if (value !== null)
+        if (value !== null) {
           dispatch({ type: "LOCALDATA_READY", localdata: value });
+        }
       })
       // FIXME: localForage will error with SSR rendering, what do if anything?
       .catch(() => {});

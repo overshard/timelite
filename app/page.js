@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-import Page from "../components/page";
-import Timer from "../components/timer";
+import Page from "./components/page";
+import Timer from "./components/timer";
 
 const Index = () => {
   return (

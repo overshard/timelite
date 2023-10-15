@@ -6,16 +6,23 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.NODE_ENV !== "development",
 });
 
-module.exports = withPlugins([
+const nextConfig = {
+  reactStrictMode: false,
+};
+
+module.exports = withPlugins(
   [
-    withPWA,
-    {
-      pwa: {
-        dest: "public",
-        disable: process.env.NODE_ENV === "development",
-        runtimeCaching,
+    [
+      withPWA,
+      {
+        pwa: {
+          dest: "public",
+          disable: process.env.NODE_ENV === "development",
+          runtimeCaching,
+        },
       },
-    },
+    ],
+    [withBundleAnalyzer],
   ],
-  [withBundleAnalyzer],
-]);
+  nextConfig
+);
