@@ -27,7 +27,6 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "LOCALDATA_READY":
-      console.log("...calledd...");
       strings.setLanguage(action.localdata.language);
       toast.info(strings.loaded);
       return { ...action.localdata };
