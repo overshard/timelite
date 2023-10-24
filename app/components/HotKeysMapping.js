@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useContext } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { GlobalHotKeys, configure } from "react-hotkeys";
 import PropTypes from "prop-types";
 

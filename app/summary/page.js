@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useContext } from "react";
 import styled from "styled-components";
 import Chart from "chart.js/auto";
@@ -7,7 +9,7 @@ import { Context } from "../components/context";
 import strings from "../l10n/summary";
 
 const Summary = () => {
-  const { state, dispatch } = useContext(Context);
+  const { state } = useContext(Context);
   strings.setLanguage(state.language);
   const canvasRef = useRef(null);
 
@@ -69,6 +71,7 @@ const Summary = () => {
     return () => {
       chart.destroy();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.language]);
 
   return (

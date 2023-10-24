@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";

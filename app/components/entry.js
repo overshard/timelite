@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
