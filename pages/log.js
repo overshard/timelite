@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import { CSVLink } from "react-csv";
+import { toast } from "react-toastify";
 
 import Page from "../components/page";
 import { Context } from "../components/context";
 import Entry from "../components/entry";
 import strings from "../l10n/log";
+import contextStrings from "../l10n/context";
 import { timeString } from "../utils/time";
 
 const Log = () => {
@@ -49,6 +51,8 @@ const Log = () => {
       setFilter({ type: "SHOW_ALL" });
     }
     dispatch({ type: "REMOVE_LOG", id: id });
+    contextStrings.setLanguage(state.language);
+    toast.error(contextStrings.deletedEntry);
   };
 
   return (
@@ -102,12 +106,20 @@ const Log = () => {
                   onClick={() => {
                     dispatch({ type: "CLEAR_TAG", tag: filter.tag });
                     setFilter({ type: "SHOW_ALL" });
+                    contextStrings.setLanguage(state.language);
+                    toast.error(contextStrings.deletedEntry);
                   }}
                 >
                   {strings.clear} {filter.tag}
                 </Reset>
               ) : (
-                <Reset onClick={() => dispatch({ type: "CLEAR_LOG" })}>
+                <Reset
+                  onClick={() => {
+                    dispatch({ type: "CLEAR_LOG" });
+                    contextStrings.setLanguage(state.language);
+                    toast.error(contextStrings.resetLog);
+                  }}
+                >
                   {strings.clear}
                 </Reset>
               )}

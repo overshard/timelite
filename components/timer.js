@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 import { Context } from "./context";
 import strings from "../l10n/timer";
+import contextStrings from "../l10n/context";
 import { timeString, timeDiff } from "../utils/time";
 
 const Timer = () => {
@@ -31,8 +33,12 @@ const Timer = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    dispatch({ type: "ADD_LOG", note: state.note });
-    dispatch({ type: "NOTE_UPDATED", note: "" });
+    if (state.note.trim()) {
+      dispatch({ type: "ADD_LOG", note: state.note });
+      dispatch({ type: "NOTE_UPDATED", note: "" });
+      contextStrings.setLanguage(state.language);
+      toast.success(contextStrings.addedEntry);
+    }
   };
 
   return (
@@ -96,7 +102,9 @@ const Note = styled.input`
   font-size: 1.6em;
   border: none;
   transform: scale(1);
-  transition: transform 250ms, background 250ms;
+  transition:
+    transform 250ms,
+    background 250ms;
 
   &:hover,
   &:focus {

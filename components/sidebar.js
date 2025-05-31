@@ -16,18 +16,18 @@ const Sidebar = ({ router }) => {
       <Title>{strings.name}</Title>
       <Pages>
         <Link href="/" passHref>
-          <Page active={router.pathname === "/"} aria-label={strings.timer}>
+          <Page $active={router.pathname === "/"} aria-label={strings.timer}>
             <TimerIcon />
           </Page>
         </Link>
         <Link href="/log" passHref>
-          <Page active={router.pathname === "/log"} aria-label={strings.log}>
+          <Page $active={router.pathname === "/log"} aria-label={strings.log}>
             <LogIcon />
           </Page>
         </Link>
         <Link href="/summary" passHref>
           <Page
-            active={router.pathname === "/summary"}
+            $active={router.pathname === "/summary"}
             aria-label={strings.summary}
           >
             <SummaryIcon />
@@ -108,11 +108,14 @@ const Page = styled.a`
   position: relative;
   display: flex;
   margin-bottom: 1rem;
-  transition: color 300ms, font-size 300ms, transform 300ms;
+  transition:
+    color 300ms,
+    font-size 300ms,
+    transform 300ms;
   font-size: 2em;
   font-weight: 100;
   ${(props) =>
-    props.active ? "color: rgba(0, 0, 0, 1);" : "color: rgba(0, 0, 0, 0.5);"}
+    props.$active ? "color: rgba(0, 0, 0, 1);" : "color: rgba(0, 0, 0, 0.5);"}
 
   &:hover {
     transform: scale(1.5);
