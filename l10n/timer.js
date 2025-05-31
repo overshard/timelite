@@ -6,7 +6,6 @@ const strings = new LocalizedStrings({
     reset: "Reset",
     add: "Add",
   },
-  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     note: "#tagでメモを追加",
     reset: "リセット",

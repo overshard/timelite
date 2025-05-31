@@ -8,7 +8,6 @@ const strings = new LocalizedStrings({
     deletedEntry: "You've deleted an entry.",
     resetLog: "You've reset your log.",
   },
-  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     loaded: "ローカルストレージから状態をロードしました。",
     addedEntry: "エントリを追加しました。",
