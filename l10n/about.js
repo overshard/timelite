@@ -19,7 +19,6 @@ const strings = new LocalizedStrings({
     keyDeleteSingleEntry: "Delete single log entry",
     keyClearLog: "Clear all log entries",
   },
-  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     title: "タイムライト？",
     quote: "なぜ午前5時ですか。常に行っていることを追跡するために使用できる簡単なものはありますか？",
@@ -31,7 +30,7 @@ const strings = new LocalizedStrings({
     keyAddLog: "ログエントリを追加する",
     keyTimerPage: "タイマーページに移動",
     keyLogPage: "ログページに移動",
-    keyAboutPage: "約ページに移動",
+    keyAboutPage: "についてページに移動",
     keyNextLogEntry: "次のログエントリに移動",
     keyPreviousLogEntry: "前のログエントリに移動します",
     keyEditEntry: "ログエントリの編集",
@@ -45,7 +44,7 @@ const strings = new LocalizedStrings({
     sectionTimer: "Zegar",
     sectionNavigation: "Nawigacja",
     sectionLog: "Dziennik",
-    keyReset: "Zerowanie zagara",
+    keyReset: "Zerowanie zegara",
     keyAddLog: "Dodaj wpis do dziennika",
     keyTimerPage: "Przejdź na stronę zegara",
     keyLogPage: "Przejdź na stronę dziennika",

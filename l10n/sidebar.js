@@ -8,12 +8,11 @@ const strings = new LocalizedStrings({
     about: "About",
     summary: "Summary",
   },
-  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     name: "タイムライト",
     timer: "タイマー",
     log: "ログ",
-    about: "約",
+    about: "について",
     summary: "概要",
   },
   pl: {

@@ -9,7 +9,6 @@ const strings = new LocalizedStrings({
     numHours: "# of hours",
     logEmpty: "Your log is empty.",
   },
-  // TODO: None of this is accurate past this line, someone please help me translate...
   jp: {
     title: "概要",
     totalHours: "すべてのタグで費やされた合計時間数。",
