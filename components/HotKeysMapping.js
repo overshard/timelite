@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import { useRouter } from "next/router";
 import { GlobalHotKeys, configure } from "react-hotkeys";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
 import { Context } from "../components/context";
+import contextStrings from "../l10n/context";
 
 configure({
   ignoreTags: [],
@@ -38,7 +40,11 @@ const HotKeysMapping = (props) => {
     RESET: () => dispatch({ type: "NEW_TIMER" }),
     ADD_LOG: (event) => {
       event.preventDefault();
-      dispatch({ type: "ADD_LOG", note: state.note });
+      if (state.note.trim()) {
+        dispatch({ type: "ADD_LOG", note: state.note });
+        contextStrings.setLanguage(state.language);
+        toast.success(contextStrings.addedEntry);
+      }
     },
     TIMER_PAGE: (event) => {
       event.preventDefault();
@@ -47,7 +53,11 @@ const HotKeysMapping = (props) => {
     LOG_PAGE: () => router.push("/log"),
     ABOUT_PAGE: () => router.push("/about"),
     SUMMARY_PAGE: () => router.push("/summary"),
-    CLEAR_LOG: () => dispatch({ type: "CLEAR_LOG" }),
+    CLEAR_LOG: () => {
+      dispatch({ type: "CLEAR_LOG" });
+      contextStrings.setLanguage(state.language);
+      toast.error(contextStrings.resetLog);
+    },
     LOG_NEXT: (event) => {
       event.preventDefault();
       if (
@@ -76,8 +86,13 @@ const HotKeysMapping = (props) => {
     LOG_DELETE_SINGLE: (event) => {
       event.preventDefault();
       if (!state.logSelectedEntry) return;
-      if (window.location.href.substr(window.location.href.length - 3) == "log")
+      if (
+        window.location.href.substr(window.location.href.length - 3) == "log"
+      ) {
         dispatch({ type: "REMOVE_LOG" });
+        contextStrings.setLanguage(state.language);
+        toast.error(contextStrings.deletedEntry);
+      }
     },
   };
 

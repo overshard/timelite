@@ -7,7 +7,7 @@ import { Context } from "../components/context";
 import strings from "../l10n/summary";
 
 const Summary = () => {
-  const { state, dispatch } = useContext(Context);
+  const { state } = useContext(Context);
   strings.setLanguage(state.language);
   const canvasRef = useRef(null);
 

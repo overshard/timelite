@@ -22,15 +22,16 @@
     "react-localization": "^1.0.16",
     "react-toastify": "^9.0.4",
     "react-transition-group": "^4.2.1",
-    "styled-components": "^5.3.5",
-    "uuid": "^8.3.2"
+    "styled-components": "^6.1.18",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "eslint": "^8.17.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.23.1",
-    "prettier": "^2.2.1",
+    "babel-plugin-styled-components": "^2.1.4",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.4.1",
+    "eslint-plugin-react": "^7.37.5",
+    "prettier": "^3.5.3",
     "webpack": "^5.76.0"
   }
 }

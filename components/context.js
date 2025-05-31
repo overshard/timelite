@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useReducer, createContext } from "react";
 import PropTypes from "prop-types";
-import { toast } from "react-toastify";
 import localForage from "localforage";
 import { v4 as uuid } from "uuid";
 
@@ -26,7 +25,6 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOCALDATA_READY":
       strings.setLanguage(action.localdata.language);
-      toast.info(strings.loaded);
       return { ...action.localdata };
     case "SET_LANGUAGE":
       newState = {
@@ -71,7 +69,6 @@ const reducer = (state, action) => {
         note: "",
       };
       localForage.setItem("context", newState);
-      toast.success(strings.addedEntry);
       return newState;
     case "EDIT_LOG":
       newState = {
@@ -102,7 +99,6 @@ const reducer = (state, action) => {
         };
       }
       localForage.setItem("context", newState);
-      toast.error(strings.deletedEntry);
       return newState;
     case "CLEAR_LOG":
       newState = {
@@ -112,7 +108,6 @@ const reducer = (state, action) => {
         edit: false,
       };
       localForage.setItem("context", newState);
-      toast.error(strings.resetLog);
       return newState;
     case "CLEAR_TAG":
       newState = {
@@ -120,10 +115,9 @@ const reducer = (state, action) => {
         log: [...state.log.filter((entry) => !entry.tags.includes(action.tag))],
       };
       localForage.setItem("context", newState);
-      toast.error(strings.deletedEntry);
       return newState;
     case "NEXT_LOG_ITEM":
-      if (state.log.length === 0) return;
+      if (state.log.length === 0) return state;
       if (!state.logSelectedEntry) {
         newState = { ...state, logSelectedEntry: state.log[0].id };
       } else {
@@ -137,7 +131,7 @@ const reducer = (state, action) => {
       localForage.setItem("context", newState);
       return newState;
     case "PREVIOUS_LOG_ITEM":
-      if (state.log.length === 0) return;
+      if (state.log.length === 0) return state;
       if (!state.logSelectedEntry) {
         newState = { ...state, logSelectedEntry: state.log[0].id };
       } else {
@@ -157,7 +151,6 @@ const reducer = (state, action) => {
     case "TOGGLE_EDITION":
       newState = { ...state, edit: action.edit };
       localForage.setItem("context", newState);
-      action.submited ? toast.success(strings.editedEntry) : "";
       return newState;
     default:
       return state;
