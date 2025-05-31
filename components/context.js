@@ -162,14 +162,17 @@ const ContextProvider = ({ children }) => {
   const value = { state, dispatch };
 
   useEffect(() => {
-    localForage
-      .getItem("context")
-      .then((value) => {
-        if (value !== null)
-          dispatch({ type: "LOCALDATA_READY", localdata: value });
-      })
-      // FIXME: localForage will error with SSR rendering, what do if anything?
-      .catch(() => {});
+    // Only use localForage in browser environment to avoid SSR errors
+    if (typeof window !== "undefined") {
+      localForage
+        .getItem("context")
+        .then((value) => {
+          if (value !== null)
+            dispatch({ type: "LOCALDATA_READY", localdata: value });
+        })
+        // Handle any remaining errors gracefully
+        .catch(() => {});
+    }
   }, []);
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
