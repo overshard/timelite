@@ -8,7 +8,6 @@ const L10n = () => {
   const { state } = useContext(Context);
   const { dispatch } = useContext(Context);
 
-  // TODO: This should probably not be buttons and be a select box of some kind...
   return (
     <Select
       onChange={(evt) => {
