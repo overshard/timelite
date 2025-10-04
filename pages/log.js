@@ -10,7 +10,7 @@ import strings from "../l10n/log";
 import contextStrings from "../l10n/context";
 import { timeString } from "../utils/time";
 
-import styles from "./log.module.css";
+import styles from "../styles/pages/log.module.css";
 
 const Log = () => {
   const { state, dispatch } = useContext(Context);

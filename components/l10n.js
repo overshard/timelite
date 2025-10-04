@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Context } from "./context";
 
-import styles from "./l10n.module.css";
+import styles from "../styles/components/l10n.module.css";
 
 const L10n = () => {
   const { state } = useContext(Context);
