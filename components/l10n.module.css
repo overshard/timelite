@@ -1,0 +1,19 @@
+.select {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  z-index: 2;
+  background-color: var(--color-two);
+  color: #ffffff;
+  padding: 5px;
+  border: none;
+}
+
+@media (max-width: 1023.99px) {
+  .select {
+    top: 5px;
+    right: 5px;
+    text-align: center;
+    bottom: auto;
+  }
+}

@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useContext } from "react";
-import styled from "styled-components";
 import Chart from "chart.js/auto";
 
 import Page from "../components/page";
 import { Context } from "../components/context";
 import strings from "../l10n/summary";
+
+import styles from "./summary.module.css";
 
 const Summary = () => {
   const { state } = useContext(Context);
@@ -73,88 +74,32 @@ const Summary = () => {
 
   return (
     <Page title="Summary">
-      <Grid>
-        <Main className={state.log.length <= 0 ? "empty" : ""} tabIndex="1">
+      <div className={styles.grid}>
+        <main
+          className={`${styles.main} ${
+            state.log.length <= 0 ? styles.mainEmpty : ""
+          }`.trim()}
+          tabIndex="1"
+        >
           {state.log.length > 0 ? (
             <>
-              <Title>{strings.title}</Title>
+              <h1 className={styles.title}>{strings.title}</h1>
               <p>{strings.totalHours}</p>
-              <TotalTime>{strings.varHours(getTotalTime(state.log))}</TotalTime>
+              <div className={styles.totalTime}>
+                {strings.varHours(getTotalTime(state.log))}
+              </div>
               <p>{strings.tagHours}</p>
-              <CanvasWrapper>
+              <div className={styles.canvasWrapper}>
                 <canvas ref={canvasRef} />
-              </CanvasWrapper>
+              </div>
             </>
           ) : (
-            <Nothing>{strings.logEmpty}</Nothing>
+            <div className={styles.nothing}>{strings.logEmpty}</div>
           )}
-        </Main>
-      </Grid>
+        </main>
+      </div>
     </Page>
   );
 };
 
 export default Summary;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 20% 1fr 20%;
-  width: 100%;
-  height: 100vh;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    grid-template-columns: 5% 1fr 5%;
-  }
-`;
-
-const Main = styled.main`
-  grid-area: 1/2;
-
-  &.empty {
-    grid-area: 1/2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-`;
-
-const Title = styled.h1`
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 6em;
-  margin-bottom: 2rem;
-`;
-
-const CanvasWrapper = styled.div`
-  background-color: white;
-  padding: 0.25rem;
-  margin-bottom: 2rem;
-`;
-
-const TotalTime = styled.div`
-  font-size: 4em;
-  font-weight: 900;
-  margin-bottom: 3rem;
-`;
-
-const Nothing = styled.div`
-  font-weight: 100;
-  font-size: 2.5em;
-  text-align: center;
-  position: relative;
-
-  &:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: -15px;
-    height: 3px;
-    background-color: ${(props) => props.theme.colors.three};
-  }
-
-  @media (${(props) => props.theme.breakpoint}) {
-    font-size: 1.4em;
-  }
-`;

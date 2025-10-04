@@ -1,7 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+
+import styles from "./page.module.css";
 
 const Page = (props) => {
   const baseTitle = "Timelite";
@@ -13,7 +14,7 @@ const Page = (props) => {
           {props.title ? `${props.title} — ${baseTitle}` : baseTitle}
         </title>
       </Head>
-      <Content>{props.children}</Content>
+      <div className={styles.content}>{props.children}</div>
     </>
   );
 };
@@ -27,11 +28,3 @@ Page.propTypes = {
 };
 
 export default Page;
-
-const Content = styled.div`
-  margin-left: 50px;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    margin-left: 0;
-  }
-`;

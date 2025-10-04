@@ -6,12 +6,9 @@
     "next:build": "next build"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0",
-    "@next/bundle-analyzer": "^12.1.6",
     "chart.js": "^3.0.2",
     "localforage": "^1.9.0",
     "next": "^12.1.6",
-    "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.5.4",
     "react": "^18.2.0",
     "react-csv": "^2.0.3",
@@ -22,16 +19,6 @@
     "react-localization": "^1.0.16",
     "react-toastify": "^9.0.4",
     "react-transition-group": "^4.2.1",
-    "styled-components": "^6.1.18",
     "uuid": "^9.0.1"
-  },
-  "devDependencies": {
-    "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.4.1",
-    "eslint-plugin-react": "^7.37.5",
-    "prettier": "^3.5.3",
-    "webpack": "^5.76.0"
   }
 }

@@ -1,160 +1,57 @@
 import React, { useContext } from "react";
-import { withRouter } from "next/router";
 import Link from "next/link";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import { useRouter } from "next/router";
 
 import { Context } from "./context";
 import strings from "../l10n/sidebar";
 
-const Sidebar = ({ router }) => {
+import styles from "./sidebar.module.css";
+
+const Sidebar = () => {
   const { state } = useContext(Context);
   strings.setLanguage(state.language);
+  const router = useRouter();
 
   return (
-    <Side>
-      <Title>{strings.name}</Title>
-      <Pages>
-        <Link href="/" passHref>
-          <Page $active={router.pathname === "/"} aria-label={strings.timer}>
+    <aside className={styles.side}>
+      <div className={styles.title}>{strings.name}</div>
+      <div className={styles.pages}>
+        <Link href="/" passHref legacyBehavior>
+          <a
+            className={`${styles.pageLink} ${router.pathname === "/" ? styles.pageLinkActive : ""}`.trim()}
+            aria-label={strings.timer}
+          >
             <TimerIcon />
-          </Page>
+          </a>
         </Link>
-        <Link href="/log" passHref>
-          <Page $active={router.pathname === "/log"} aria-label={strings.log}>
+        <Link href="/log" passHref legacyBehavior>
+          <a
+            className={`${styles.pageLink} ${router.pathname === "/log" ? styles.pageLinkActive : ""}`.trim()}
+            aria-label={strings.log}
+          >
             <LogIcon />
-          </Page>
+          </a>
         </Link>
-        <Link href="/summary" passHref>
-          <Page
-            $active={router.pathname === "/summary"}
+        <Link href="/summary" passHref legacyBehavior>
+          <a
+            className={`${styles.pageLink} ${router.pathname === "/summary" ? styles.pageLinkActive : ""}`.trim()}
             aria-label={strings.summary}
           >
             <SummaryIcon />
-          </Page>
+          </a>
         </Link>
-      </Pages>
-      <Link href="/about" passHref>
-        <About aria-label={strings.about}>
+      </div>
+      <Link href="/about" passHref legacyBehavior>
+        <a className={styles.about} aria-label={strings.about}>
           <HelpIcon />
-        </About>
+        </a>
       </Link>
-    </Side>
+    </aside>
   );
 };
 
-Sidebar.propTypes = {
-  router: PropTypes.object,
-  language: PropTypes.string,
-};
+export default Sidebar;
 
-export default withRouter(Sidebar);
-
-const Side = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 50px;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    width: 100%;
-    height: 50px;
-    bottom: 0;
-    left: 0;
-    top: auto;
-    flex-direction: row;
-    align-items: center;
-  }
-`;
-
-const Title = styled.div`
-  color: ${(props) => props.theme.colors.one};
-  text-transform: uppercase;
-  font-size: 1.7em;
-  font-weight: 900;
-  text-align: center;
-  padding: 15px 0px;
-  white-space: nowrap;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  line-height: 1.7em;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    padding: 0px 15px;
-    font-size: 1.4em;
-    writing-mode: horizontal-tb;
-    text-orientation: mixed;
-  }
-`;
-
-const Pages = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    flex-direction: row;
-    padding: 5px;
-  }
-`;
-
-const Page = styled.a`
-  text-decoration: none;
-  position: relative;
-  display: flex;
-  margin-bottom: 1rem;
-  transition:
-    color 300ms,
-    font-size 300ms,
-    transform 300ms;
-  font-size: 2em;
-  font-weight: 100;
-  ${(props) =>
-    props.$active ? "color: rgba(0, 0, 0, 1);" : "color: rgba(0, 0, 0, 0.5);"}
-
-  &:hover {
-    transform: scale(1.5);
-  }
-
-  @media (${(props) => props.theme.breakpoint}) {
-    font-size: 1.4em;
-    margin-bottom: 0;
-    margin-right: 15px;
-
-    &:hover {
-      font-size: 1.5em;
-    }
-  }
-`;
-
-const About = styled.a`
-  text-align: center;
-  padding: 10px 0;
-  display: block;
-  text-decoration: none;
-  font-family: monospace;
-  background: ${(props) => props.theme.colors.two};
-  color: white;
-  line-height: 0;
-  transition: transform 300ms;
-
-  &:hover {
-    transform: scale(1.5);
-  }
-
-  @media (${(props) => props.theme.breakpoint}) {
-    padding: 0 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-  }
-`;
 
 const HelpIcon = () => {
   return (

@@ -1,0 +1,95 @@
+.time {
+  font-size: 10em;
+  text-align: center;
+  font-weight: lighter;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1023.99px) {
+  .time {
+    font-size: 5em;
+  }
+}
+
+.inputs {
+  text-align: center;
+}
+
+.note {
+  width: 600px;
+  text-align: center;
+  margin-top: 40px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.7);
+  color: #000000;
+  padding: 15px 30px;
+  font-size: 1.6em;
+  transform: scale(1);
+  transition:
+    transform 250ms,
+    background 250ms;
+}
+
+.note:hover,
+.note:focus {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+  z-index: 3;
+  position: relative;
+}
+
+.note::placeholder {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+@media (max-width: 1023.99px) {
+  .note {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    width: 280px;
+    margin-top: 20px;
+  }
+}
+
+.buttons {
+  text-align: center;
+  display: flex;
+}
+
+.button {
+  color: #ffffff;
+  padding: 15px 30px;
+  font-size: 1em;
+  letter-spacing: 2px;
+  width: 100%;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+  transform: scale(1);
+  transition: transform 250ms;
+}
+
+.button:hover,
+.button:focus {
+  transform: scale(1.1);
+  z-index: 3;
+  position: relative;
+}
+
+@media (max-width: 1023.99px) {
+  .button {
+    font-size: 0.9em;
+    padding: 15px 25px;
+  }
+}
+
+.resetButton {
+  background: var(--color-one);
+}
+
+.addButton {
+  background: var(--color-two);
+}

@@ -1,0 +1,179 @@
+.grid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  width: 100%;
+  min-height: 100vh;
+}
+
+@media (max-width: 1023.99px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+  }
+}
+
+.details {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-column: 1;
+  width: 250px;
+  height: 100vh;
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: #e2e2e2;
+  color: var(--color-one);
+}
+
+@media (max-width: 1023.99px) {
+  .details {
+    position: relative;
+    grid-column: 1;
+    height: auto;
+    margin-bottom: 50px;
+    width: 100%;
+  }
+}
+
+.main {
+  grid-column: 2;
+  min-height: 100vh;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+.mainEmpty {
+  grid-column: 1 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (max-width: 1023.99px) {
+  .main {
+    grid-column: 1;
+    padding-top: 0;
+    min-height: auto;
+    padding-bottom: 100px;
+  }
+
+  .mainEmpty {
+    grid-column: 1;
+    height: 100vh;
+  }
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 1023.99px) {
+  .topBar {
+    flex-direction: column;
+  }
+}
+
+.filters {
+  display: block;
+}
+
+.filters span {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: lighter;
+  display: block;
+}
+
+.filterButton {
+  background: var(--color-three);
+  border-bottom: 1px solid var(--color-four);
+  padding: 6px 9px;
+  color: #ffffff;
+  border: none;
+  margin-right: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.reset {
+  font-size: 1.1em;
+  border: 0;
+  background-color: var(--color-five);
+  border-bottom: 1px solid var(--color-four);
+  padding: 10px 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+@media (max-width: 1023.99px) {
+  .reset {
+    font-size: 0.8em;
+    padding: 8px 15px;
+    margin-top: 15px;
+  }
+}
+
+.csvButton {
+  text-align: center;
+  padding: 5px 0;
+  display: block;
+  text-decoration: none;
+  font-family: monospace;
+  background: var(--color-one);
+  color: #ffffff;
+  margin: 5px;
+}
+
+@media (max-width: 1023.99px) {
+  .csvButton {
+    padding: 10px 0;
+  }
+}
+
+.nothing {
+  font-weight: 100;
+  font-size: 2.5em;
+  text-align: center;
+  position: relative;
+}
+
+.nothing::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -15px;
+  height: 3px;
+  background-color: var(--color-three);
+}
+
+@media (max-width: 1023.99px) {
+  .nothing {
+    font-size: 1.4em;
+  }
+}
+
+.total {
+  font-weight: bolder;
+  font-size: 2em;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.total:last-child {
+  margin-bottom: 0;
+}
+
+.total span {
+  font-size: 0.4em;
+  text-transform: uppercase;
+  font-weight: lighter;
+  display: block;
+}
