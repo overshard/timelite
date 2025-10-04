@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "next --port 3000",
+    "start": "next --port 8000",
     "next:start": "next start --port ${PORT}",
     "next:build": "next build"
   },
