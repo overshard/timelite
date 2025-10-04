@@ -1,5 +1,7 @@
 FROM alpine:3.22
 
+ENV NEXT_TELEMETRY_DISABLED=1
+
 RUN apk add --update --no-cache \
       nodejs yarn
 
