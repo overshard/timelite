@@ -16,35 +16,30 @@ const Sidebar = () => {
     <aside className={styles.side}>
       <div className={styles.title}>{strings.name}</div>
       <div className={styles.pages}>
-        <Link href="/" passHref legacyBehavior>
-          <a
-            className={`${styles.pageLink} ${router.pathname === "/" ? styles.pageLinkActive : ""}`.trim()}
-            aria-label={strings.timer}
-          >
-            <TimerIcon />
-          </a>
+        <Link
+          href="/"
+          className={`${styles.pageLink} ${router.pathname === "/" ? styles.pageLinkActive : ""}`.trim()}
+          aria-label={strings.timer}
+        >
+          <TimerIcon />
         </Link>
-        <Link href="/log" passHref legacyBehavior>
-          <a
-            className={`${styles.pageLink} ${router.pathname === "/log" ? styles.pageLinkActive : ""}`.trim()}
-            aria-label={strings.log}
-          >
-            <LogIcon />
-          </a>
+        <Link
+          href="/log"
+          className={`${styles.pageLink} ${router.pathname === "/log" ? styles.pageLinkActive : ""}`.trim()}
+          aria-label={strings.log}
+        >
+          <LogIcon />
         </Link>
-        <Link href="/summary" passHref legacyBehavior>
-          <a
-            className={`${styles.pageLink} ${router.pathname === "/summary" ? styles.pageLinkActive : ""}`.trim()}
-            aria-label={strings.summary}
-          >
-            <SummaryIcon />
-          </a>
+        <Link
+          href="/summary"
+          className={`${styles.pageLink} ${router.pathname === "/summary" ? styles.pageLinkActive : ""}`.trim()}
+          aria-label={strings.summary}
+        >
+          <SummaryIcon />
         </Link>
       </div>
-      <Link href="/about" passHref legacyBehavior>
-        <a className={styles.about} aria-label={strings.about}>
-          <HelpIcon />
-        </a>
+      <Link href="/about" className={styles.about} aria-label={strings.about}>
+        <HelpIcon />
       </Link>
     </aside>
   );
