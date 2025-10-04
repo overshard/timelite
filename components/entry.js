@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 
@@ -7,10 +7,23 @@ import { Context } from "../components/context";
 
 import styles from "../styles/components/entry.module.css";
 
-const Entry = ({ entry, removeEntry, isSelected }) => {
+const Entry = React.forwardRef(
+  ({ entry, removeEntry, isSelected, style }, forwardedRef) => {
   const { state, dispatch } = useContext(Context);
   const { register, handleSubmit } = useForm();
   const focusedEntry = useRef(null);
+
+  const setRefs = useCallback(
+    (node) => {
+      focusedEntry.current = node;
+      if (typeof forwardedRef === "function") {
+        forwardedRef(node);
+      } else if (forwardedRef && "current" in forwardedRef) {
+        forwardedRef.current = node;
+      }
+    },
+    [forwardedRef]
+  );
 
   const onSubmit = (data) => {
     dispatch({
@@ -37,14 +50,15 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
   });
 
   const highlight = isSelected == entry.id ? { filter: "invert(1)" } : {};
+  const combinedStyle = { ...(style || {}), ...highlight };
   const containerClasses = [styles.entryContainer];
   if (state.edit) containerClasses.push(styles.zoom);
 
   return (
     <div
-      style={highlight}
+  style={combinedStyle}
       className={containerClasses.join(" ")}
-      ref={focusedEntry}
+      ref={setRefs}
       tabIndex={-1}
     >
       {state.edit && isSelected == entry.id ? (
@@ -133,12 +147,16 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
       )}
     </div>
   );
-};
+  }
+);
 
 Entry.propTypes = {
   entry: PropTypes.object,
   removeEntry: PropTypes.func,
   isSelected: PropTypes.string,
+  style: PropTypes.object,
 };
+
+Entry.displayName = "Entry";
 
 export default Entry;

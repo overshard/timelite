@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { CSVLink } from "react-csv";
 import { toast } from "react-toastify";
@@ -15,6 +15,7 @@ import styles from "../styles/pages/log.module.css";
 const Log = () => {
   const { state, dispatch } = useContext(Context);
   const [filter, setFilter] = useState({ type: "SHOW_ALL" });
+  const nodeRefs = useRef(new Map());
 
   strings.setLanguage(state.language);
 
@@ -55,6 +56,8 @@ const Log = () => {
     contextStrings.setLanguage(state.language);
     toast.error(contextStrings.deletedEntry);
   };
+
+  const visibleEntries = getVisibleEntries(state.log, filter);
 
   return (
     <Page title="Log">
@@ -138,20 +141,27 @@ const Log = () => {
               )}
             </div>
           )}
-          {getVisibleEntries(state.log, filter).length > 0 ? (
+          {visibleEntries.length > 0 ? (
             <>
               <TransitionGroup component={null}>
-                {getVisibleEntries(state.log, filter).map((entry, index) => {
+                {visibleEntries.map((entry, index) => {
                   const timeout = (index + 1) * 250;
                   const transitionDelay = index * 125;
+                  let nodeRef = nodeRefs.current.get(entry.id);
+                  if (!nodeRef) {
+                    nodeRef = React.createRef();
+                    nodeRefs.current.set(entry.id, nodeRef);
+                  }
                   return (
                     <CSSTransition
                       key={entry.id}
                       appear
                       timeout={{ appear: timeout, enter: 250, exit: 250 }}
                       classNames="fade"
+                      nodeRef={nodeRef}
                     >
                       <Entry
+                        ref={nodeRef}
                         style={{ transitionDelay: `${transitionDelay}ms` }}
                         entry={entry}
                         removeEntry={removeEntry}

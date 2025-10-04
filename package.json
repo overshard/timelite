@@ -6,18 +6,18 @@
     "next:build": "next build"
   },
   "dependencies": {
-    "chart.js": "^3.0.2",
+    "chart.js": "^4.5.0",
     "localforage": "^1.9.0",
-    "next": "^12.1.6",
-    "react": "^18.2.0",
+    "next": "^15.5.4",
+    "react": "^19.2.0",
     "react-csv": "^2.0.3",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.32.1",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.64.0",
     "react-hotkeys": "^2.0.0",
-    "react-is": "^18.2.0",
-    "react-localization": "^1.0.16",
-    "react-toastify": "^9.0.4",
+    "react-is": "^19.2.0",
+    "react-localization": "^2.0.6",
+    "react-toastify": "^11.0.5",
     "react-transition-group": "^4.2.1",
-    "uuid": "^9.0.1"
+    "uuid": "^13.0.0"
   }
 }
