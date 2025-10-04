@@ -5,7 +5,7 @@ import Page from "../components/page";
 import { Context } from "../components/context";
 import strings from "../l10n/summary";
 
-import styles from "./summary.module.css";
+import styles from "../styles/pages/summary.module.css";
 
 const Summary = () => {
   const { state } = useContext(Context);

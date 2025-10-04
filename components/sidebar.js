@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Context } from "./context";
 import strings from "../l10n/sidebar";
 
-import styles from "./sidebar.module.css";
+import styles from "../styles/components/sidebar.module.css";
 
 const Sidebar = () => {
   const { state } = useContext(Context);

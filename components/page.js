@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import PropTypes from "prop-types";
 
-import styles from "./page.module.css";
+import styles from "../styles/components/page.module.css";
 
 const Page = (props) => {
   const baseTitle = "Timelite";

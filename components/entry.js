@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { timeString } from "../utils/time";
 import { Context } from "../components/context";
 
-import styles from "./entry.module.css";
+import styles from "../styles/components/entry.module.css";
 
 const Entry = ({ entry, removeEntry, isSelected }) => {
   const { state, dispatch } = useContext(Context);

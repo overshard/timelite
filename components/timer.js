@@ -6,7 +6,7 @@ import strings from "../l10n/timer";
 import contextStrings from "../l10n/context";
 import { timeString, timeDiff } from "../utils/time";
 
-import styles from "./timer.module.css";
+import styles from "../styles/components/timer.module.css";
 
 const Timer = () => {
   const { state, dispatch } = useContext(Context);

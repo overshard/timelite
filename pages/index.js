@@ -3,7 +3,7 @@ import React from "react";
 import Page from "../components/page";
 import Timer from "../components/timer";
 
-import styles from "./index.module.css";
+import styles from "../styles/pages/index.module.css";
 
 const Index = () => {
   return (
