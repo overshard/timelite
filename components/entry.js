@@ -1,10 +1,11 @@
 import React, { useContext, useRef, useEffect } from "react";
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 
 import { timeString } from "../utils/time";
 import { Context } from "../components/context";
+
+import styles from "./entry.module.css";
 
 const Entry = ({ entry, removeEntry, isSelected }) => {
   const { state, dispatch } = useContext(Context);
@@ -27,29 +28,35 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
     });
     dispatch({ type: "TOGGLE_EDITION", edit: false, submited: true });
   };
+
   useEffect(() => {
-    if (isSelected == entry.id) {
+    if (isSelected == entry.id && focusedEntry.current) {
       focusedEntry.current.focus();
       focusedEntry.current.scrollIntoView({ behavior: "smooth" });
     }
   });
 
   const highlight = isSelected == entry.id ? { filter: "invert(1)" } : {};
+  const containerClasses = [styles.entryContainer];
+  if (state.edit) containerClasses.push(styles.zoom);
+
   return (
-    <EntryContainer
+    <div
       style={highlight}
-      className={state.edit && "zoom"}
+      className={containerClasses.join(" ")}
       ref={focusedEntry}
+      tabIndex={-1}
     >
       {state.edit && isSelected == entry.id ? (
-        <EntryForm onSubmit={handleSubmit(onSubmit)}>
-          <EntryTime>
+        <form className={styles.entryForm} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.entryTime}>
             {timeString(entry.end - entry.start)}
             <span>{entry.start.toLocaleTimeString()}</span>
-          </EntryTime>
-          <EntryNote>
-            <EntryNoteInput
+          </div>
+          <div className={styles.entryNote}>
+            <input
               {...register("note")}
+              className={styles.entryNoteInput}
               name="note"
               autoFocus
               value={state.log.find((x) => x.id == entry.id).note || ""}
@@ -69,22 +76,30 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
                 })
               }
             />
-          </EntryNote>
-          <EntrySubmit type="submit">✔</EntrySubmit>
-          <EntryRemove
+          </div>
+          <button
+            className={`${styles.entryButton} ${styles.entrySubmit}`}
+            type="submit"
+          >
+            ✔
+          </button>
+          <button
+            className={`${styles.entryButton} ${styles.entryRemove}`}
             type="button"
             onClick={() => dispatch({ type: "TOGGLE_EDITION", edit: false })}
           >
             x
-          </EntryRemove>
-        </EntryForm>
+          </button>
+        </form>
       ) : (
         <>
-          <EntryTime>
+          <div className={styles.entryTime}>
             {timeString(entry.end - entry.start)}
             <span>{entry.start.toLocaleTimeString()}</span>
-          </EntryTime>
-          <EntryNote className={entry.note.length === 0 && "empty"}>
+          </div>
+          <div
+            className={`${styles.entryNote} ${entry.note.length === 0 ? styles.entryNoteEmpty : ""}`.trim()}
+          >
             {entry.note}
             {entry.tags.length > 0 && (
               <small>
@@ -95,26 +110,28 @@ const Entry = ({ entry, removeEntry, isSelected }) => {
                   .join(", ")}
               </small>
             )}
-          </EntryNote>
-          <EntryEdit
+          </div>
+          <button
+            className={`${styles.entryButton} ${styles.entryEdit}`}
             onClick={() => {
               dispatch({ type: "SELECT_LOG_ITEM", id: entry.id });
               dispatch({ type: "TOGGLE_EDITION", edit: true });
             }}
           >
             _
-          </EntryEdit>
-          <EntryRemove
+          </button>
+          <button
+            className={`${styles.entryButton} ${styles.entryRemove}`}
             onClick={() => {
               dispatch({ type: "SELECT_LOG_ITEM", id: "" });
               removeEntry(entry.id);
             }}
           >
             x
-          </EntryRemove>
+          </button>
         </>
       )}
-    </EntryContainer>
+    </div>
   );
 };
 
@@ -125,155 +142,3 @@ Entry.propTypes = {
 };
 
 export default Entry;
-
-const EntryContainer = styled.div`
-  background-color: #ffffff;
-  color: black;
-  margin-bottom: 15px;
-  display: grid;
-  grid-template-columns: 150px 1fr 50px 50px;
-  align-items: center;
-  border-bottom: 1px solid ${(props) => props.theme.colors.four};
-  transition-duration: 250ms;
-  transition-property: transform;
-
-  &.zoom {
-    transform: scale(1.05);
-  }
-
-  &.fade-appear,
-  &.fade-enter {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-
-  &.fade-appear-active,
-  &.fade-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition-duration: 250ms;
-    transition-property: opacity, transform;
-  }
-
-  &.fade-exit {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  &.fade-exit-active {
-    opacity: 0;
-    transition-delay: 0ms !important;
-    transition-duration: 250ms;
-    transition-property: opacity, transform;
-    transform: translateX(100px);
-  }
-
-  @media (${(props) => props.theme.breakpoint}) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    text-align: center;
-  }
-`;
-
-const EntryForm = styled.form`
-  display: contents;
-`;
-
-const EntryNoteInput = styled.input`
-  border: none;
-  padding: 12px 0;
-  font-size: 1em;
-  width: 100%;
-  border-bottom: 2px solid ${(props) => props.theme.colors.three};
-`;
-
-const EntryTime = styled.div`
-  font-weight: bold;
-  font-size: 1.3em;
-  padding: 15px;
-  height: 100%;
-  background-color: ${(props) => props.theme.colors.four};
-  color: white;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  flex-direction: column;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    grid-column: 1 / span 2;
-  }
-
-  span {
-    font-size: 0.7em;
-    opacity: 0.8;
-    font-weight: lighter;
-  }
-`;
-
-const EntryNote = styled.div`
-  padding: 15px;
-
-  &.empty {
-    padding: 0;
-  }
-
-  & small {
-    display: block;
-    color: gray;
-    margin-top: 5px;
-  }
-
-  @media (${(props) => props.theme.breakpoint}) {
-    grid-column: 1 / span 2;
-  }
-`;
-
-const EntryEdit = styled.button`
-  font-size: 1.3em;
-  font-weight: bolder;
-  color: white;
-  cursor: pointer;
-  border: 0;
-  background: ${(props) => props.theme.colors.four};
-  margin: 0;
-  padding: 15px;
-  height: 100%;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    padding: 5px;
-  }
-`;
-
-const EntrySubmit = styled.button`
-  font-size: 1.3em;
-  font-weight: bolder;
-  color: white;
-  cursor: pointer;
-  border: 0;
-  background: ${(props) => props.theme.colors.four};
-  margin: 0;
-  padding: 15px;
-  height: 100%;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    padding: 5px;
-  }
-`;
-
-const EntryRemove = styled.button`
-  font-size: 1.3em;
-  font-weight: bolder;
-  color: white;
-  cursor: pointer;
-  border: 0;
-  background: ${(props) => props.theme.colors.five};
-  margin: 0;
-  padding: 15px;
-  height: 100%;
-
-  @media (${(props) => props.theme.breakpoint}) {
-    padding: 5px;
-  }
-`;

@@ -1,0 +1,111 @@
+.entryContainer {
+  background-color: #ffffff;
+  color: #000000;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 150px 1fr 50px 50px;
+  align-items: center;
+  border-bottom: 1px solid var(--color-four);
+  transition-duration: 250ms;
+  transition-property: transform;
+}
+
+.zoom {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1023.99px) {
+  .entryContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    text-align: center;
+  }
+}
+
+.entryForm {
+  display: contents;
+}
+
+.entryNoteInput {
+  border: none;
+  padding: 12px 0;
+  font-size: 1em;
+  width: 100%;
+  border-bottom: 2px solid var(--color-three);
+  background: transparent;
+  color: inherit;
+}
+
+.entryTime {
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 15px;
+  height: 100%;
+  background-color: var(--color-four);
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.entryTime span {
+  font-size: 0.7em;
+  opacity: 0.8;
+  font-weight: lighter;
+}
+
+@media (max-width: 1023.99px) {
+  .entryTime {
+    grid-column: 1 / span 2;
+  }
+}
+
+.entryNote {
+  padding: 15px;
+}
+
+.entryNoteEmpty {
+  padding: 0;
+}
+
+.entryNote small {
+  display: block;
+  color: gray;
+  margin-top: 5px;
+}
+
+@media (max-width: 1023.99px) {
+  .entryNote {
+    grid-column: 1 / span 2;
+  }
+}
+
+.entryButton {
+  font-size: 1.3em;
+  font-weight: bolder;
+  color: #ffffff;
+  cursor: pointer;
+  border: 0;
+  margin: 0;
+  padding: 15px;
+  height: 100%;
+  background: transparent;
+}
+
+@media (max-width: 1023.99px) {
+  .entryButton {
+    padding: 5px;
+  }
+}
+
+.entrySubmit,
+.entryEdit {
+  background: var(--color-four);
+}
+
+.entryRemove {
+  background: var(--color-five);
+}
