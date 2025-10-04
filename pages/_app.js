@@ -12,10 +12,12 @@ import Sidebar from "../components/sidebar";
 import "../styles/globals.css";
 
 const MyApp = ({ Component, pageProps, router }) => {
+  const pageNodeRef = React.useMemo(() => React.createRef(), [router.route]);
+
   return (
     <ContextProvider>
       <HotKeysMapping>
-        <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+  <ToastContainer position="top-right" />
         <L10n />
         <TransitionGroup component={null}>
           <CSSTransition
@@ -27,8 +29,9 @@ const MyApp = ({ Component, pageProps, router }) => {
               exit: 250,
             }}
             classNames="page-transition"
+            nodeRef={pageNodeRef}
           >
-            <div className="page-transition">
+            <div className="page-transition" ref={pageNodeRef}>
               <Component {...pageProps} />
             </div>
           </CSSTransition>
