@@ -4,6 +4,6 @@ services:
     build: .
     env_file: .env
     ports:
-      - "${PORT}:${PORT}"
+      - "127.0.0.1:${PORT}:${PORT}"
     command: yarn next:start
     restart: unless-stopped
