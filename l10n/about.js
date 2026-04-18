@@ -20,6 +20,8 @@ const strings = new LocalizedStrings({
     keyEditEntry: "Edit log entry",
     keyDeleteSingleEntry: "Delete single log entry",
     keyClearLog: "Clear all log entries",
+    keyPauseToggle: "Pause or resume timer",
+    keyHelp: "Toggle shortcuts overlay",
   },
   jp: {
     title: "タイムライト？",
@@ -40,6 +42,8 @@ const strings = new LocalizedStrings({
     keyEditEntry: "ログエントリの編集",
     keyDeleteSingleEntry: "単一のログエントリを削除する",
     keyClearLog: "すべてのログエントリをクリアする",
+    keyPauseToggle: "タイマーを一時停止／再開",
+    keyHelp: "ショートカット一覧を切替",
   },
   pl: {
     title: "Timelite?",
@@ -60,6 +64,8 @@ const strings = new LocalizedStrings({
     keyEditEntry: "Edytuj wpis dziennika",
     keyDeleteSingleEntry: "Skasuj pojedynczy wpis dziennika",
     keyClearLog: "Wyczyść wszystkie wpisy dziennika",
+    keyPauseToggle: "Pauza lub wznowienie zegara",
+    keyHelp: "Przełącz panel skrótów",
   },
 });
 

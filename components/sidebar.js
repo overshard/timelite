@@ -36,6 +36,7 @@ const Sidebar = () => {
           href="/"
           className={`${styles.pageLink} ${router.pathname === "/" ? styles.pageLinkActive : ""}`.trim()}
           aria-label={strings.timer}
+          title={`${strings.timer} (⎇+T)`}
         >
           <TimerIcon />
         </Link>
@@ -43,6 +44,7 @@ const Sidebar = () => {
           href="/log"
           className={`${styles.pageLink} ${router.pathname === "/log" ? styles.pageLinkActive : ""}`.trim()}
           aria-label={strings.log}
+          title={`${strings.log} (⎇+L)`}
         >
           <LogIcon />
         </Link>
@@ -50,11 +52,17 @@ const Sidebar = () => {
           href="/summary"
           className={`${styles.pageLink} ${router.pathname === "/summary" ? styles.pageLinkActive : ""}`.trim()}
           aria-label={strings.summary}
+          title={`${strings.summary} (⎇+S)`}
         >
           <SummaryIcon />
         </Link>
       </div>
-      <Link href="/about" className={styles.about} aria-label={strings.about}>
+      <Link
+        href="/about"
+        className={styles.about}
+        aria-label={strings.about}
+        title={`${strings.about} (⎇+O) — press ? for shortcuts`}
+      >
         <HelpIcon />
       </Link>
     </aside>

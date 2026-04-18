@@ -37,37 +37,6 @@
   letter-spacing: 0.01em;
 }
 
-.tileExport {
-  position: relative;
-  background: transparent;
-  border: 1px solid var(--border-green);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  color: var(--green-bright);
-  text-decoration: none;
-  transition:
-    background 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
-}
-
-.tileExport:hover {
-  background: var(--green-dim);
-  border-color: var(--green);
-  color: var(--green-hi);
-}
-
-.tileExportGlyph {
-  font-size: 1.5em;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0;
-}
-
 .topBar {
   display: flex;
   justify-content: space-between;
@@ -156,6 +125,92 @@
   .reset {
     align-self: flex-start;
   }
+}
+
+.actionsBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.emptyActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.actionButton {
+  font-family: var(--font-mono);
+  font-size: 0.74em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--green-bright);
+  background: var(--green-dim);
+  border: 1px solid var(--border-green);
+  padding: 9px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.actionButton:hover:not(:disabled) {
+  color: var(--green-hi);
+  background: rgba(107, 158, 120, 0.18);
+  border-color: var(--green-bright);
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 18px 4px 8px;
+  margin-top: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.dayHeader:first-child {
+  padding-top: 4px;
+  margin-top: 0;
+}
+
+.dayHeaderLabel {
+  font-size: 0.72em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--text-bright);
+}
+
+.dayHeaderDate {
+  font-size: 0.68em;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-left: 8px;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.dayHeaderTotal {
+  font-size: 0.78em;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--green-bright);
+  letter-spacing: 0.05em;
 }
 
 .nothingFiltered {

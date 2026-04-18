@@ -6,9 +6,16 @@ import { toast } from "react-toastify";
 import Page from "../components/page";
 import { Context } from "../components/context";
 import Entry from "../components/entry";
+import NewEntryForm from "../components/newEntryForm";
 import strings from "../l10n/log";
 import contextStrings from "../l10n/context";
 import { timeString } from "../utils/time";
+import {
+  parseImport,
+  buildJsonExport,
+  buildMarkdownExport,
+  downloadTextFile,
+} from "../utils/importExport";
 
 import styles from "../styles/pages/log.module.css";
 
@@ -28,10 +35,78 @@ const sanitizeCell = (value) => {
   return str;
 };
 
+const dayKeyOf = (date) => {
+  const d = date instanceof Date ? date : new Date(date);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
+
+const dayLabelOf = (date, strings) => {
+  const d = date instanceof Date ? date : new Date(date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const sameDay = (a, b) =>
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate();
+  const yesterday = new Date(today.getTime() - 86400000);
+  if (sameDay(d, today)) return strings.today;
+  if (sameDay(d, yesterday)) return strings.yesterday;
+  return null;
+};
+
 const Log = () => {
   const { state, dispatch } = useContext(Context);
   const [filter, setFilter] = useState({ type: "SHOW_ALL" });
+  const [addingEntry, setAddingEntry] = useState(false);
+  const importInputRef = useRef(null);
   const nodeRefs = useRef(new Map());
+
+  const handleImportClick = () => {
+    if (importInputRef.current) importInputRef.current.click();
+  };
+
+  const handleImportFile = async (event) => {
+    const file = event.target.files && event.target.files[0];
+    event.target.value = "";
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const entries = parseImport(text, file.name);
+      if (entries.length === 0) {
+        toast.error("Nothing to import.");
+        return;
+      }
+      if (
+        !window.confirm(
+          `Import ${entries.length} entr${entries.length === 1 ? "y" : "ies"} and merge into your log?`
+        )
+      ) {
+        return;
+      }
+      dispatch({ type: "IMPORT_LOG", entries });
+      toast.success(`Imported ${entries.length} entries.`);
+    } catch (err) {
+      toast.error(`Import failed: ${err.message || err}`);
+    }
+  };
+
+  const handleExportMarkdown = () => {
+    const md = buildMarkdownExport(state.log);
+    downloadTextFile(
+      md,
+      `timelite-export-${new Date().toISOString().slice(0, 10)}.md`,
+      "text/markdown;charset=utf-8"
+    );
+  };
+
+  const handleExportJson = () => {
+    const json = buildJsonExport(state.log);
+    downloadTextFile(
+      json,
+      `timelite-export-${new Date().toISOString().slice(0, 10)}.json`,
+      "application/json;charset=utf-8"
+    );
+  };
 
   strings.setLanguage(state.language);
 
@@ -110,12 +185,53 @@ const Log = () => {
   const visibleEntries = getVisibleEntries(state.log, filter);
   const isEmpty = state.log.length === 0;
 
+  const groupedByDay = useMemo(() => {
+    const groups = [];
+    let current = null;
+    for (const entry of visibleEntries) {
+      const key = dayKeyOf(entry.start);
+      if (!current || current.key !== key) {
+        current = { key, date: new Date(entry.start), totalMs: 0, entries: [] };
+        groups.push(current);
+      }
+      current.entries.push(entry);
+      current.totalMs +=
+        +new Date(entry.end) - +new Date(entry.start);
+    }
+    return groups;
+  }, [visibleEntries]);
+
   if (isEmpty) {
     return (
       <Page title="Log">
         <div className="page-grid">
           <main className="page-main">
             <h1 className="page-title">{strings.pageTitle}</h1>
+            {addingEntry ? (
+              <NewEntryForm onClose={() => setAddingEntry(false)} />
+            ) : (
+              <div className={styles.emptyActions}>
+                <button
+                  className={styles.actionButton}
+                  onClick={() => setAddingEntry(true)}
+                >
+                  + {strings.addEntry}
+                </button>
+                <button
+                  className={styles.actionButton}
+                  onClick={handleImportClick}
+                >
+                  ↑ {strings.importData}
+                </button>
+                <input
+                  ref={importInputRef}
+                  type="file"
+                  accept=".csv,.json,text/csv,application/json"
+                  style={{ display: "none" }}
+                  onChange={handleImportFile}
+                />
+              </div>
+            )}
           </main>
         </div>
         <div className="empty-state">
@@ -155,18 +271,56 @@ const Log = () => {
               <span className={styles.tileLabel}>{strings.entries}</span>
               <span className={styles.tileValue}>{state.log.length}</span>
             </div>
+          </div>
+
+          <div className={styles.actionsBar}>
+            <button
+              className={styles.actionButton}
+              onClick={() => setAddingEntry(true)}
+              disabled={addingEntry}
+            >
+              + {strings.addEntry}
+            </button>
+            <button
+              className={styles.actionButton}
+              onClick={handleImportClick}
+            >
+              ↑ {strings.importData}
+            </button>
             <CSVLink
-              className={styles.tileExport}
+              className={styles.actionButton}
               data={csvData}
               headers={CSV_HEADERS}
               filename={`timelite-export-${new Date()
                 .toISOString()
                 .slice(0, 10)}.csv`}
             >
-              <span className={styles.tileLabel}>{strings.export}</span>
-              <span className={styles.tileExportGlyph}>↓</span>
+              ↓ {strings.export}
             </CSVLink>
+            <button
+              className={styles.actionButton}
+              onClick={handleExportMarkdown}
+            >
+              ↓ {strings.exportMd}
+            </button>
+            <button
+              className={styles.actionButton}
+              onClick={handleExportJson}
+            >
+              ↓ {strings.exportJson}
+            </button>
+            <input
+              ref={importInputRef}
+              type="file"
+              accept=".csv,.json,text/csv,application/json"
+              style={{ display: "none" }}
+              onChange={handleImportFile}
+            />
           </div>
+
+          {addingEntry && (
+            <NewEntryForm onClose={() => setAddingEntry(false)} />
+          )}
 
           {getTags(state.log).length > 0 && (
             <div className={styles.topBar}>
@@ -198,7 +352,11 @@ const Log = () => {
                   {strings.clear} {filter.tag}
                 </button>
               ) : (
-                <button className={styles.reset} onClick={clearAll}>
+                <button
+                  className={styles.reset}
+                  onClick={clearAll}
+                  title="⎇+C"
+                >
                   {strings.clear}
                 </button>
               )}
@@ -206,34 +364,62 @@ const Log = () => {
           )}
 
           {visibleEntries.length > 0 ? (
-            <TransitionGroup component={null}>
-              {visibleEntries.map((entry, index) => {
-                const timeout = (index + 1) * 250;
-                const transitionDelay = index * 125;
-                let nodeRef = nodeRefs.current.get(entry.id);
-                if (!nodeRef) {
-                  nodeRef = React.createRef();
-                  nodeRefs.current.set(entry.id, nodeRef);
-                }
-                return (
-                  <CSSTransition
-                    key={entry.id}
-                    appear
-                    timeout={{ appear: timeout, enter: 250, exit: 250 }}
-                    classNames="fade"
-                    nodeRef={nodeRef}
-                  >
-                    <Entry
-                      ref={nodeRef}
-                      style={{ transitionDelay: `${transitionDelay}ms` }}
-                      entry={entry}
-                      removeEntry={removeEntry}
-                      isSelected={state.logSelectedEntry}
-                    />
-                  </CSSTransition>
-                );
-              })}
-            </TransitionGroup>
+            groupedByDay.map((group, groupIndex) => {
+              const customLabel = dayLabelOf(group.date, strings);
+              const dateLabel = group.date.toLocaleDateString(undefined, {
+                weekday: "long",
+                month: "short",
+                day: "numeric",
+              });
+              return (
+                <React.Fragment key={group.key}>
+                  <div className={styles.dayHeader}>
+                    <div>
+                      <span className={styles.dayHeaderLabel}>
+                        {customLabel || dateLabel}
+                      </span>
+                      {customLabel && (
+                        <span className={styles.dayHeaderDate}>
+                          {dateLabel}
+                        </span>
+                      )}
+                    </div>
+                    <span className={styles.dayHeaderTotal}>
+                      {timeString(group.totalMs)}
+                    </span>
+                  </div>
+                  <TransitionGroup component={null}>
+                    {group.entries.map((entry, index) => {
+                      const appearIndex = groupIndex * 4 + index;
+                      const timeout = (appearIndex + 1) * 250;
+                      const transitionDelay = appearIndex * 125;
+                      let nodeRef = nodeRefs.current.get(entry.id);
+                      if (!nodeRef) {
+                        nodeRef = React.createRef();
+                        nodeRefs.current.set(entry.id, nodeRef);
+                      }
+                      return (
+                        <CSSTransition
+                          key={entry.id}
+                          appear
+                          timeout={{ appear: timeout, enter: 250, exit: 250 }}
+                          classNames="fade"
+                          nodeRef={nodeRef}
+                        >
+                          <Entry
+                            ref={nodeRef}
+                            style={{ transitionDelay: `${transitionDelay}ms` }}
+                            entry={entry}
+                            removeEntry={removeEntry}
+                            isSelected={state.logSelectedEntry}
+                          />
+                        </CSSTransition>
+                      );
+                    })}
+                  </TransitionGroup>
+                </React.Fragment>
+              );
+            })
           ) : (
             <div className={styles.nothingFiltered}>
               {strings.nothingFiltered}
