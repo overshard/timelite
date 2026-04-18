@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Timelite is a progressive web app for casual time tracking. All data is stored locally in the browser using localForage (IndexedDB) — there is no backend or database. It works offline.
+Timelite is a browser-based app for casual time tracking. All data is stored locally in the browser using localForage (IndexedDB) — there is no backend or database. Once loaded, the app works offline. It is not installable as a PWA: the service worker and `next-pwa` integration were removed; the `manifest.json` is retained for icon/theme metadata only, and any previously registered service worker is unregistered on load.
 
 ## Commands
 
