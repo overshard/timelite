@@ -6,7 +6,7 @@ const timeDiff = (time) => {
 const timeString = (timeDiff) => {
   // timeDiff should be milliseconds
   const timerTotal = [
-    (timeDiff / 1000 / 60 / 60) % 60, // Hours
+    timeDiff / 1000 / 60 / 60, // Hours (uncapped so long sessions don't wrap)
     (timeDiff / 1000 / 60) % 60, // Minutes
     (timeDiff / 1000) % 60, // Seconds
   ];

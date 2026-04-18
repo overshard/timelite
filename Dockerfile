@@ -12,3 +12,5 @@ COPY . .
 RUN bun run next:build
 
 USER bun
+
+CMD ["bun", "next:start"]

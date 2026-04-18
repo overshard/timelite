@@ -7,12 +7,12 @@
         "chart.js": "^4.5.1",
         "localforage": "^1.9.0",
         "next": "^16.1.6",
+        "prop-types": "^15.8.1",
         "react": "^19.2.4",
         "react-csv": "^2.0.3",
         "react-dom": "^19.2.4",
         "react-hook-form": "^7.71.2",
         "react-hotkeys": "^2.0.0",
-        "react-is": "^19.2.4",
         "react-localization": "^2.0.6",
         "react-toastify": "^11.0.5",
         "react-transition-group": "^4.2.1",
@@ -146,7 +146,7 @@
 
     "react-hotkeys": ["react-hotkeys@2.0.0", "", { "dependencies": { "prop-types": "^15.6.1" } }, "sha512-3n3OU8vLX/pfcJrR3xJ1zlww6KS1kEJt0Whxc4FiGV+MJrQ1mYSYI3qS/11d2MJDFm8IhOXMTFQirfu6AVOF6Q=="],
 
-    "react-is": ["react-is@19.2.4", "", {}, "sha512-W+EWGn2v0ApPKgKKCy/7s7WHXkboGcsrXE+2joLyVxkbyVQfO3MUEaUQDHoSmb8TFFrSKYa9mw64WZHNHSDzYA=="],
+    "react-is": ["react-is@16.13.1", "", {}, "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="],
 
     "react-localization": ["react-localization@2.0.6", "", { "dependencies": { "localized-strings": "^2.0.3" } }, "sha512-+UIJ8Dm/Bfdrz38u4d6rgW2Ip9TP9uetUp1WgTrWibgPoJXnclAgPafWL26NbBzuxmOxo9UIRqOKWY/MBJmNdQ=="],
 
@@ -165,7 +165,5 @@
     "styled-jsx": ["styled-jsx@5.1.6", "", { "dependencies": { "client-only": "0.0.1" } }, "sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA=="],
 
     "tslib": ["tslib@2.8.1", "", {}, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
-
-    "prop-types/react-is": ["react-is@16.13.1", "", {}, "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="],
   }
 }

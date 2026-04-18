@@ -31,6 +31,16 @@ For an overview of how to get this project running and why it's useful check out
 the DB Tech video on it here: https://www.youtube.com/watch?v=woG6qOmxlOA
 
 
+## Features
+
+- **Timer** with pause/resume and `#hashtag` note support
+- **Log** with per-day grouping, tag filtering, inline edit, manual entry,
+  and import/export (CSV, JSON, Markdown)
+- **Summary** with charts for hours-per-tag and hours-per-day
+- **Keyboard shortcuts** — press `?` anywhere to see the full map
+- **Offline-first PWA** — installable, all data stays in IndexedDB
+
+
 ## Clone
 
 For any possible way of running Timelite yourself you'll need a copy of the
@@ -55,13 +65,9 @@ browser at `http://localhost:8000`.
 
 ## Production
 
-You can either push to [Vercel](https://vercel.com/) with an update to the
-`vercel.json` file to change the alias or install Docker and docker-compose and
-use that on any server.
-
-With docker appending `-d` to the end after `up` will run this container in
-detached mode. We have `restart: unless-stopped` configured so on system
-restarts or crashes the container will start back up automatically.
+Install Docker and docker-compose, then run the container on any server.
+`restart: unless-stopped` is configured so the container comes back up after
+system restarts or crashes. Appending `-d` runs it in detached mode:
 
     docker-compose up -d
 
