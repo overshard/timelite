@@ -14,6 +14,12 @@ const strings = new LocalizedStrings({
     show: "Show All",
     clear: "Clear",
     export: "Export CSV",
+    today: "Today",
+    yesterday: "Yesterday",
+    addEntry: "Add entry",
+    exportMd: "Export MD",
+    exportJson: "Export JSON",
+    importData: "Import",
   },
   jp: {
     pageTitle: "ログ",
@@ -28,6 +34,12 @@ const strings = new LocalizedStrings({
     show: "すべて",
     clear: "すべてクリア",
     export: "CSVに書き出す",
+    today: "今日",
+    yesterday: "昨日",
+    addEntry: "エントリ追加",
+    exportMd: "MDに書き出す",
+    exportJson: "JSONに書き出す",
+    importData: "インポート",
   },
   pl: {
     pageTitle: "Dziennik",
@@ -42,6 +54,12 @@ const strings = new LocalizedStrings({
     show: "Pokaż wszystko",
     clear: "Wyczyść",
     export: "Eksportuj CSV",
+    today: "Dzisiaj",
+    yesterday: "Wczoraj",
+    addEntry: "Dodaj wpis",
+    exportMd: "Eksportuj MD",
+    exportJson: "Eksportuj JSON",
+    importData: "Importuj",
   },
 });
 

@@ -1,9 +1,10 @@
-import React, { useContext, useRef, useEffect, useCallback } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext, useRef, useEffect, useCallback, useMemo } from "react";
+import { useForm, Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 
 import { timeString } from "../utils/time";
 import { Context } from "../components/context";
+import TagNoteInput from "./tagNoteInput";
 
 import styles from "../styles/components/entry.module.css";
 
@@ -22,13 +23,18 @@ const toDatetimeLocal = (date) => {
 const Entry = React.forwardRef(
   ({ entry, removeEntry, isSelected, style }, forwardedRef) => {
     const { state, dispatch } = useContext(Context);
-    const { register, handleSubmit, reset } = useForm({
+    const { register, handleSubmit, reset, control } = useForm({
       defaultValues: {
         note: entry.note,
         start: toDatetimeLocal(entry.start),
         end: toDatetimeLocal(entry.end),
       },
     });
+    const allTags = useMemo(() => {
+      const s = new Set();
+      for (const e of state.log) for (const t of e.tags || []) s.add(t);
+      return [...s].sort();
+    }, [state.log]);
     const focusedEntry = useRef(null);
     const isEditing = state.edit && isSelected == entry.id;
 
@@ -123,12 +129,20 @@ const Entry = React.forwardRef(
               </label>
             </div>
             <div className={styles.entryNote}>
-              <input
-                {...register("note")}
-                className={styles.entryNoteInput}
-                autoFocus
-                aria-label="Note"
-                placeholder="Note with #tags"
+              <Controller
+                name="note"
+                control={control}
+                render={({ field }) => (
+                  <TagNoteInput
+                    className={styles.entryNoteInput}
+                    aria-label="Note"
+                    placeholder="Note with #tags"
+                    autoFocus
+                    value={field.value}
+                    onChange={field.onChange}
+                    allTags={allTags}
+                  />
+                )}
               />
             </div>
             <button
@@ -166,6 +180,7 @@ const Entry = React.forwardRef(
             <button
               className={`${styles.entryButton} ${styles.entryEdit}`}
               aria-label="Edit"
+              title="Edit (⎇+E)"
               onClick={() => {
                 dispatch({ type: "SELECT_LOG_ITEM", id: entry.id });
                 dispatch({ type: "TOGGLE_EDITION", edit: true });
@@ -176,6 +191,7 @@ const Entry = React.forwardRef(
             <button
               className={`${styles.entryButton} ${styles.entryRemove}`}
               aria-label="Delete"
+              title="Delete (⎇+D)"
               onClick={() => {
                 dispatch({ type: "SELECT_LOG_ITEM", id: "" });
                 removeEntry(entry.id);

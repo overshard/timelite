@@ -1,0 +1,118 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 9, 7, 0.72);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fade 180ms ease;
+}
+
+.panel {
+  max-width: 720px;
+  width: calc(100% - 48px);
+  background: var(--surface);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+  padding: 22px 24px 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: 0.82em;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--green-bright);
+}
+
+.close {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9em;
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.close:hover {
+  border-color: var(--terracotta);
+  color: var(--terracotta-bright);
+  background: var(--terracotta-dim);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px 32px;
+}
+
+@media (max-width: 599.99px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionLabel {
+  font-size: 0.66em;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.84em;
+}
+
+.key {
+  font-family: var(--font-mono);
+  display: inline-block;
+  min-width: 56px;
+  text-align: center;
+  padding: 4px 8px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--green-bright);
+  font-size: 0.9em;
+  letter-spacing: 0.04em;
+}
+
+.label {
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,16 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { GlobalHotKeys, configure } from "react-hotkeys";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 
 import { Context } from "../components/context";
+import KeyHelpOverlay from "./keyHelpOverlay";
 import contextStrings from "../l10n/context";
 
 configure({
   ignoreTags: [],
   ignoreEventsCondition: (keyEvent) => {
     if (keyEvent.key === "Enter" || keyEvent.key === " ") {
+      return true;
+    }
+    const t = keyEvent.target;
+    const isTypingField =
+      t &&
+      (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
+    if (isTypingField && keyEvent.key === "?") {
       return true;
     }
     return false;
@@ -20,6 +28,7 @@ configure({
 const keyMap = {
   RESET: "alt+r",
   ADD_LOG: "alt+a",
+  PAUSE_TOGGLE: "alt+p",
   TIMER_PAGE: "alt+t",
   LOG_PAGE: "alt+l",
   ABOUT_PAGE: "alt+o",
@@ -29,10 +38,12 @@ const keyMap = {
   LOG_PREVIOUS: "ArrowUp",
   LOG_EDIT: "alt+e",
   LOG_DELETE_SINGLE: "alt+d",
+  KEY_HELP: ["shift+/", "?"],
 };
 
 const HotKeysMapping = (props) => {
   const { state, dispatch } = useContext(Context);
+  const [showHelp, setShowHelp] = useState(false);
 
   const router = useRouter();
 
@@ -47,6 +58,12 @@ const HotKeysMapping = (props) => {
         contextStrings.setLanguage(state.language);
         toast.success(contextStrings.addedEntry);
       }
+    },
+    PAUSE_TOGGLE: (event) => {
+      event.preventDefault();
+      dispatch({
+        type: state.timerPausedAt ? "RESUME_TIMER" : "PAUSE_TIMER",
+      });
     },
     TIMER_PAGE: (event) => {
       event.preventDefault();
@@ -90,11 +107,16 @@ const HotKeysMapping = (props) => {
       dispatch({ type: "REMOVE_LOG" });
       toast.error(contextStrings.deletedEntry);
     },
+    KEY_HELP: (event) => {
+      event.preventDefault();
+      setShowHelp((v) => !v);
+    },
   };
 
   return (
     <GlobalHotKeys keyMap={keyMap} handlers={handlers}>
       {props.children}
+      <KeyHelpOverlay open={showHelp} onClose={() => setShowHelp(false)} />
     </GlobalHotKeys>
   );
 };

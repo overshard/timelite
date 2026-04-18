@@ -12,6 +12,7 @@ const initialState = {
   note: "",
   language: "en",
   timer: new Date(),
+  timerPausedAt: null,
   log: [],
   logSelectedEntry: "",
   edit: false,
@@ -36,9 +37,30 @@ const reducer = (state, action) => {
       newState = {
         ...state,
         timer: new Date(),
+        timerPausedAt: null,
       };
       localForage.setItem("context", newState);
       return newState;
+    case "PAUSE_TIMER":
+      if (state.timerPausedAt) return state;
+      newState = {
+        ...state,
+        timerPausedAt: new Date(),
+      };
+      localForage.setItem("context", newState);
+      return newState;
+    case "RESUME_TIMER": {
+      if (!state.timerPausedAt) return state;
+      const pausedElapsed =
+        +new Date(state.timerPausedAt) - +new Date(state.timer);
+      newState = {
+        ...state,
+        timer: new Date(Date.now() - pausedElapsed),
+        timerPausedAt: null,
+      };
+      localForage.setItem("context", newState);
+      return newState;
+    }
     case "NOTE_UPDATED":
       newState = {
         ...state,
@@ -46,15 +68,19 @@ const reducer = (state, action) => {
       };
       localForage.setItem("context", newState);
       return newState;
-    case "ADD_LOG":
+    case "ADD_LOG": {
+      const end = state.timerPausedAt
+        ? new Date(state.timerPausedAt)
+        : new Date();
       newState = {
         ...state,
         timer: new Date(),
+        timerPausedAt: null,
         log: [
           {
             id: newId(),
             start: state.timer,
-            end: new Date(),
+            end,
             note: state.note,
             tags: state.note
               .split(/\s+/)
@@ -67,6 +93,39 @@ const reducer = (state, action) => {
       };
       localForage.setItem("context", newState);
       return newState;
+    }
+    case "IMPORT_LOG": {
+      const existingIds = new Set(state.log.map((e) => e.id));
+      const prepared = action.entries.map((e) => ({
+        ...e,
+        id: !e.id || existingIds.has(e.id) ? newId() : e.id,
+      }));
+      const merged = [...state.log, ...prepared].sort(
+        (a, b) => +new Date(b.start) - +new Date(a.start)
+      );
+      newState = { ...state, log: merged };
+      localForage.setItem("context", newState);
+      return newState;
+    }
+    case "ADD_MANUAL_LOG": {
+      const { start, end, note } = action;
+      const entry = {
+        id: newId(),
+        start,
+        end,
+        note,
+        tags: note
+          .split(/\s+/)
+          .filter((word) => word.startsWith("#") && word.length > 1)
+          .map((word) => word.toLowerCase()),
+      };
+      const merged = [...state.log, entry].sort(
+        (a, b) => +new Date(b.start) - +new Date(a.start)
+      );
+      newState = { ...state, log: merged };
+      localForage.setItem("context", newState);
+      return newState;
+    }
     case "EDIT_LOG":
       newState = {
         ...state,

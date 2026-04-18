@@ -55,6 +55,9 @@ const About = () => {
               <div className={styles.keysDescription}>
                 <span>⎇+a</span> {strings.keyAddLog}
               </div>
+              <div className={styles.keysDescription}>
+                <span>⎇+p</span> {strings.keyPauseToggle}
+              </div>
               <h2 className="section-label">{strings.sectionNavigation}</h2>
               <div className={styles.keysDescription}>
                 <span>⎇+t</span> {strings.keyTimerPage}
@@ -85,6 +88,9 @@ const About = () => {
               </div>
               <div className={styles.keysDescription}>
                 <span>⎇+c</span> {strings.keyClearLog}
+              </div>
+              <div className={styles.keysDescription}>
+                <span>?</span> {strings.keyHelp}
               </div>
             </div>
           </div>

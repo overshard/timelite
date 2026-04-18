@@ -1,0 +1,36 @@
+.wrap {
+  position: relative;
+}
+
+.list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius);
+  z-index: 20;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  max-height: 220px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.item {
+  padding: 7px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.item:hover,
+.itemActive {
+  background: var(--green-dim);
+  color: var(--green-bright);
+}

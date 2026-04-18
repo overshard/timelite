@@ -36,6 +36,12 @@
   margin-top: 1.5rem;
 }
 
+.noteWrap {
+  display: inline-block;
+  text-align: left;
+  max-width: 100%;
+}
+
 .note {
   width: 560px;
   max-width: calc(100vw - 80px);
@@ -122,6 +128,40 @@
     font-size: 0.72em;
     letter-spacing: 0.12em;
   }
+}
+
+.timePaused {
+  color: var(--amber-bright);
+  text-shadow: 0 0 24px rgba(201, 168, 76, 0.35);
+}
+
+.pausedBadge {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  top: -6px;
+  font-size: 0.12em;
+  letter-spacing: 0.32em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--amber-bright);
+  background: var(--amber-dim);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 4px 10px;
+  border-radius: 2px;
+  text-shadow: none;
+}
+
+.pauseButton {
+  color: var(--amber-bright);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  background: var(--amber-dim);
+}
+
+.pauseButton:hover {
+  color: var(--amber-bright);
+  background: rgba(201, 168, 76, 0.18);
+  border-color: var(--amber-bright);
 }
 
 .resetButton {
