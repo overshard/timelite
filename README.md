@@ -38,7 +38,8 @@ the DB Tech video on it here: https://www.youtube.com/watch?v=woG6qOmxlOA
   and import/export (CSV, JSON, Markdown)
 - **Summary** with charts for hours-per-tag and hours-per-day
 - **Keyboard shortcuts** — press `?` anywhere to see the full map
-- **Offline-first PWA** — installable, all data stays in IndexedDB
+- **Local-only, offline-capable** — all data stays in IndexedDB and never
+  leaves the browser
 
 
 ## Clone
