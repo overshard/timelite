@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useMemo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { CSVLink } from "react-csv";
 import { toast } from "react-toastify";
@@ -11,6 +11,22 @@ import contextStrings from "../l10n/context";
 import { timeString } from "../utils/time";
 
 import styles from "../styles/pages/log.module.css";
+
+const CSV_HEADERS = [
+  { label: "id", key: "id" },
+  { label: "start", key: "start" },
+  { label: "end", key: "end" },
+  { label: "duration_seconds", key: "duration_seconds" },
+  { label: "note", key: "note" },
+  { label: "tags", key: "tags" },
+];
+
+const sanitizeCell = (value) => {
+  if (value == null) return "";
+  const str = String(value);
+  if (/^[=+\-@\t\r]/.test(str)) return `'${str}`;
+  return str;
+};
 
 const Log = () => {
   const { state, dispatch } = useContext(Context);
@@ -48,59 +64,119 @@ const Log = () => {
     }, 0);
   };
 
+  const csvData = useMemo(
+    () =>
+      state.log.map((entry) => {
+        const start =
+          entry.start instanceof Date ? entry.start : new Date(entry.start);
+        const end = entry.end instanceof Date ? entry.end : new Date(entry.end);
+        return {
+          id: entry.id,
+          start: start.toISOString(),
+          end: end.toISOString(),
+          duration_seconds: Math.round((end - start) / 1000),
+          note: sanitizeCell(entry.note),
+          tags: sanitizeCell((entry.tags || []).join(" ")),
+        };
+      }),
+    [state.log]
+  );
+
   const removeEntry = (id) => {
+    contextStrings.setLanguage(state.language);
+    if (!window.confirm(contextStrings.confirmDeleteEntry)) return;
     if (getVisibleEntries(state.log, filter).length === 1) {
       setFilter({ type: "SHOW_ALL" });
     }
     dispatch({ type: "REMOVE_LOG", id: id });
+    toast.error(contextStrings.deletedEntry);
+  };
+
+  const clearAll = () => {
     contextStrings.setLanguage(state.language);
+    if (!window.confirm(contextStrings.confirmClearLog)) return;
+    dispatch({ type: "CLEAR_LOG" });
+    toast.error(contextStrings.resetLog);
+  };
+
+  const clearTag = () => {
+    contextStrings.setLanguage(state.language);
+    if (!window.confirm(contextStrings.confirmClearTag)) return;
+    dispatch({ type: "CLEAR_TAG", tag: filter.tag });
+    setFilter({ type: "SHOW_ALL" });
     toast.error(contextStrings.deletedEntry);
   };
 
   const visibleEntries = getVisibleEntries(state.log, filter);
+  const isEmpty = state.log.length === 0;
+
+  if (isEmpty) {
+    return (
+      <Page title="Log">
+        <div className="page-grid">
+          <main className="page-main">
+            <h1 className="page-title">{strings.pageTitle}</h1>
+          </main>
+        </div>
+        <div className="empty-state">
+          <p className="empty-state-title">{strings.nothing}</p>
+          <p className="empty-state-hint">{strings.emptyHint}</p>
+        </div>
+      </Page>
+    );
+  }
+
+  const startTimeLabel = state.log[state.log.length - 1].start.toLocaleTimeString();
 
   return (
     <Page title="Log">
-      <div className={styles.grid}>
-        {state.log.length > 0 && (
-          <aside className={styles.details}>
-            <div className={styles.total}>
-              <span>{strings.start}</span>
-              {state.log[state.log.length - 1].start.toLocaleTimeString()}
+      <div className="page-grid">
+        <main className="page-main">
+          <h1 className="page-title">{strings.pageTitle}</h1>
+
+          <div className={styles.tiles}>
+            <div className={styles.tile}>
+              <span className={styles.tileLabel}>{strings.start}</span>
+              <span className={styles.tileValue}>{startTimeLabel}</span>
             </div>
-            <div className={styles.total}>
-              <span>{strings.subtotal}</span>
-              {timeString(getVisibleTotalMilliseconds())}
+            <div className={styles.tile}>
+              <span className={styles.tileLabel}>{strings.subtotal}</span>
+              <span className={styles.tileValue}>
+                {timeString(getVisibleTotalMilliseconds())}
+              </span>
             </div>
-            <div className={styles.total}>
-              <span>{strings.total}</span>
-              {timeString(getTotalMilliseconds())}
+            <div className={styles.tile}>
+              <span className={styles.tileLabel}>{strings.total}</span>
+              <span className={styles.tileValue}>
+                {timeString(getTotalMilliseconds())}
+              </span>
+            </div>
+            <div className={styles.tile}>
+              <span className={styles.tileLabel}>{strings.entries}</span>
+              <span className={styles.tileValue}>{state.log.length}</span>
             </div>
             <CSVLink
-              className={styles.csvButton}
-              data={state.log}
-              filename="timelite-export.csv"
+              className={styles.tileExport}
+              data={csvData}
+              headers={CSV_HEADERS}
+              filename={`timelite-export-${new Date()
+                .toISOString()
+                .slice(0, 10)}.csv`}
             >
-              {strings.export}
+              <span className={styles.tileLabel}>{strings.export}</span>
+              <span className={styles.tileExportGlyph}>↓</span>
             </CSVLink>
-          </aside>
-        )}
-        <main
-          className={`${styles.main} ${
-            getVisibleEntries(state.log, filter).length === 0
-              ? styles.mainEmpty
-              : ""
-          }`.trim()}
-          tabIndex="1"
-        >
+          </div>
+
           {getTags(state.log).length > 0 && (
             <div className={styles.topBar}>
               <div className={styles.filters}>
-                <span>{strings.tags}</span>
+                <span className={styles.filtersLabel}>{strings.tags}</span>
                 {getTags(state.log).map((tag) => {
+                  const active = filter.type === "SHOW_TAG" && filter.tag === tag;
                   return (
                     <button
-                      className={styles.filterButton}
+                      className={`${styles.filterButton} ${active ? styles.filterButtonActive : ""}`.trim()}
                       key={tag}
                       onClick={() => setFilter({ type: "SHOW_TAG", tag: tag })}
                     >
@@ -108,72 +184,60 @@ const Log = () => {
                     </button>
                   );
                 })}
-                <button
-                  className={styles.filterButton}
-                  onClick={() => setFilter({ type: "SHOW_ALL" })}
-                >
-                  {strings.show}
-                </button>
+                {filter.type === "SHOW_TAG" && (
+                  <button
+                    className={styles.filterButton}
+                    onClick={() => setFilter({ type: "SHOW_ALL" })}
+                  >
+                    {strings.show}
+                  </button>
+                )}
               </div>
               {filter.tag ? (
-                <button
-                  className={styles.reset}
-                  onClick={() => {
-                    dispatch({ type: "CLEAR_TAG", tag: filter.tag });
-                    setFilter({ type: "SHOW_ALL" });
-                    contextStrings.setLanguage(state.language);
-                    toast.error(contextStrings.deletedEntry);
-                  }}
-                >
+                <button className={styles.reset} onClick={clearTag}>
                   {strings.clear} {filter.tag}
                 </button>
               ) : (
-                <button
-                  className={styles.reset}
-                  onClick={() => {
-                    dispatch({ type: "CLEAR_LOG" });
-                    contextStrings.setLanguage(state.language);
-                    toast.error(contextStrings.resetLog);
-                  }}
-                >
+                <button className={styles.reset} onClick={clearAll}>
                   {strings.clear}
                 </button>
               )}
             </div>
           )}
+
           {visibleEntries.length > 0 ? (
-            <>
-              <TransitionGroup component={null}>
-                {visibleEntries.map((entry, index) => {
-                  const timeout = (index + 1) * 250;
-                  const transitionDelay = index * 125;
-                  let nodeRef = nodeRefs.current.get(entry.id);
-                  if (!nodeRef) {
-                    nodeRef = React.createRef();
-                    nodeRefs.current.set(entry.id, nodeRef);
-                  }
-                  return (
-                    <CSSTransition
-                      key={entry.id}
-                      appear
-                      timeout={{ appear: timeout, enter: 250, exit: 250 }}
-                      classNames="fade"
-                      nodeRef={nodeRef}
-                    >
-                      <Entry
-                        ref={nodeRef}
-                        style={{ transitionDelay: `${transitionDelay}ms` }}
-                        entry={entry}
-                        removeEntry={removeEntry}
-                        isSelected={state.logSelectedEntry}
-                      />
-                    </CSSTransition>
-                  );
-                })}
-              </TransitionGroup>
-            </>
+            <TransitionGroup component={null}>
+              {visibleEntries.map((entry, index) => {
+                const timeout = (index + 1) * 250;
+                const transitionDelay = index * 125;
+                let nodeRef = nodeRefs.current.get(entry.id);
+                if (!nodeRef) {
+                  nodeRef = React.createRef();
+                  nodeRefs.current.set(entry.id, nodeRef);
+                }
+                return (
+                  <CSSTransition
+                    key={entry.id}
+                    appear
+                    timeout={{ appear: timeout, enter: 250, exit: 250 }}
+                    classNames="fade"
+                    nodeRef={nodeRef}
+                  >
+                    <Entry
+                      ref={nodeRef}
+                      style={{ transitionDelay: `${transitionDelay}ms` }}
+                      entry={entry}
+                      removeEntry={removeEntry}
+                      isSelected={state.logSelectedEntry}
+                    />
+                  </CSSTransition>
+                );
+              })}
+            </TransitionGroup>
           ) : (
-            <div className={styles.nothing}>{strings.nothing}</div>
+            <div className={styles.nothingFiltered}>
+              {strings.nothingFiltered}
+            </div>
           )}
         </main>
       </div>

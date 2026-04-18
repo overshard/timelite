@@ -3,57 +3,136 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 50px;
-  background-color: #ffffff;
+  width: 60px;
+  background-color: var(--bg-deep);
+  border-right: 1px solid var(--border);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  align-items: center;
+  padding: 14px 0;
+  z-index: 10;
 }
 
 @media (max-width: 1023.99px) {
   .side {
     width: 100%;
-    height: 50px;
+    height: 56px;
     bottom: 0;
     left: 0;
     top: auto;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-right: 0;
+    border-top: 1px solid var(--border);
   }
 }
 
-.title {
-  color: var(--color-one);
+/* Brand mark + vertical wordmark */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 200ms ease;
+  padding-top: 4px;
+}
+
+.brand:hover {
+  color: var(--green-bright);
+}
+
+.brandMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--green-bright);
+  filter: drop-shadow(0 0 6px rgba(107, 158, 120, 0.35));
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.brandMark svg {
+  display: block;
+}
+
+.brandMark svg circle:last-child {
+  transform-origin: center;
+  animation: brandPulse 2.2s ease-in-out infinite;
+}
+
+.brand:hover .brandMark {
+  filter: drop-shadow(0 0 10px rgba(107, 158, 120, 0.6));
+  transform: scale(1.05);
+}
+
+@keyframes brandPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.82);
+  }
+}
+
+.brandText {
+  font-size: 1.3em;
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: 1.7em;
-  font-weight: 900;
-  text-align: center;
-  padding: 15px 0;
-  white-space: nowrap;
+  letter-spacing: 0.14em;
+  color: var(--green-bright);
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  line-height: 1.7em;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 0 10px var(--green-glow);
 }
 
 @media (max-width: 1023.99px) {
-  .title {
-    padding: 0 15px;
-    font-size: 1.4em;
+  .brand {
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 0;
+  }
+
+  .brandMark {
+    width: 26px;
+    height: 26px;
+  }
+
+  .brandMark svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .brandText {
+    font-size: 0.8em;
     writing-mode: horizontal-tb;
-    text-orientation: mixed;
+    letter-spacing: 0.2em;
   }
 }
 
 .pages {
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  gap: 4px;
+  align-items: center;
 }
 
 @media (max-width: 1023.99px) {
   .pages {
     flex-direction: row;
-    padding: 5px;
+    gap: 2px;
   }
 }
 
@@ -61,59 +140,61 @@
   text-decoration: none;
   position: relative;
   display: flex;
-  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
   transition:
-    color 300ms,
-    font-size 300ms,
-    transform 300ms;
-  font-size: 2em;
-  font-weight: 100;
-  color: rgba(0, 0, 0, 0.5);
+    color 200ms ease,
+    background 200ms ease;
+}
+
+.pageLink svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 .pageLink:hover {
-  transform: scale(1.5);
+  color: var(--green-bright);
+  background: var(--green-dim);
 }
 
 .pageLinkActive {
-  color: rgba(0, 0, 0, 1);
+  color: var(--green-bright);
+  background: var(--green-dim);
+  box-shadow: inset 2px 0 0 var(--green);
 }
 
 @media (max-width: 1023.99px) {
-  .pageLink {
-    font-size: 1.4em;
-    margin-bottom: 0;
-    margin-right: 15px;
-  }
-
-  .pageLink:hover {
-    transform: none;
-    font-size: 1.5em;
+  .pageLinkActive {
+    box-shadow: inset 0 2px 0 var(--green);
   }
 }
 
 .about {
-  text-align: center;
-  padding: 10px 0;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
   text-decoration: none;
-  font-family: monospace;
-  background: var(--color-two);
-  color: #ffffff;
-  line-height: 0;
-  transition: transform 300ms;
+  color: var(--text-muted);
+  transition:
+    color 200ms ease,
+    background 200ms ease;
+}
+
+.about svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 .about:hover {
-  transform: scale(1.5);
-}
-
-@media (max-width: 1023.99px) {
-  .about {
-    padding: 0 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-  }
+  color: var(--amber);
+  background: var(--amber-dim);
 }

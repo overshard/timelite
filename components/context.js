@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { useReducer, createContext } from "react";
 import PropTypes from "prop-types";
 import localForage from "localforage";
-import { v4 as uuid } from "uuid";
 
-import strings from "../l10n/context";
+const newId = () =>
+  typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+    ? crypto.randomUUID()
+    : `id-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
 const initialState = {
   note: "",
@@ -20,11 +22,8 @@ const Context = createContext();
 const reducer = (state, action) => {
   let newState = {};
 
-  strings.setLanguage(state.language);
-
   switch (action.type) {
     case "LOCALDATA_READY":
-      strings.setLanguage(action.localdata.language);
       return { ...action.localdata };
     case "SET_LANGUAGE":
       newState = {
@@ -53,16 +52,14 @@ const reducer = (state, action) => {
         timer: new Date(),
         log: [
           {
-            id: uuid(),
+            id: newId(),
             start: state.timer,
             end: new Date(),
             note: state.note,
             tags: state.note
-              .split(" ")
-              .filter((word) => word.startsWith("#"))
-              .map((word) => {
-                return word.toLowerCase();
-              }),
+              .split(/\s+/)
+              .filter((word) => word.startsWith("#") && word.length > 1)
+              .map((word) => word.toLowerCase()),
           },
           ...state.log,
         ],
@@ -162,7 +159,6 @@ const ContextProvider = ({ children }) => {
   const value = { state, dispatch };
 
   useEffect(() => {
-    // Only use localForage in browser environment to avoid SSR errors
     if (typeof window !== "undefined") {
       localForage
         .getItem("context")
@@ -170,7 +166,6 @@ const ContextProvider = ({ children }) => {
           if (value !== null)
             dispatch({ type: "LOCALDATA_READY", localdata: value });
         })
-        // Handle any remaining errors gracefully
         .catch(() => {});
     }
   }, []);

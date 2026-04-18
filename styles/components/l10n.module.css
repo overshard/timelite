@@ -1,19 +1,33 @@
 .select {
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
-  z-index: 2;
-  background-color: var(--color-two);
-  color: #ffffff;
-  padding: 5px;
-  border: none;
+  background: var(--surface);
+  color: var(--text-bright);
+  padding: 8px 14px;
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+  min-width: 180px;
 }
 
-@media (max-width: 1023.99px) {
-  .select {
-    top: 5px;
-    right: 5px;
-    text-align: center;
-    bottom: auto;
-  }
+.select:hover {
+  color: var(--green-bright);
+  border-color: var(--border-green-hover);
+  background: var(--surface-2);
+}
+
+.select:focus-visible {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-dim);
+}
+
+.select option {
+  background: var(--surface);
+  color: var(--text);
 }

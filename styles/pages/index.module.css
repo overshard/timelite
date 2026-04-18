@@ -1,7 +1,7 @@
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -10,39 +10,52 @@
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   z-index: -1;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-image:
-    linear-gradient(#0d0221, transparent),
-    linear-gradient(to top left, #580215, transparent),
-    linear-gradient(to top right, #210d00, transparent);
-  background-blend-mode: screen;
-  background-size: cover;
+  background:
+    radial-gradient(
+      circle at 20% 15%,
+      rgba(107, 158, 120, 0.08) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 85%,
+      rgba(201, 168, 76, 0.05) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(196, 112, 85, 0.04) 0%,
+      transparent 70%
+    );
+  pointer-events: none;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 20% 1fr 20%;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 60px 1fr 80px;
+  grid-template-rows: 1fr;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 @media (max-width: 1023.99px) {
   .grid {
-    grid-template-columns: 5% 1fr 5%;
+    grid-template-columns: 0 1fr 0;
   }
 }
 
 .main {
-  grid-area: 2 / 2;
+  grid-area: 1 / 2;
   justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
-  animation: fadeUp 500ms forwards;
+  min-height: 100vh;
+  padding: 48px 24px;
+  animation: fadeUp 500ms ease-out forwards;
 }
