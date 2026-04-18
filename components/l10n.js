@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
-import PropTypes from "prop-types";
 
 import { Context } from "./context";
 
 import styles from "../styles/components/l10n.module.css";
 
 const L10n = () => {
-  const { state } = useContext(Context);
-  const { dispatch } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
 
   return (
     <select
@@ -22,10 +20,6 @@ const L10n = () => {
       <option value="pl">Polski</option>
     </select>
   );
-};
-
-L10n.propTypes = {
-  setLanguage: PropTypes.func,
 };
 
 export default L10n;

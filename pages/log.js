@@ -40,7 +40,7 @@ const dayKeyOf = (date) => {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 };
 
-const dayLabelOf = (date, strings) => {
+const dayLabelOf = (date, l10nStrings) => {
   const d = date instanceof Date ? date : new Date(date);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -49,8 +49,8 @@ const dayLabelOf = (date, strings) => {
     a.getMonth() === b.getMonth() &&
     a.getDate() === b.getDate();
   const yesterday = new Date(today.getTime() - 86400000);
-  if (sameDay(d, today)) return strings.today;
-  if (sameDay(d, yesterday)) return strings.yesterday;
+  if (sameDay(d, today)) return l10nStrings.today;
+  if (sameDay(d, yesterday)) return l10nStrings.yesterday;
   return null;
 };
 
