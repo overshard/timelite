@@ -7,6 +7,9 @@ const strings = new LocalizedStrings({
     editedEntry: "You've edited an entry.",
     deletedEntry: "You've deleted an entry.",
     resetLog: "You've reset your log.",
+    confirmClearLog: "Clear all log entries? This cannot be undone.",
+    confirmClearTag: "Delete all entries with this tag? This cannot be undone.",
+    confirmDeleteEntry: "Delete this entry?",
   },
   jp: {
     loaded: "ローカルストレージから状態をロードしました。",
@@ -14,6 +17,9 @@ const strings = new LocalizedStrings({
     editedEntry: "エントリを編集しました。",
     deletedEntry: "エントリを削除しました。",
     resetLog: "ログをリセットしました。",
+    confirmClearLog: "すべてのログエントリを削除しますか？元に戻せません。",
+    confirmClearTag: "このタグのすべてのエントリを削除しますか？元に戻せません。",
+    confirmDeleteEntry: "このエントリを削除しますか？",
   },
   pl: {
     loaded: "Wczytano stan z lokalnego zapisu.",
@@ -21,6 +27,9 @@ const strings = new LocalizedStrings({
     editedEntry: "Zmieniłeś wpis.",
     deletedEntry: "Skasowałeś wpis.",
     resetLog: "Wyczyściłeś dziennik.",
+    confirmClearLog: "Usunąć wszystkie wpisy dziennika? Tej operacji nie można cofnąć.",
+    confirmClearTag: "Usunąć wszystkie wpisy z tym tagiem? Tej operacji nie można cofnąć.",
+    confirmDeleteEntry: "Usunąć ten wpis?",
   },
 });
 

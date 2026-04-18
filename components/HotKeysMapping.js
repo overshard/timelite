@@ -36,6 +36,8 @@ const HotKeysMapping = (props) => {
 
   const router = useRouter();
 
+  const onLogPage = () => router.pathname === "/log";
+
   const handlers = {
     RESET: () => dispatch({ type: "NEW_TIMER" }),
     ADD_LOG: (event) => {
@@ -54,45 +56,39 @@ const HotKeysMapping = (props) => {
     ABOUT_PAGE: () => router.push("/about"),
     SUMMARY_PAGE: () => router.push("/summary"),
     CLEAR_LOG: () => {
-      dispatch({ type: "CLEAR_LOG" });
+      if (state.log.length === 0) return;
       contextStrings.setLanguage(state.language);
+      if (!window.confirm(contextStrings.confirmClearLog)) return;
+      dispatch({ type: "CLEAR_LOG" });
       toast.error(contextStrings.resetLog);
     },
     LOG_NEXT: (event) => {
       event.preventDefault();
-      if (
-        window.location.href.substr(window.location.href.length - 3) == "log"
-      ) {
-        dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
+      if (onLogPage()) {
+        dispatch({ type: "TOGGLE_EDITION", edit: false });
         dispatch({ type: "NEXT_LOG_ITEM" });
       }
     },
     LOG_PREVIOUS: (event) => {
       event.preventDefault();
-
-      if (
-        window.location.href.substr(window.location.href.length - 3) == "log"
-      ) {
-        dispatch({ type: "LOG_EDIT_TOGLE", edit: false });
+      if (onLogPage()) {
+        dispatch({ type: "TOGGLE_EDITION", edit: false });
         dispatch({ type: "PREVIOUS_LOG_ITEM" });
       }
     },
     LOG_EDIT: (event) => {
       event.preventDefault();
       if (!state.logSelectedEntry) return;
-      if (window.location.href.substr(window.location.href.length - 3) == "log")
-        dispatch({ type: "TOGGLE_EDITION", edit: true });
+      if (onLogPage()) dispatch({ type: "TOGGLE_EDITION", edit: true });
     },
     LOG_DELETE_SINGLE: (event) => {
       event.preventDefault();
       if (!state.logSelectedEntry) return;
-      if (
-        window.location.href.substr(window.location.href.length - 3) == "log"
-      ) {
-        dispatch({ type: "REMOVE_LOG" });
-        contextStrings.setLanguage(state.language);
-        toast.error(contextStrings.deletedEntry);
-      }
+      if (!onLogPage()) return;
+      contextStrings.setLanguage(state.language);
+      if (!window.confirm(contextStrings.confirmDeleteEntry)) return;
+      dispatch({ type: "REMOVE_LOG" });
+      toast.error(contextStrings.deletedEntry);
     },
   };
 

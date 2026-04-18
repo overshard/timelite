@@ -1,17 +1,34 @@
 .entryContainer {
-  background-color: #ffffff;
-  color: #000000;
-  margin-bottom: 15px;
+  background-color: var(--surface);
+  color: var(--text);
+  margin-bottom: 10px;
   display: grid;
-  grid-template-columns: 150px 1fr 50px 50px;
-  align-items: center;
-  border-bottom: 1px solid var(--color-four);
-  transition-duration: 250ms;
-  transition-property: transform;
+  grid-template-columns: 170px 1fr 44px 44px;
+  align-items: stretch;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 180ms ease;
+  overflow: hidden;
+}
+
+.entryContainer.editing {
+  grid-template-columns: 300px 1fr 44px 44px;
+}
+
+.entryContainer:hover {
+  border-color: var(--border-green);
+}
+
+.selected {
+  border-color: var(--green);
+  box-shadow: 0 0 0 1px var(--green), 0 0 24px var(--green-dim);
 }
 
 .zoom {
-  transform: scale(1.05);
+  transform: scale(1.01);
 }
 
 @media (max-width: 1023.99px) {
@@ -28,43 +45,148 @@
 
 .entryNoteInput {
   border: none;
-  padding: 12px 0;
-  font-size: 1em;
+  padding: 10px 0;
+  font-size: 0.95em;
   width: 100%;
-  border-bottom: 2px solid var(--color-three);
+  border-bottom: 1px solid var(--border-green);
   background: transparent;
-  color: inherit;
+  color: var(--text-bright);
+  outline: none;
+  letter-spacing: 0.02em;
+}
+
+.entryNoteInput:focus-visible {
+  border-bottom-color: var(--green);
+  box-shadow: 0 1px 0 0 var(--green);
 }
 
 .entryTime {
-  font-weight: bold;
-  font-size: 1.3em;
-  padding: 15px;
+  font-weight: 600;
+  font-size: 1.1em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  padding: 12px 14px;
   height: 100%;
-  background-color: var(--color-four);
-  color: #ffffff;
+  background-color: var(--bg-deep);
+  color: var(--green-bright);
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
   flex-direction: column;
+  gap: 4px;
+  border-right: 1px solid var(--border);
+  min-width: 0;
+}
+
+.entryTimeEditing {
+  align-items: stretch;
+  gap: 8px;
+  text-align: left;
+  padding: 12px;
+}
+
+.entryDuration {
+  font-size: 0.95em;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--green-bright);
+  font-weight: 700;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
 }
 
 .entryTime span {
   font-size: 0.7em;
-  opacity: 0.8;
-  font-weight: lighter;
+  opacity: 0.7;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.entryTimeRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.entryTimeRowLabel {
+  font-size: 0.58em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  min-width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.entryTimeInput {
+  flex: 1 1 auto;
+  font-size: 0.72em;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  padding: 4px 6px;
+  border: 1px solid var(--border-green);
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: 2px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  color-scheme: dark;
+}
+
+.entryTimeInput:focus-visible {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px var(--green-dim);
+}
+
+/* Trim and recolor the native calendar picker indicator so the seconds
+   digit never collides with it on Chromium. */
+.entryTimeInput::-webkit-calendar-picker-indicator {
+  filter: invert(0.55) sepia(0.2) saturate(3) hue-rotate(80deg);
+  padding: 0;
+  margin-left: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.entryTimeInput::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 @media (max-width: 1023.99px) {
+  .entryContainer,
+  .entryContainer.editing {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
   .entryTime {
     grid-column: 1 / span 2;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .entryTimeEditing {
+    padding: 14px 16px;
+  }
+  .entryTimeRow {
+    gap: 10px;
+  }
+  .entryTimeRowLabel {
+    min-width: 32px;
   }
 }
 
 .entryNote {
-  padding: 15px;
+  padding: 14px 18px;
+  align-self: center;
+  font-size: 0.92em;
+  letter-spacing: 0.01em;
 }
 
 .entryNoteEmpty {
@@ -73,8 +195,11 @@
 
 .entryNote small {
   display: block;
-  color: gray;
-  margin-top: 5px;
+  color: var(--green-bright);
+  opacity: 0.7;
+  margin-top: 6px;
+  font-size: 0.72em;
+  letter-spacing: 0.08em;
 }
 
 @media (max-width: 1023.99px) {
@@ -84,28 +209,55 @@
 }
 
 .entryButton {
-  font-size: 1.3em;
-  font-weight: bolder;
-  color: #ffffff;
+  font-size: 1em;
   cursor: pointer;
   border: 0;
+  border-left: 1px solid var(--border);
   margin: 0;
-  padding: 15px;
+  padding: 0;
   height: 100%;
   background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.entryButton:hover {
+  background: var(--green-dim);
+  color: var(--green-bright);
+}
+
+.entryButton:focus-visible {
+  outline: none;
+  background: var(--green-dim);
+  box-shadow: inset 0 0 0 1px var(--green);
 }
 
 @media (max-width: 1023.99px) {
   .entryButton {
-    padding: 5px;
+    padding: 10px;
   }
 }
 
-.entrySubmit,
-.entryEdit {
-  background: var(--color-four);
+.entrySubmit {
+  color: var(--green-bright);
 }
 
-.entryRemove {
-  background: var(--color-five);
+.entrySubmit:hover {
+  background: var(--green-dim);
+  color: var(--green-hi);
+}
+
+.entryEdit:hover {
+  color: var(--amber-bright);
+  background: var(--amber-dim);
+}
+
+.entryRemove:hover {
+  color: var(--terracotta-bright);
+  background: var(--terracotta-dim);
 }

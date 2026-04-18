@@ -16,9 +16,9 @@ https://timelite.bythewood.me/
 ## Why?
 
 I want to casually track the time I spend on things without any overhead of
-signing into a service or even being online. Timelite is a progressive web app
-and works just fine without an internet connection, all data is stored locally
-and I don't track anything.
+signing into a service or even being online. All data stays in your browser
+(IndexedDB via localForage), there is no backend, and nothing is tracked or
+sent anywhere.
 
 Timelite has been a pretty great companion for me with more aggressive team
 management software solutions that sometimes don't allow me to swap between
@@ -84,3 +84,7 @@ that you can run:
 The `up` implies that you want to start the server again, `--build` will rebuild
 the container and `-d`, as stated above, starts us in detached mode so you can
 set it and forget it.
+
+If you previously used an older version and now see stale service-worker /
+filesystem errors in the console, the app now unregisters any old service
+workers on load. A hard refresh (Ctrl+Shift+R) will clear them after one visit.

@@ -1,10 +1,45 @@
 :root {
-  --color-one: #0d0221;
-  --color-two: #261447;
-  --color-three: #d40078;
-  --color-four: #ff3864;
-  --color-five: #ff6c11;
+  /* Warm-dark biohacker palette */
+  --bg: #0e0d0a;
+  --bg-deep: #090806;
+  --surface: #13120e;
+  --surface-2: #18160f;
+  --border: rgba(221, 215, 205, 0.06);
+  --border-green: rgba(107, 158, 120, 0.2);
+  --border-green-hover: rgba(107, 158, 120, 0.35);
+
+  --text: #ddd7cd;
+  --text-bright: #ede8e0;
+  --text-muted: #a09890;
+  --text-dim: #665f56;
+
+  --green: #6b9e78;
+  --green-bright: #7db88c;
+  --green-hi: #95cca2;
+  --green-dim: rgba(107, 158, 120, 0.12);
+  --green-glow: rgba(107, 158, 120, 0.3);
+
+  --amber: #c9a84c;
+  --amber-bright: #ddc06a;
+  --amber-dim: rgba(201, 168, 76, 0.1);
+
+  --terracotta: #c47055;
+  --terracotta-bright: #e38871;
+  --terracotta-dim: rgba(196, 112, 85, 0.1);
+
+  /* Legacy tokens kept so any missed reference still resolves to the new palette */
+  --color-one: var(--bg);
+  --color-two: var(--surface);
+  --color-three: var(--green);
+  --color-four: var(--green-bright);
+  --color-five: var(--amber);
+
+  --radius: 3px;
+  --radius-lg: 6px;
   --breakpoint-desktop-max: 1023.99px;
+
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono",
+    Menlo, Consolas, ui-monospace, monospace;
 }
 
 * {
@@ -18,43 +53,71 @@ body {
 }
 
 body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Helvetica,
-    Arial,
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  color: #ffffff;
-  background-color: var(--color-one);
+  font-family: var(--font-mono);
+  color: var(--text);
+  background-color: var(--bg);
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Subtle grid background for that operator-console feel */
+  background-image:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(107, 158, 120, 0.04) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(201, 168, 76, 0.025) 0%,
+      transparent 50%
+    ),
+    linear-gradient(rgba(107, 158, 120, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107, 158, 120, 0.015) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+  background-position: 0 0, 0 0, -1px -1px, -1px -1px;
+  background-attachment: fixed;
 }
 
 input,
 button,
 select,
 textarea {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Helvetica,
-    Arial,
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol";
+  font-family: var(--font-mono);
+  color: inherit;
 }
 
 a {
-  color: inherit;
+  color: var(--green-bright);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+a:hover {
+  color: var(--green-hi);
+}
+
+:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 1px solid var(--green);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--green-dim);
+}
+
+::selection {
+  background: var(--green-dim);
+  color: var(--green-hi);
 }
 
 .page-transition {
@@ -96,7 +159,7 @@ a {
 .fade-appear,
 .fade-enter {
   opacity: 0;
-  transform: translateX(-100px);
+  transform: translateX(-40px);
 }
 
 .fade-appear-active,
@@ -114,8 +177,164 @@ a {
 
 .fade-exit-active {
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateX(40px);
   transition-duration: 250ms;
   transition-property: opacity, transform;
   transition-delay: 0ms !important;
+}
+
+/* Toastify overrides so it matches the dark warm palette */
+.Toastify__toast {
+  font-family: var(--font-mono) !important;
+  font-size: 0.85rem !important;
+  border-radius: var(--radius) !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border-green);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+.Toastify__toast--success {
+  border-left: 3px solid var(--green);
+}
+
+.Toastify__toast--error {
+  border-left: 3px solid var(--terracotta);
+}
+
+.Toastify__progress-bar--success {
+  background: var(--green) !important;
+}
+
+.Toastify__progress-bar--error {
+  background: var(--terracotta) !important;
+}
+
+/* ----- Shared page primitives (used by log, summary, about) ----- */
+
+/* Outer page grid: fixed sidebar + fluid main + right gutter.
+   All content pages use this for consistent horizontal alignment. */
+.page-grid {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) 60px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+@media (max-width: 1023.99px) {
+  .page-grid {
+    grid-template-columns: 0 minmax(0, 1fr) 0;
+  }
+}
+
+.page-main {
+  grid-column: 2;
+  width: 100%;
+  max-width: 1100px;
+  justify-self: start;
+  padding: 52px 40px 120px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1023.99px) {
+  .page-main {
+    padding: 32px 20px 120px;
+  }
+}
+
+/* Page title bar: uppercase green with glow + hairline underline.
+   Use on every content page's top to signal location. */
+.page-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  letter-spacing: 0.22em;
+  color: var(--green-bright);
+  text-shadow: 0 0 16px var(--green-glow);
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 1023.99px) {
+  .page-title {
+    font-size: 1.3em;
+  }
+}
+
+/* Section label: small uppercase tracked label used above chart / section */
+.section-label {
+  font-size: 0.72em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--text-muted);
+  margin: 2rem 0 0.75rem;
+}
+
+.section-label:first-child {
+  margin-top: 0;
+}
+
+/* Empty state: consistent centered message used when a page has no data.
+   Positioned to fill the viewport so it renders identically across pages. */
+.empty-state {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.empty-state > * {
+  pointer-events: auto;
+}
+
+.empty-state-title {
+  font-weight: 500;
+  font-size: 1.15em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+  padding-bottom: 14px;
+  position: relative;
+}
+
+.empty-state-title::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--green) 50%,
+    transparent
+  );
+}
+
+.empty-state-hint {
+  font-size: 0.78em;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1023.99px) {
+  .empty-state-title {
+    font-size: 0.9em;
+  }
 }
