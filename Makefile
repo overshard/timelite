@@ -15,5 +15,4 @@ push:
 	git remote | xargs -I R git push R master
 
 clean:
-	rm -rf node_modules
-	rm -rf .next
+	rm -rf .next node_modules
